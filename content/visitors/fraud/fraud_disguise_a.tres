@@ -1,0 +1,36 @@
+[gd_resource type="VisitorProfile" load_steps=4 format=3]
+
+[sub_resource type="VisitorLine" id="Greet1"]
+text = "Galing po ako kina Mr. Santos, yung nagpautang sa inyo. Pwede pong ma-collect ngayon?"
+trigger_condition = "on_greet"
+
+[sub_resource type="TellData" id="Tell1"]
+tell_id = "fraud_wrong_name"
+tell_text = "He calls the lender \"Mr. Santos\" — but that's not the name on your receipt."
+tell_type = "overexplain"
+suspicion_weight = 0.9
+is_red_herring = false
+
+[sub_resource type="TellData" id="Tell2"]
+tell_id = "fraud_pressure"
+tell_text = "He keeps glancing past you into the house instead of at your face while he talks."
+tell_type = "gate_gap_cue"
+suspicion_weight = 0.6
+is_red_herring = false
+
+[resource]
+visitor_id = "fraud_disguise_a"
+display_name = "Collector (unfamiliar)"
+visitor_type = 1
+greet_lines = [SubResource("Greet1")]
+tell_pool = [SubResource("Tell1"), SubResource("Tell2")]
+tells_per_visit = 2
+response_lines = {}
+base_aggression = 0.3
+debt_knowledge_accurate = false
+wants_entry_not_payment = false
+can_be_paid = true
+safe_if_refused = true
+safe_if_paid = false
+fatal_if_let_in = false
+linked_person_id = ""

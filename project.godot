@@ -11,8 +11,16 @@ config_version=5
 [application]
 
 config/name="Tagbalay"
+run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DayManager="*uid://8xo7ptka432y"
+Enums="*uid://cqorf4oivoql5"
+NightManager="*uid://wm5cq202jy48"
+RunState="*uid://cyxuxiqd88nu7"
 
 [display]
 

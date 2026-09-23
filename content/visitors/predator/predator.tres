@@ -1,0 +1,36 @@
+[gd_resource type="VisitorProfile" load_steps=4 format=3]
+
+[sub_resource type="VisitorLine" id="Greet1"]
+text = "Ay, hi! Pinsan ako ni Nanay mo, galing probinsya. Pwede ko lang po hintayin dito yung sundo ko? Malamig sa labas."
+trigger_condition = "on_greet"
+
+[sub_resource type="TellData" id="Tell1"]
+tell_id = "predator_urgency"
+tell_text = "He keeps glancing at the street behind him, not at you — like he's timing something."
+tell_type = "urgency"
+suspicion_weight = 0.7
+is_red_herring = false
+
+[sub_resource type="TellData" id="Tell2"]
+tell_id = "predator_vague"
+tell_text = "When you ask which side of the family he's from, he laughs it off instead of answering."
+tell_type = "overexplain"
+suspicion_weight = 0.8
+is_red_herring = false
+
+[resource]
+visitor_id = "predator"
+display_name = "Stranger (claims family)"
+visitor_type = 3
+greet_lines = [SubResource("Greet1")]
+tell_pool = [SubResource("Tell1"), SubResource("Tell2")]
+tells_per_visit = 2
+response_lines = {}
+base_aggression = 0.4
+debt_knowledge_accurate = false
+wants_entry_not_payment = true
+can_be_paid = false
+safe_if_refused = true
+safe_if_paid = false
+fatal_if_let_in = true
+linked_person_id = ""
