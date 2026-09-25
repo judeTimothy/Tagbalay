@@ -1,0 +1,892 @@
+[gd_scene format=3 uid="uid://bd5vpro07mnfn"]
+
+[ext_resource type="Script" uid="uid://digpx3ml54lta" path="res://Scripts/door_scene.gd" id="1_g722q"]
+[ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_g722q"]
+[ext_resource type="Texture2D" uid="uid://b3dn2nw7y33rd" path="res://Assets/Backgrounds/DoorScene.jpg" id="3_ipro8"]
+[ext_resource type="Texture2D" uid="uid://cjytk3b21uw5l" path="res://Assets/Characters/MC1.png" id="4_wm8oe"]
+[ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="5_m7brq"]
+[ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_4fqap"]
+[ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="7_c2lec"]
+[ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="8_7if5x"]
+[ext_resource type="Texture2D" uid="uid://c136dsf440uhh" path="res://Assets/UI/paper.png" id="9_a14qh"]
+[ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="10_j1dur"]
+[ext_resource type="Texture2D" uid="uid://24cviadaaen2" path="res://Assets/UI/button_disabled.png" id="11_g722q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
+shader = ExtResource("10_j1dur")
+shader_parameter/amount = 36.50100648379751
+
+[sub_resource type="Shader" id="Shader_g722q"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+// ─────────────────────────────────────────────
+// Distortion
+// ─────────────────────────────────────────────
+
+uniform float fisheye_strength : hint_range(0.01, 4.0, 0.01) = 1.0;
+
+uniform float curve_scale : hint_range(0.5, 2.0, 0.01) = 1.1;
+uniform float curve_x_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+uniform float curve_y_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+uniform float curve_x_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+uniform float curve_y_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+uniform float curve_border : hint_range(0.0, 0.2, 0.001) = 0.04;
+uniform float curve_zoom : hint_range(0.5, 1.2, 0.01) = 0.92;
+uniform int curve_iterations : hint_range(1, 4, 1) = 2;
+
+
+// ─────────────────────────────────────────────
+// Chromatic aberration / RGB separation
+// ─────────────────────────────────────────────
+
+uniform float chromatic_r_offset : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+uniform float chromatic_g_offset : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+uniform float chromatic_b_offset : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+
+uniform float chromatic_y_r : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+uniform float chromatic_y_g : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+uniform float chromatic_y_b : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+
+uniform float chromatic_intensity : hint_range(0.0, 2.0, 0.01) = 1.0;
+
+
+// ─────────────────────────────────────────────
+// CRT glow / color
+// ─────────────────────────────────────────────
+
+uniform float color_mix : hint_range(0.0, 2.0, 0.01) = 0.6;
+uniform float color_squared_mix : hint_range(0.0, 2.0, 0.01) = 0.4;
+uniform float color_bias : hint_range(0.0, 0.5, 0.01) = 0.05;
+
+uniform vec3 color_tint : source_color = vec3(0.95, 1.05, 0.95);
+uniform float brightness : hint_range(0.0, 5.0, 0.01) = 2.8;
+
+
+// ─────────────────────────────────────────────
+// Vignette
+// ─────────────────────────────────────────────
+
+uniform float vignette_strength : hint_range(0.0, 3.0, 0.01) = 1.0;
+uniform float vignette_power : hint_range(0.01, 2.0, 0.01) = 0.3;
+
+
+// ─────────────────────────────────────────────
+// Scanlines
+// ─────────────────────────────────────────────
+
+uniform float scanline_speed : hint_range(0.0, 10.0, 0.1) = 3.5;
+uniform float scanline_frequency : hint_range(0.0, 10.0, 0.1) = 1.5;
+uniform float scanline_min : hint_range(0.0, 1.0, 0.01) = 0.35;
+uniform float scanline_amplitude : hint_range(0.0, 1.0, 0.01) = 0.35;
+uniform float scanline_power : hint_range(0.1, 5.0, 0.1) = 1.7;
+uniform float scanline_darkness : hint_range(0.0, 2.0, 0.01) = 0.7;
+uniform float scanline_brightness : hint_range(0.0, 2.0, 0.01) = 0.4;
+
+
+// ─────────────────────────────────────────────
+// Screen noise / flicker
+// ─────────────────────────────────────────────
+
+uniform float flicker_strength : hint_range(0.0, 0.2, 0.001) = 0.01;
+uniform float flicker_speed : hint_range(0.0, 300.0, 1.0) = 110.0;
+
+
+// ─────────────────────────────────────────────
+// Pixel / shadow-mask effect
+// ─────────────────────────────────────────────
+
+uniform float pixel_effect_strength : hint_range(0.0, 1.0, 0.01) = 0.65;
+uniform float pixel_effect_scale : hint_range(0.1, 10.0, 0.1) = 2.0;
+
+
+// ─────────────────────────────────────────────
+// Secondary chromatic glow
+// ─────────────────────────────────────────────
+
+uniform float glow_scale : hint_range(0.0, 2.0, 0.01) = 0.75;
+uniform float glow_r_offset : hint_range(-0.1, 0.1, 0.001) = 0.025;
+uniform float glow_g_offset : hint_range(-0.1, 0.1, 0.001) = -0.022;
+uniform float glow_b_offset : hint_range(-0.1, 0.1, 0.001) = -0.020;
+
+uniform float glow_r_y : hint_range(-0.1, 0.1, 0.001) = -0.027;
+uniform float glow_g_y : hint_range(-0.1, 0.1, 0.001) = -0.020;
+uniform float glow_b_y : hint_range(-0.1, 0.1, 0.001) = -0.018;
+
+uniform float glow_r_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+uniform float glow_g_strength : hint_range(0.0, 1.0, 0.01) = 0.05;
+uniform float glow_b_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+
+
+// ─────────────────────────────────────────────
+// Functions
+// ─────────────────────────────────────────────
+
+vec2 fisheye(vec2 uv) {
+	vec2 d = uv - 0.5;
+	float r = length(d);
+
+	float rf = pow(r, fisheye_strength)
+		/ pow(0.5, fisheye_strength - 1.0);
+
+	return vec2(0.5) + rf * normalize(d);
+}
+
+
+vec2 curve(vec2 uv) {
+	uv = (uv - 0.5) * 2.0;
+
+	uv *= curve_scale;
+
+	uv.x *= 1.0 + curve_x_strength *
+		pow(abs(uv.y) / 5.0, curve_x_power);
+
+	uv.y *= 1.0 + curve_y_strength *
+		pow(abs(uv.x) / 4.0, curve_y_power);
+
+	uv = (uv / 2.0) + 0.5;
+
+	uv = uv * curve_zoom + curve_border;
+
+	return uv;
+}
+
+
+// ─────────────────────────────────────────────
+// Fragment
+// ─────────────────────────────────────────────
+
+void fragment() {
+	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 q = FRAGCOORD.xy / iResolution.xy;
+
+	// Fisheye
+	q = fisheye(q);
+
+	// CRT screen curvature
+	vec2 uv = q;
+
+	for (int i = 0; i < curve_iterations; i++) {
+		uv = curve(uv);
+	}
+
+	// Base screen color
+	vec3 oricol = texture(screen_texture, q).xyz;
+	vec3 col;
+
+	// Animated horizontal distortion
+	float x =
+		sin(0.3 * TIME + uv.y * 21.0) *
+		sin(0.7 * TIME + uv.y * 29.0) *
+		sin(0.3 + 0.33 * TIME + uv.y * 31.0) *
+		0.0017;
+
+	// RGB-separated sampling
+	col.r = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+	).x;
+
+	col.g = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+	).y;
+
+	col.b = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+	).z;
+
+	// Secondary RGB glow
+	col.r += glow_r_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_r_offset, glow_r_y)
+		+ vec2(uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+	).x;
+
+	col.g += glow_g_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_g_offset, glow_g_y)
+		+ vec2(uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+	).y;
+
+	col.b += glow_b_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_b_offset, glow_b_y)
+		+ vec2(uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+	).z;
+
+	// Color / CRT glow
+	col += color_bias;
+
+	col = clamp(
+		col * color_mix +
+		color_squared_mix * col * col,
+		0.0,
+		1.0
+	);
+
+	// Vignette
+	float vig =
+		vignette_strength *
+		16.0 *
+		uv.x *
+		uv.y *
+		(1.0 - uv.x) *
+		(1.0 - uv.y);
+
+	col *= vec3(pow(max(vig, 0.0), vignette_power));
+
+	// CRT tint and brightness
+	col *= color_tint;
+	col *= brightness;
+
+	// Scanlines
+	float scans = clamp(
+		scanline_min +
+		scanline_amplitude *
+		sin(
+			scanline_speed * TIME +
+			uv.y * iResolution.y * scanline_frequency
+		),
+		0.0,
+		1.0
+	);
+
+	float s = pow(scans, scanline_power);
+
+	col *= vec3(
+		scanline_brightness +
+		scanline_darkness * s
+	);
+
+	// Subtle flicker
+	col *= 1.0 +
+		flicker_strength *
+		sin(flicker_speed * TIME);
+
+	// Clip outside curved screen
+	if (uv.x < 0.0 || uv.x > 1.0)
+		col *= 0.0;
+
+	if (uv.y < 0.0 || uv.y > 1.0)
+		col *= 0.0;
+
+	// Pixel / shadow-mask effect
+	float pixel_mask = clamp(
+		(mod(FRAGCOORD.x, pixel_effect_scale) - 1.0) * 2.0,
+		0.0,
+		1.0
+	);
+
+	col *= 1.0 - pixel_effect_strength * vec3(pixel_mask);
+
+	COLOR = vec4(col, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gbba"]
+shader = SubResource("Shader_g722q")
+shader_parameter/fisheye_strength = 1.15
+shader_parameter/curve_scale = 1.1
+shader_parameter/curve_x_strength = 1.999999955296
+shader_parameter/curve_y_strength = 0.1499999966472
+shader_parameter/curve_x_power = 5.000000074506
+shader_parameter/curve_y_power = 2.0
+shader_parameter/curve_border = 0.04
+shader_parameter/curve_zoom = 0.92
+shader_parameter/curve_iterations = 1
+shader_parameter/chromatic_r_offset = -5.896999902277322e-11
+shader_parameter/chromatic_g_offset = 0.0
+shader_parameter/chromatic_b_offset = -0.002
+shader_parameter/chromatic_y_r = 0.001
+shader_parameter/chromatic_y_g = -0.002
+shader_parameter/chromatic_y_b = 0.0
+shader_parameter/chromatic_intensity = 1.0
+shader_parameter/color_mix = 0.6
+shader_parameter/color_squared_mix = 0.4
+shader_parameter/color_bias = 0.05
+shader_parameter/color_tint = Color(1.0387418, 1.0046363, 1.0004495, 1)
+shader_parameter/brightness = 2.8
+shader_parameter/vignette_strength = 1.0
+shader_parameter/vignette_power = 0.3
+shader_parameter/scanline_speed = 3.5
+shader_parameter/scanline_frequency = 1.5
+shader_parameter/scanline_min = 0.35
+shader_parameter/scanline_amplitude = 0.35
+shader_parameter/scanline_power = 1.7
+shader_parameter/scanline_darkness = 0.7
+shader_parameter/scanline_brightness = 0.4
+shader_parameter/flicker_strength = 0.01
+shader_parameter/flicker_speed = 110.0
+shader_parameter/pixel_effect_strength = 0.65
+shader_parameter/pixel_effect_scale = 2.0
+shader_parameter/glow_scale = 0.499999988824
+shader_parameter/glow_r_offset = 0.025
+shader_parameter/glow_g_offset = -0.022
+shader_parameter/glow_b_offset = -0.02
+shader_parameter/glow_r_y = -0.027
+shader_parameter/glow_g_y = -0.02
+shader_parameter/glow_b_y = -0.018
+shader_parameter/glow_r_strength = 0.08
+shader_parameter/glow_g_strength = 0.05
+shader_parameter/glow_b_strength = 0.08
+
+[sub_resource type="Animation" id="Animation_wm8oe"]
+resource_name = "Black_to_View"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BGM:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.0, -6.0]
+}
+
+[sub_resource type="Animation" id="Animation_m7brq"]
+resource_name = "Black_to_View_Intro"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BGM:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -6.0]
+}
+
+[sub_resource type="Animation" id="Animation_g722q"]
+resource_name = "Fade_to_Black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yrdjb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BGM:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-6.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wm8oe"]
+_data = {
+&"Black_to_View": SubResource("Animation_wm8oe"),
+&"Black_to_View_Intro": SubResource("Animation_m7brq"),
+&"Fade_to_Black": SubResource("Animation_g722q"),
+&"RESET": SubResource("Animation_yrdjb")
+}
+
+[node name="Door" type="Node2D" unique_id=1626590382]
+script = ExtResource("1_g722q")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=610521921]
+stream = ExtResource("2_g722q")
+volume_db = -6.0
+autoplay = true
+
+[node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
+
+[node name="Knock" type="AudioStreamPlayer" parent="." unique_id=678743897]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
+modulate = Color(0.38439402, 0.27913073, 0.8100319, 1)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_ipro8")
+
+[node name="UI" type="Control" parent="." unique_id=1440015256]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MC1" type="Sprite2D" parent="UI" unique_id=1256210219]
+visible = false
+modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
+position = Vector2(1021, 422)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("4_wm8oe")
+
+[node name="DialogueBox" type="Sprite2D" parent="UI" unique_id=1384319198]
+visible = false
+position = Vector2(960, 894)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_m7brq")
+
+[node name="Dialogue" type="VBoxContainer" parent="UI" unique_id=19302163]
+visible = false
+custom_minimum_size = Vector2(1800, 0)
+custom_maximum_size = Vector2(1800, 250)
+layout_mode = 0
+offset_left = 70.0
+offset_top = 762.0
+offset_right = 1870.0
+offset_bottom = 1012.0
+theme_override_constants/separation = 30
+
+[node name="Dialogue" type="Label" parent="UI/Dialogue" unique_id=1776992578]
+custom_minimum_size = Vector2(1800, 0)
+custom_maximum_size = Vector2(1800, -1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 42
+text = "Ginasabad na kuno si mama sang gin utangan mo. Kung indi kapa gid mag bayad, Patiro ka gid kuno kay papa."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Translation" type="Label" parent="UI/Dialogue" unique_id=584684478]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 36
+text = "(Mom is being harassed by your debtors. If this continues, Dad might have to shoot you.)"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Choice" type="HBoxContainer" parent="UI" unique_id=3457405]
+visible = false
+layout_mode = 0
+offset_left = 8.999999
+offset_top = 638.0
+offset_right = 1809.0
+offset_bottom = 695.0
+scale = Vector2(1.055, 1.055)
+theme_override_constants/separation = 224
+alignment = 1
+
+[node name="Yes" type="TextureButton" parent="UI/Choice" unique_id=502986540]
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+
+[node name="Label" type="Label" parent="UI/Choice/Yes" unique_id=1869303518]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "This is the yes choice."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="No" type="TextureButton" parent="UI/Choice" unique_id=1348148114]
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+
+[node name="Label" type="Label" parent="UI/Choice/No" unique_id=1506212261]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "This is the no choice."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Sprite2D" parent="UI" unique_id=910894360]
+position = Vector2(1693, 181)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("9_a14qh")
+
+[node name="Label" type="Label" parent="UI/Stats" unique_id=1170608964]
+offset_left = -1337.5
+offset_top = -1550.0
+offset_right = -233.5
+offset_bottom = -975.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 434
+text = "Utang kay:"
+
+[node name="Debtor" type="Label" parent="UI/Stats" unique_id=875222162]
+offset_left = -2075.0
+offset_top = -975.0
+offset_right = 1971.0
+offset_bottom = -50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 630
+text = "Pedro Lending"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UI/Stats" unique_id=548091280]
+offset_left = -2075.0
+offset_top = 50.0
+offset_right = 1971.0
+offset_bottom = 975.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 550
+text = "P69,420.67"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
+
+[node name="Fisheye" type="ColorRect" parent="UI/CanvasLayer" unique_id=437030349]
+visible = false
+material = SubResource("ShaderMaterial_xrivr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = -5.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Point" type="Node2D" parent="UI/CanvasLayer" unique_id=811899620]
+position = Vector2(829, 582)
+
+[node name="NoMore" type="Sprite2D" parent="UI/CanvasLayer" unique_id=855515416]
+position = Vector2(1010, 852.8662)
+scale = Vector2(0.54, 0.207)
+texture = ExtResource("5_m7brq")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/NoMore" unique_id=1840840394]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1074.5
+offset_top = -234.96487
+offset_right = -205.5
+offset_bottom = -161.96487
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 3)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 55
+text = "There seems to be no more visitors."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sleep" type="TextureButton" parent="UI/CanvasLayer" unique_id=1084641578]
+offset_left = 751.0
+offset_top = 881.0
+offset_right = 1384.0
+offset_bottom = 938.0
+scale = Vector2(0.82, 0.82)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/Sleep" unique_id=15570519]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Sleep?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CRT" type="ColorRect" parent="UI/CanvasLayer" unique_id=392238359]
+material = SubResource("ShaderMaterial_8gbba")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Color" type="ColorRect" parent="UI/CanvasLayer" unique_id=1723473653]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DayActions" type="VBoxContainer" parent="UI" unique_id=625878632]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 138.0
+offset_right = 734.0
+offset_bottom = 378.0
+
+[node name="Work" type="TextureButton" parent="UI/DayActions" unique_id=1028783027]
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/DayActions/Work" unique_id=1426321150]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Go to Work"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rest" type="TextureButton" parent="UI/DayActions" unique_id=1486082308]
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/DayActions/Rest" unique_id=721127759]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Sleep In"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Care" type="TextureButton" parent="UI/DayActions" unique_id=80283259]
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/DayActions/Care" unique_id=2089388559]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Check on Mother"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Meds" type="TextureButton" parent="UI/DayActions" unique_id=676421997]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/DayActions/Meds" unique_id=1352452997]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Give Meds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buy" type="TextureButton" parent="UI/DayActions" unique_id=1675239636]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/DayActions/Buy" unique_id=1020560448]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Buy Meds (P40)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Door" type="Button" parent="." unique_id=859843174]
+offset_left = 923.0
+offset_top = 74.0
+offset_right = 1371.0
+offset_bottom = 1078.0
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=234417531]
+libraries/ = SubResource("AnimationLibrary_wm8oe")
+
+[node name="SceneChange" type="Timer" parent="." unique_id=1578064081]
+one_shot = true
+
+[node name="Timer" type="Timer" parent="." unique_id=229626299]
+one_shot = true
+
+[node name="SceneChangeMorn" type="Timer" parent="." unique_id=600008025]
+one_shot = true
+
+[node name="TimerMorn" type="Timer" parent="." unique_id=1147337899]
+one_shot = true
+
+[node name="KnockCountdown" type="Timer" parent="." unique_id=820271057]
+one_shot = true
+
+[connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
+[connection signal="finished" from="Knock" to="." method="_on_knock_finished"]
+[connection signal="mouse_entered" from="UI/Choice/Yes" to="." method="_on_yes_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Choice/Yes" to="." method="_on_yes_mouse_exited"]
+[connection signal="pressed" from="UI/Choice/Yes" to="." method="_on_yes_pressed"]
+[connection signal="mouse_entered" from="UI/Choice/No" to="." method="_on_no_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Choice/No" to="." method="_on_no_mouse_exited"]
+[connection signal="pressed" from="UI/Choice/No" to="." method="_on_no_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_pressed"]
+[connection signal="mouse_entered" from="UI/DayActions/Work" to="." method="_on_work_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DayActions/Work" to="." method="_on_work_mouse_exited"]
+[connection signal="pressed" from="UI/DayActions/Work" to="." method="_on_work_pressed"]
+[connection signal="mouse_entered" from="UI/DayActions/Rest" to="." method="_on_rest_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DayActions/Rest" to="." method="_on_rest_mouse_exited"]
+[connection signal="pressed" from="UI/DayActions/Rest" to="." method="_on_rest_pressed"]
+[connection signal="mouse_entered" from="UI/DayActions/Care" to="." method="_on_care_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DayActions/Care" to="." method="_on_care_mouse_exited"]
+[connection signal="pressed" from="UI/DayActions/Care" to="." method="_on_care_pressed"]
+[connection signal="mouse_entered" from="UI/DayActions/Meds" to="." method="_on_meds_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DayActions/Meds" to="." method="_on_meds_mouse_exited"]
+[connection signal="pressed" from="UI/DayActions/Meds" to="." method="_on_meds_pressed"]
+[connection signal="mouse_entered" from="UI/DayActions/Buy" to="." method="_on_buy_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DayActions/Buy" to="." method="_on_buy_mouse_exited"]
+[connection signal="pressed" from="UI/DayActions/Buy" to="." method="_on_buy_pressed"]
+[connection signal="pressed" from="Door" to="." method="_on_door_pressed"]
+[connection signal="timeout" from="SceneChange" to="." method="_on_scene_change_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SceneChangeMorn" to="." method="_on_scene_change_timeout"]
+[connection signal="timeout" from="TimerMorn" to="." method="_on_timer_morn_timeout"]
+[connection signal="timeout" from="KnockCountdown" to="." method="_on_knock_countdown_timeout"]

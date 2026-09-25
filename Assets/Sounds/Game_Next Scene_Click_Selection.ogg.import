@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ko6o4cb2d4um"
+path="res://.godot/imported/Game_Next Scene_Click_Selection.ogg-c0e6692aeb51c73f6fd172c62ed4c9a2.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Game_Next Scene_Click_Selection.ogg"
+dest_files=["res://.godot/imported/Game_Next Scene_Click_Selection.ogg-c0e6692aeb51c73f6fd172c62ed4c9a2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

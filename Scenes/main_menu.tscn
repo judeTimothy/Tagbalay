@@ -1,0 +1,551 @@
+[gd_scene format=3 uid="uid://u20uuf8182p7"]
+
+[ext_resource type="Script" uid="uid://dymd5plehm0t" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="AudioStream" uid="uid://caj8nw4e68nc6" path="res://Assets/Music/(1) Main Menu.ogg" id="2_48xlc"]
+[ext_resource type="Texture2D" uid="uid://bwdhhtls3vu30" path="res://Assets/Backgrounds/MainMenu.jpg" id="3_1ehe0"]
+[ext_resource type="AudioStream" uid="uid://b5qatp8t51cks" path="res://Assets/Sounds/TV_Static.ogg" id="3_n45e2"]
+[ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="4_ce3w2"]
+[ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_opfnp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
+shader = ExtResource("4_ce3w2")
+shader_parameter/amount = 36.50100648379751
+
+[sub_resource type="Shader" id="Shader_bo1nx"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+// ─────────────────────────────────────────────
+// Distortion
+// ─────────────────────────────────────────────
+
+uniform float fisheye_strength : hint_range(0.01, 4.0, 0.01) = 1.0;
+
+uniform float curve_scale : hint_range(0.5, 2.0, 0.01) = 1.1;
+uniform float curve_x_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+uniform float curve_y_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+uniform float curve_x_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+uniform float curve_y_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+uniform float curve_border : hint_range(0.0, 0.2, 0.001) = 0.04;
+uniform float curve_zoom : hint_range(0.5, 1.2, 0.01) = 0.92;
+uniform int curve_iterations : hint_range(1, 4, 1) = 2;
+
+
+// ─────────────────────────────────────────────
+// Chromatic aberration / RGB separation
+// ─────────────────────────────────────────────
+
+uniform float chromatic_r_offset : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+uniform float chromatic_g_offset : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+uniform float chromatic_b_offset : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+
+uniform float chromatic_y_r : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+uniform float chromatic_y_g : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+uniform float chromatic_y_b : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+
+uniform float chromatic_intensity : hint_range(0.0, 2.0, 0.01) = 1.0;
+
+
+// ─────────────────────────────────────────────
+// CRT glow / color
+// ─────────────────────────────────────────────
+
+uniform float color_mix : hint_range(0.0, 2.0, 0.01) = 0.6;
+uniform float color_squared_mix : hint_range(0.0, 2.0, 0.01) = 0.4;
+uniform float color_bias : hint_range(0.0, 0.5, 0.01) = 0.05;
+
+uniform vec3 color_tint : source_color = vec3(0.95, 1.05, 0.95);
+uniform float brightness : hint_range(0.0, 5.0, 0.01) = 2.8;
+
+
+// ─────────────────────────────────────────────
+// Vignette
+// ─────────────────────────────────────────────
+
+uniform float vignette_strength : hint_range(0.0, 3.0, 0.01) = 1.0;
+uniform float vignette_power : hint_range(0.01, 2.0, 0.01) = 0.3;
+
+
+// ─────────────────────────────────────────────
+// Scanlines
+// ─────────────────────────────────────────────
+
+uniform float scanline_speed : hint_range(0.0, 10.0, 0.1) = 3.5;
+uniform float scanline_frequency : hint_range(0.0, 10.0, 0.1) = 1.5;
+uniform float scanline_min : hint_range(0.0, 1.0, 0.01) = 0.35;
+uniform float scanline_amplitude : hint_range(0.0, 1.0, 0.01) = 0.35;
+uniform float scanline_power : hint_range(0.1, 5.0, 0.1) = 1.7;
+uniform float scanline_darkness : hint_range(0.0, 2.0, 0.01) = 0.7;
+uniform float scanline_brightness : hint_range(0.0, 2.0, 0.01) = 0.4;
+
+
+// ─────────────────────────────────────────────
+// Screen noise / flicker
+// ─────────────────────────────────────────────
+
+uniform float flicker_strength : hint_range(0.0, 0.2, 0.001) = 0.01;
+uniform float flicker_speed : hint_range(0.0, 300.0, 1.0) = 110.0;
+
+
+// ─────────────────────────────────────────────
+// Pixel / shadow-mask effect
+// ─────────────────────────────────────────────
+
+uniform float pixel_effect_strength : hint_range(0.0, 1.0, 0.01) = 0.65;
+uniform float pixel_effect_scale : hint_range(0.1, 10.0, 0.1) = 2.0;
+
+
+// ─────────────────────────────────────────────
+// Secondary chromatic glow
+// ─────────────────────────────────────────────
+
+uniform float glow_scale : hint_range(0.0, 2.0, 0.01) = 0.75;
+uniform float glow_r_offset : hint_range(-0.1, 0.1, 0.001) = 0.025;
+uniform float glow_g_offset : hint_range(-0.1, 0.1, 0.001) = -0.022;
+uniform float glow_b_offset : hint_range(-0.1, 0.1, 0.001) = -0.020;
+
+uniform float glow_r_y : hint_range(-0.1, 0.1, 0.001) = -0.027;
+uniform float glow_g_y : hint_range(-0.1, 0.1, 0.001) = -0.020;
+uniform float glow_b_y : hint_range(-0.1, 0.1, 0.001) = -0.018;
+
+uniform float glow_r_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+uniform float glow_g_strength : hint_range(0.0, 1.0, 0.01) = 0.05;
+uniform float glow_b_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+
+
+// ─────────────────────────────────────────────
+// Functions
+// ─────────────────────────────────────────────
+
+vec2 fisheye(vec2 uv) {
+	vec2 d = uv - 0.5;
+	float r = length(d);
+
+	float rf = pow(r, fisheye_strength)
+		/ pow(0.5, fisheye_strength - 1.0);
+
+	return vec2(0.5) + rf * normalize(d);
+}
+
+
+vec2 curve(vec2 uv) {
+	uv = (uv - 0.5) * 2.0;
+
+	uv *= curve_scale;
+
+	uv.x *= 1.0 + curve_x_strength *
+		pow(abs(uv.y) / 5.0, curve_x_power);
+
+	uv.y *= 1.0 + curve_y_strength *
+		pow(abs(uv.x) / 4.0, curve_y_power);
+
+	uv = (uv / 2.0) + 0.5;
+
+	uv = uv * curve_zoom + curve_border;
+
+	return uv;
+}
+
+
+// ─────────────────────────────────────────────
+// Fragment
+// ─────────────────────────────────────────────
+
+void fragment() {
+	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 q = FRAGCOORD.xy / iResolution.xy;
+
+	// Fisheye
+	q = fisheye(q);
+
+	// CRT screen curvature
+	vec2 uv = q;
+
+	for (int i = 0; i < curve_iterations; i++) {
+		uv = curve(uv);
+	}
+
+	// Base screen color
+	vec3 oricol = texture(screen_texture, q).xyz;
+	vec3 col;
+
+	// Animated horizontal distortion
+	float x =
+		sin(0.3 * TIME + uv.y * 21.0) *
+		sin(0.7 * TIME + uv.y * 29.0) *
+		sin(0.3 + 0.33 * TIME + uv.y * 31.0) *
+		0.0017;
+
+	// RGB-separated sampling
+	col.r = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+	).x;
+
+	col.g = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+	).y;
+
+	col.b = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+	).z;
+
+	// Secondary RGB glow
+	col.r += glow_r_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_r_offset, glow_r_y)
+		+ vec2(uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+	).x;
+
+	col.g += glow_g_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_g_offset, glow_g_y)
+		+ vec2(uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+	).y;
+
+	col.b += glow_b_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_b_offset, glow_b_y)
+		+ vec2(uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+	).z;
+
+	// Color / CRT glow
+	col += color_bias;
+
+	col = clamp(
+		col * color_mix +
+		color_squared_mix * col * col,
+		0.0,
+		1.0
+	);
+
+	// Vignette
+	float vig =
+		vignette_strength *
+		16.0 *
+		uv.x *
+		uv.y *
+		(1.0 - uv.x) *
+		(1.0 - uv.y);
+
+	col *= vec3(pow(max(vig, 0.0), vignette_power));
+
+	// CRT tint and brightness
+	col *= color_tint;
+	col *= brightness;
+
+	// Scanlines
+	float scans = clamp(
+		scanline_min +
+		scanline_amplitude *
+		sin(
+			scanline_speed * TIME +
+			uv.y * iResolution.y * scanline_frequency
+		),
+		0.0,
+		1.0
+	);
+
+	float s = pow(scans, scanline_power);
+
+	col *= vec3(
+		scanline_brightness +
+		scanline_darkness * s
+	);
+
+	// Subtle flicker
+	col *= 1.0 +
+		flicker_strength *
+		sin(flicker_speed * TIME);
+
+	// Clip outside curved screen
+	if (uv.x < 0.0 || uv.x > 1.0)
+		col *= 0.0;
+
+	if (uv.y < 0.0 || uv.y > 1.0)
+		col *= 0.0;
+
+	// Pixel / shadow-mask effect
+	float pixel_mask = clamp(
+		(mod(FRAGCOORD.x, pixel_effect_scale) - 1.0) * 2.0,
+		0.0,
+		1.0
+	);
+
+	col *= 1.0 - pixel_effect_strength * vec3(pixel_mask);
+
+	COLOR = vec4(col, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opfnp"]
+shader = SubResource("Shader_bo1nx")
+shader_parameter/fisheye_strength = 1.15
+shader_parameter/curve_scale = 1.1
+shader_parameter/curve_x_strength = 1.999999955296
+shader_parameter/curve_y_strength = 0.1499999966472
+shader_parameter/curve_x_power = 5.000000074506
+shader_parameter/curve_y_power = 2.0
+shader_parameter/curve_border = 0.04
+shader_parameter/curve_zoom = 0.92
+shader_parameter/curve_iterations = 1
+shader_parameter/chromatic_r_offset = -5.896999902277322e-11
+shader_parameter/chromatic_g_offset = 0.0
+shader_parameter/chromatic_b_offset = -0.002
+shader_parameter/chromatic_y_r = 0.001
+shader_parameter/chromatic_y_g = -0.002
+shader_parameter/chromatic_y_b = 0.0
+shader_parameter/chromatic_intensity = 1.0
+shader_parameter/color_mix = 0.6
+shader_parameter/color_squared_mix = 0.4
+shader_parameter/color_bias = 0.05
+shader_parameter/color_tint = Color(1.0387418, 1.0046363, 1.0004495, 1)
+shader_parameter/brightness = 2.8
+shader_parameter/vignette_strength = 1.0
+shader_parameter/vignette_power = 0.3
+shader_parameter/scanline_speed = 3.5
+shader_parameter/scanline_frequency = 1.5
+shader_parameter/scanline_min = 0.35
+shader_parameter/scanline_amplitude = 0.35
+shader_parameter/scanline_power = 1.7
+shader_parameter/scanline_darkness = 0.7
+shader_parameter/scanline_brightness = 0.4
+shader_parameter/flicker_strength = 0.01
+shader_parameter/flicker_speed = 110.0
+shader_parameter/pixel_effect_strength = 0.65
+shader_parameter/pixel_effect_scale = 2.0
+shader_parameter/glow_scale = 0.499999988824
+shader_parameter/glow_r_offset = 0.025
+shader_parameter/glow_g_offset = -0.022
+shader_parameter/glow_b_offset = -0.02
+shader_parameter/glow_r_y = -0.027
+shader_parameter/glow_g_y = -0.02
+shader_parameter/glow_b_y = -0.018
+shader_parameter/glow_r_strength = 0.08
+shader_parameter/glow_g_strength = 0.05
+shader_parameter/glow_b_strength = 0.08
+
+[sub_resource type="Animation" id="Animation_cp0ys"]
+resource_name = "Black_to_View"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Static:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-30.0, -30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BGM:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_opfnp"]
+resource_name = "Fade_to_Black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yhxw7"]
+resource_name = "Intro"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BGM:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0009999999, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_trj04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Static:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-30.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BGM:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhxw7"]
+_data = {
+&"Black_to_View": SubResource("Animation_cp0ys"),
+&"Fade_to_Black": SubResource("Animation_opfnp"),
+&"Intro": SubResource("Animation_yhxw7"),
+&"RESET": SubResource("Animation_trj04")
+}
+
+[node name="MainMenu" type="Control" unique_id=1647314391]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28flt")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1901188971]
+stream = ExtResource("2_48xlc")
+autoplay = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=530936707]
+
+[node name="Static" type="AudioStreamPlayer" parent="." unique_id=719607224]
+stream = ExtResource("3_n45e2")
+volume_db = -30.0
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=901702447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1ehe0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1725068451]
+
+[node name="Fisheye" type="ColorRect" parent="CanvasLayer" unique_id=80975405]
+visible = false
+material = SubResource("ShaderMaterial_n45e2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = -5.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Point" type="Node2D" parent="CanvasLayer" unique_id=1965961308]
+position = Vector2(829, 582)
+
+[node name="CRT" type="ColorRect" parent="CanvasLayer" unique_id=483951979]
+material = SubResource("ShaderMaterial_opfnp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Color" type="ColorRect" parent="CanvasLayer" unique_id=1883226802]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=909406792]
+libraries/ = SubResource("AnimationLibrary_yhxw7")
+
+[node name="Play" type="Button" parent="." unique_id=2034943851]
+layout_mode = 0
+offset_left = 698.0
+offset_top = 317.0
+offset_right = 1161.0
+offset_bottom = 526.0
+theme_override_colors/font_color = Color(0.021900358, 0.31970716, 0.46061963, 1)
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 150
+flat = true
+
+[node name="Label" type="Label" parent="Play" unique_id=2143399876]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.023529412, 0.32156864, 0.45882353, 1)
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 150
+text = "PLAY"
+
+[node name="Timer" type="Timer" parent="." unique_id=1015111502]
+
+[node name="IntroTimer" type="Timer" parent="." unique_id=723635692]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="Start" type="Timer" parent="." unique_id=1383747253]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
+[connection signal="finished" from="Static" to="." method="_on_static_finished"]
+[connection signal="mouse_entered" from="Play" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Play" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="IntroTimer" to="." method="_on_intro_timer_timeout"]
+[connection signal="timeout" from="Start" to="." method="_on_start_timeout"]

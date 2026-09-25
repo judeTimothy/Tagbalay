@@ -1,11 +1,653 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://dbqko3bcaf3xu"]
 
-[ext_resource type="Script" path="res://scripts/scenes/main.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://iefkpsnfek3t" path="res://Assets/Backgrounds/BG1.jpg" id="1_21xkr"]
+[ext_resource type="Script" uid="uid://bwdqx7jmvgw6h" path="res://Scripts/main.gd" id="1_ynf5e"]
+[ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="2_8gbba"]
+[ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_hptm8"]
+[ext_resource type="Texture2D" uid="uid://c136dsf440uhh" path="res://Assets/UI/paper.png" id="2_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://cjytk3b21uw5l" path="res://Assets/Characters/MC1.png" id="2_kry3j"]
+[ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="3_21xkr"]
+[ext_resource type="AudioStream" uid="uid://e0upokc6x5nm" path="res://Assets/Sounds/Writing_On_Paper.ogg" id="3_d1ilt"]
+[ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="3_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="5_344ge"]
+[ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="6_ynf5e"]
 
-[node name="Main" type="Node"]
-script = ExtResource("1")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
+shader = ExtResource("2_8gbba")
+shader_parameter/amount = 36.50100648379751
 
-[node name="PhaseContainer" type="Control" parent="."]
+[sub_resource type="Shader" id="Shader_bo1nx"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+// ─────────────────────────────────────────────
+// Distortion
+// ─────────────────────────────────────────────
+
+uniform float fisheye_strength : hint_range(0.01, 4.0, 0.01) = 1.0;
+
+uniform float curve_scale : hint_range(0.5, 2.0, 0.01) = 1.1;
+uniform float curve_x_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+uniform float curve_y_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+uniform float curve_x_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+uniform float curve_y_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+uniform float curve_border : hint_range(0.0, 0.2, 0.001) = 0.04;
+uniform float curve_zoom : hint_range(0.5, 1.2, 0.01) = 0.92;
+uniform int curve_iterations : hint_range(1, 4, 1) = 2;
+
+
+// ─────────────────────────────────────────────
+// Chromatic aberration / RGB separation
+// ─────────────────────────────────────────────
+
+uniform float chromatic_r_offset : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+uniform float chromatic_g_offset : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+uniform float chromatic_b_offset : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+
+uniform float chromatic_y_r : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+uniform float chromatic_y_g : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+uniform float chromatic_y_b : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+
+uniform float chromatic_intensity : hint_range(0.0, 2.0, 0.01) = 1.0;
+
+
+// ─────────────────────────────────────────────
+// CRT glow / color
+// ─────────────────────────────────────────────
+
+uniform float color_mix : hint_range(0.0, 2.0, 0.01) = 0.6;
+uniform float color_squared_mix : hint_range(0.0, 2.0, 0.01) = 0.4;
+uniform float color_bias : hint_range(0.0, 0.5, 0.01) = 0.05;
+
+uniform vec3 color_tint : source_color = vec3(0.95, 1.05, 0.95);
+uniform float brightness : hint_range(0.0, 5.0, 0.01) = 2.8;
+
+
+// ─────────────────────────────────────────────
+// Vignette
+// ─────────────────────────────────────────────
+
+uniform float vignette_strength : hint_range(0.0, 3.0, 0.01) = 1.0;
+uniform float vignette_power : hint_range(0.01, 2.0, 0.01) = 0.3;
+
+
+// ─────────────────────────────────────────────
+// Scanlines
+// ─────────────────────────────────────────────
+
+uniform float scanline_speed : hint_range(0.0, 10.0, 0.1) = 3.5;
+uniform float scanline_frequency : hint_range(0.0, 10.0, 0.1) = 1.5;
+uniform float scanline_min : hint_range(0.0, 1.0, 0.01) = 0.35;
+uniform float scanline_amplitude : hint_range(0.0, 1.0, 0.01) = 0.35;
+uniform float scanline_power : hint_range(0.1, 5.0, 0.1) = 1.7;
+uniform float scanline_darkness : hint_range(0.0, 2.0, 0.01) = 0.7;
+uniform float scanline_brightness : hint_range(0.0, 2.0, 0.01) = 0.4;
+
+
+// ─────────────────────────────────────────────
+// Screen noise / flicker
+// ─────────────────────────────────────────────
+
+uniform float flicker_strength : hint_range(0.0, 0.2, 0.001) = 0.01;
+uniform float flicker_speed : hint_range(0.0, 300.0, 1.0) = 110.0;
+
+
+// ─────────────────────────────────────────────
+// Pixel / shadow-mask effect
+// ─────────────────────────────────────────────
+
+uniform float pixel_effect_strength : hint_range(0.0, 1.0, 0.01) = 0.65;
+uniform float pixel_effect_scale : hint_range(0.1, 10.0, 0.1) = 2.0;
+
+
+// ─────────────────────────────────────────────
+// Secondary chromatic glow
+// ─────────────────────────────────────────────
+
+uniform float glow_scale : hint_range(0.0, 2.0, 0.01) = 0.75;
+uniform float glow_r_offset : hint_range(-0.1, 0.1, 0.001) = 0.025;
+uniform float glow_g_offset : hint_range(-0.1, 0.1, 0.001) = -0.022;
+uniform float glow_b_offset : hint_range(-0.1, 0.1, 0.001) = -0.020;
+
+uniform float glow_r_y : hint_range(-0.1, 0.1, 0.001) = -0.027;
+uniform float glow_g_y : hint_range(-0.1, 0.1, 0.001) = -0.020;
+uniform float glow_b_y : hint_range(-0.1, 0.1, 0.001) = -0.018;
+
+uniform float glow_r_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+uniform float glow_g_strength : hint_range(0.0, 1.0, 0.01) = 0.05;
+uniform float glow_b_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+
+
+// ─────────────────────────────────────────────
+// Functions
+// ─────────────────────────────────────────────
+
+vec2 fisheye(vec2 uv) {
+	vec2 d = uv - 0.5;
+	float r = length(d);
+
+	float rf = pow(r, fisheye_strength)
+		/ pow(0.5, fisheye_strength - 1.0);
+
+	return vec2(0.5) + rf * normalize(d);
+}
+
+
+vec2 curve(vec2 uv) {
+	uv = (uv - 0.5) * 2.0;
+
+	uv *= curve_scale;
+
+	uv.x *= 1.0 + curve_x_strength *
+		pow(abs(uv.y) / 5.0, curve_x_power);
+
+	uv.y *= 1.0 + curve_y_strength *
+		pow(abs(uv.x) / 4.0, curve_y_power);
+
+	uv = (uv / 2.0) + 0.5;
+
+	uv = uv * curve_zoom + curve_border;
+
+	return uv;
+}
+
+
+// ─────────────────────────────────────────────
+// Fragment
+// ─────────────────────────────────────────────
+
+void fragment() {
+	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 q = FRAGCOORD.xy / iResolution.xy;
+
+	// Fisheye
+	q = fisheye(q);
+
+	// CRT screen curvature
+	vec2 uv = q;
+
+	for (int i = 0; i < curve_iterations; i++) {
+		uv = curve(uv);
+	}
+
+	// Base screen color
+	vec3 oricol = texture(screen_texture, q).xyz;
+	vec3 col;
+
+	// Animated horizontal distortion
+	float x =
+		sin(0.3 * TIME + uv.y * 21.0) *
+		sin(0.7 * TIME + uv.y * 29.0) *
+		sin(0.3 + 0.33 * TIME + uv.y * 31.0) *
+		0.0017;
+
+	// RGB-separated sampling
+	col.r = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+	).x;
+
+	col.g = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+	).y;
+
+	col.b = texture(
+		screen_texture,
+		vec2(x + uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+	).z;
+
+	// Secondary RGB glow
+	col.r += glow_r_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_r_offset, glow_r_y)
+		+ vec2(uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+	).x;
+
+	col.g += glow_g_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_g_offset, glow_g_y)
+		+ vec2(uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+	).y;
+
+	col.b += glow_b_strength * texture(
+		screen_texture,
+		glow_scale * vec2(x + glow_b_offset, glow_b_y)
+		+ vec2(uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+	).z;
+
+	// Color / CRT glow
+	col += color_bias;
+
+	col = clamp(
+		col * color_mix +
+		color_squared_mix * col * col,
+		0.0,
+		1.0
+	);
+
+	// Vignette
+	float vig =
+		vignette_strength *
+		16.0 *
+		uv.x *
+		uv.y *
+		(1.0 - uv.x) *
+		(1.0 - uv.y);
+
+	col *= vec3(pow(max(vig, 0.0), vignette_power));
+
+	// CRT tint and brightness
+	col *= color_tint;
+	col *= brightness;
+
+	// Scanlines
+	float scans = clamp(
+		scanline_min +
+		scanline_amplitude *
+		sin(
+			scanline_speed * TIME +
+			uv.y * iResolution.y * scanline_frequency
+		),
+		0.0,
+		1.0
+	);
+
+	float s = pow(scans, scanline_power);
+
+	col *= vec3(
+		scanline_brightness +
+		scanline_darkness * s
+	);
+
+	// Subtle flicker
+	col *= 1.0 +
+		flicker_strength *
+		sin(flicker_speed * TIME);
+
+	// Clip outside curved screen
+	if (uv.x < 0.0 || uv.x > 1.0)
+		col *= 0.0;
+
+	if (uv.y < 0.0 || uv.y > 1.0)
+		col *= 0.0;
+
+	// Pixel / shadow-mask effect
+	float pixel_mask = clamp(
+		(mod(FRAGCOORD.x, pixel_effect_scale) - 1.0) * 2.0,
+		0.0,
+		1.0
+	);
+
+	col *= 1.0 - pixel_effect_strength * vec3(pixel_mask);
+
+	COLOR = vec4(col, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gbba"]
+shader = SubResource("Shader_bo1nx")
+shader_parameter/fisheye_strength = 1.15
+shader_parameter/curve_scale = 1.1
+shader_parameter/curve_x_strength = 1.999999955296
+shader_parameter/curve_y_strength = 0.1499999966472
+shader_parameter/curve_x_power = 5.000000074506
+shader_parameter/curve_y_power = 2.0
+shader_parameter/curve_border = 0.04
+shader_parameter/curve_zoom = 0.92
+shader_parameter/curve_iterations = 1
+shader_parameter/chromatic_r_offset = -5.896999902277322e-11
+shader_parameter/chromatic_g_offset = 0.0
+shader_parameter/chromatic_b_offset = -0.002
+shader_parameter/chromatic_y_r = 0.001
+shader_parameter/chromatic_y_g = -0.002
+shader_parameter/chromatic_y_b = 0.0
+shader_parameter/chromatic_intensity = 1.0
+shader_parameter/color_mix = 0.6
+shader_parameter/color_squared_mix = 0.4
+shader_parameter/color_bias = 0.05
+shader_parameter/color_tint = Color(1.0387418, 1.0046363, 1.0004495, 1)
+shader_parameter/brightness = 2.8
+shader_parameter/vignette_strength = 1.0
+shader_parameter/vignette_power = 0.3
+shader_parameter/scanline_speed = 3.5
+shader_parameter/scanline_frequency = 1.5
+shader_parameter/scanline_min = 0.35
+shader_parameter/scanline_amplitude = 0.35
+shader_parameter/scanline_power = 1.7
+shader_parameter/scanline_darkness = 0.7
+shader_parameter/scanline_brightness = 0.4
+shader_parameter/flicker_strength = 0.01
+shader_parameter/flicker_speed = 110.0
+shader_parameter/pixel_effect_strength = 0.65
+shader_parameter/pixel_effect_scale = 2.0
+shader_parameter/glow_scale = 0.499999988824
+shader_parameter/glow_r_offset = 0.025
+shader_parameter/glow_g_offset = -0.022
+shader_parameter/glow_b_offset = -0.02
+shader_parameter/glow_r_y = -0.027
+shader_parameter/glow_g_y = -0.02
+shader_parameter/glow_b_y = -0.018
+shader_parameter/glow_r_strength = 0.08
+shader_parameter/glow_g_strength = 0.05
+shader_parameter/glow_b_strength = 0.08
+
+[sub_resource type="Animation" id="Animation_hptm8"]
+resource_name = "Black_to_View"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6iyac"]
+resource_name = "Fade_to_Black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.099999994, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d1ilt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hptm8"]
+_data = {
+&"Black_to_View": SubResource("Animation_hptm8"),
+&"Fade_to_Black": SubResource("Animation_6iyac"),
+&"RESET": SubResource("Animation_d1ilt")
+}
+
+[node name="Main" type="Node2D" unique_id=1626590382]
+script = ExtResource("1_ynf5e")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=610521921]
+stream = ExtResource("2_hptm8")
+volume_db = -6.0
+autoplay = true
+
+[node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
+
+[node name="Paper" type="AudioStreamPlayer" parent="." unique_id=894728574]
+stream = ExtResource("3_d1ilt")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
+modulate = Color(0.7372549, 0.5294118, 0.44313726, 1)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_21xkr")
+
+[node name="UI" type="Control" parent="." unique_id=1440015256]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MC1" type="Sprite2D" parent="UI" unique_id=1256210219]
+modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
+position = Vector2(1021, 422)
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("2_kry3j")
+
+[node name="DialogueBox" type="Sprite2D" parent="UI" unique_id=1384319198]
+position = Vector2(960, 894)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_21xkr")
+
+[node name="Dialogue" type="VBoxContainer" parent="UI" unique_id=19302163]
+custom_minimum_size = Vector2(1800, 0)
+custom_maximum_size = Vector2(1800, 250)
+layout_mode = 0
+offset_left = 70.0
+offset_top = 762.0
+offset_right = 1870.0
+offset_bottom = 1012.0
+theme_override_constants/separation = 30
+
+[node name="Dialogue" type="Label" parent="UI/Dialogue" unique_id=1776992578]
+custom_minimum_size = Vector2(1800, 0)
+custom_maximum_size = Vector2(1800, -1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 42
+text = "Mayong gab-e, to. Pasensya gd sa distorbo. Amo ni ang balay ni Carmen?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Translation" type="Label" parent="UI/Dialogue" unique_id=584684478]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 36
+text = "(Good evening, young man. Sorry for the late notice, but is this the residence of Carmen?)"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Choice" type="HBoxContainer" parent="UI" unique_id=3457405]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -635.0
+offset_top = 83.0
+offset_right = 635.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4, 1.4)
+pivot_offset = Vector2(635, 0)
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Yes" type="TextureButton" parent="UI/Choice" unique_id=502986540]
+layout_mode = 2
+texture_normal = ExtResource("5_344ge")
+texture_pressed = ExtResource("6_ynf5e")
+texture_hover = ExtResource("6_ynf5e")
+
+[node name="Label" type="Label" parent="UI/Choice/Yes" unique_id=1869303518]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -35.135082
+offset_right = 101.5
+offset_bottom = 7.8649178
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 30
+text = "Mayong gab-e."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Translation" type="Label" parent="UI/Choice/Yes" unique_id=2044269246]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -8.594793
+offset_right = 101.5
+offset_bottom = 34.405205
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 24
+text = "(Good evening)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="No" type="TextureButton" parent="UI/Choice" unique_id=1348148114]
+layout_mode = 2
+texture_normal = ExtResource("5_344ge")
+texture_pressed = ExtResource("6_ynf5e")
+texture_hover = ExtResource("6_ynf5e")
+
+[node name="Label" type="Label" parent="UI/Choice/No" unique_id=1506212261]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -35.135002
+offset_right = 159.5
+offset_bottom = 7.864998
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 30
+text = "..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Translation" type="Label" parent="UI/Choice/No" unique_id=1416245722]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -8.594999
+offset_right = 159.5
+offset_bottom = 34.405
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 24
+text = "(Stay silent)."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Sprite2D" parent="UI" unique_id=910894360]
+visible = false
+position = Vector2(1693, 181)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_jjvhh")
+
+[node name="Label" type="Label" parent="UI/Stats" unique_id=1170608964]
+offset_left = -1337.5
+offset_top = -1550.0
+offset_right = -233.5
+offset_bottom = -975.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 434
+text = "Utang kay:"
+
+[node name="Debtor" type="Label" parent="UI/Stats" unique_id=875222162]
+offset_left = -2075.0
+offset_top = -975.0
+offset_right = 1971.0
+offset_bottom = -50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 650
+text = "Pedro Lending"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UI/Stats" unique_id=548091280]
+offset_left = -2075.0
+offset_top = 50.0
+offset_right = 1971.0
+offset_bottom = 975.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 550
+text = "P69,420.67"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
+
+[node name="Fisheye" type="ColorRect" parent="UI/CanvasLayer" unique_id=437030349]
+visible = false
+material = SubResource("ShaderMaterial_xrivr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = -5.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CRT" type="ColorRect" parent="UI/CanvasLayer" unique_id=392238359]
+material = SubResource("ShaderMaterial_8gbba")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/CanvasLayer" unique_id=216819667]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1331616331]
+libraries/ = SubResource("AnimationLibrary_hptm8")
+
+[node name="Timer" type="Timer" parent="." unique_id=934772056]
+
+[connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
+[connection signal="mouse_entered" from="UI/Choice/Yes" to="." method="_on_yes_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Choice/Yes" to="." method="_on_yes_mouse_exited"]
+[connection signal="pressed" from="UI/Choice/Yes" to="." method="_on_yes_pressed"]
+[connection signal="mouse_entered" from="UI/Choice/No" to="." method="_on_no_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Choice/No" to="." method="_on_no_mouse_exited"]
+[connection signal="pressed" from="UI/Choice/No" to="." method="_on_no_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
