@@ -14,6 +14,7 @@ var condition = 20
 var day = 1
 var night = false
 var knocking = false
+var given_medicine = false
 
 
 
@@ -200,14 +201,21 @@ func _on_buy_pressed() -> void:
 	$SFX.play()
 
 func _on_meds_pressed() -> void:
-	meds -= 1
-	mother += 10
-	var t = toast.instantiate()
-	t.display_text("Mother took her meds. She feels a little bit better now.")
-	t.global_position = $UI/CanvasLayer/Point.global_position/4
-	$UI/CanvasLayer/Point.add_child(t)
+	if given_medicine == false:
+		meds -= 1
+		mother += 10
+		var t = toast.instantiate()
+		t.display_text("Mother took her meds. She's recovering.")
+		t.global_position = $UI/CanvasLayer/Point.global_position/4
+		$UI/CanvasLayer/Point.add_child(t)
+	else:
+		var t = toast.instantiate()
+		t.display_text("Mother already took her meds.")
+		t.global_position = $UI/CanvasLayer/Point.global_position/4
+		$UI/CanvasLayer/Point.add_child(t)
 	$SFX.stream = select_sfx
 	$SFX.play()
+	given_medicine = true
 	if meds == 0:
 		$UI/DayActions/Meds/Label.remove_theme_color_override("font_color")
 

@@ -5,11 +5,12 @@
 [ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="2_8gbba"]
 [ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_hptm8"]
 [ext_resource type="Texture2D" uid="uid://c136dsf440uhh" path="res://Assets/UI/paper.png" id="2_jjvhh"]
-[ext_resource type="Texture2D" uid="uid://cjytk3b21uw5l" path="res://Assets/Characters/MC1.png" id="2_kry3j"]
 [ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="3_21xkr"]
 [ext_resource type="AudioStream" uid="uid://e0upokc6x5nm" path="res://Assets/Sounds/Writing_On_Paper.ogg" id="3_d1ilt"]
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="3_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="5_344ge"]
+[ext_resource type="Texture2D" uid="uid://y6jyg5ovn7df" path="res://Assets/Characters/sibling - base.png" id="5_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://dc7vwclfc0g7l" path="res://Assets/Misc/LightProbe.png" id="6_6iyac"]
 [ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="6_ynf5e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
@@ -22,100 +23,395 @@ code = "shader_type canvas_item;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
 // ─────────────────────────────────────────────
+// Master
+// ─────────────────────────────────────────────
+group_uniforms Master;
+
+/**
+ * Overall effect strength. Blends between the untouched source frame (0.0)
+ * and the fully processed CRT image (1.0). This is the single \"tone it all
+ * down\" knob — use it instead of hand-tuning every group below if the whole
+ * effect just needs to read as weaker or stronger.
+ * Recommended: 0.7-1.0 for a strong retro-horror look, 0.3-0.5 if the CRT
+ * effect is fighting with readability of in-game text or key scares.
+ */
+uniform float crt_intensity : hint_range(0.0, 1.0, 0.01) = 1.0;
+
+
+// ─────────────────────────────────────────────
 // Distortion
 // ─────────────────────────────────────────────
+group_uniforms Distortion;
 
+/**
+ * Strength of the fisheye (barrel) lens warp applied before the CRT curve.
+ * 1.0 = no extra warp beyond the curve below. Higher values bulge the
+ * center outward and compress the edges, like a wide convex tube screen.
+ * Recommended: 0.8-1.5. Above ~2.0 the image gets uncomfortably warped.
+ */
 uniform float fisheye_strength : hint_range(0.01, 4.0, 0.01) = 1.0;
 
+/**
+ * Overall scale of the screen-curvature math (uniform zoom applied before
+ * the per-axis curve is computed). Larger values push more of the image
+ * toward the curved edges.
+ * Recommended: 1.0-1.3.
+ */
 uniform float curve_scale : hint_range(0.5, 2.0, 0.01) = 1.1;
+
+/**
+ * How much the horizontal (X) curvature bulges based on vertical position.
+ * 0 = flat left/right edges. Higher values give a rounder tube-TV silhouette.
+ * Recommended: 0.5-1.2.
+ */
 uniform float curve_x_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+
+/**
+ * How much the vertical (Y) curvature bulges based on horizontal position.
+ * 0 = flat top/bottom edges.
+ * Recommended: 0.5-1.2.
+ */
 uniform float curve_y_strength : hint_range(0.0, 2.0, 0.01) = 1.0;
+
+/**
+ * Falloff exponent for the horizontal curve. Lower values (~1) curve evenly
+ * across the whole width; higher values keep the center flatter and
+ * concentrate the bulge near the edges.
+ * Recommended: 1.5-3.0.
+ */
 uniform float curve_x_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+
+/**
+ * Falloff exponent for the vertical curve. Same behavior as
+ * curve_x_power but for the top/bottom bulge.
+ * Recommended: 1.5-3.0.
+ */
 uniform float curve_y_power : hint_range(0.1, 10.0, 0.1) = 2.0;
+
+/**
+ * Extra empty margin (in UV space) added around the curved screen before
+ * clipping. Creates the dark bezel gap between the curved image and the
+ * screen edge. Larger values shrink the visible picture and widen the border.
+ * Recommended: 0.02-0.06.
+ */
 uniform float curve_border : hint_range(0.0, 0.2, 0.001) = 0.04;
+
+/**
+ * Zoom applied to the curved UVs. Values below 1.0 shrink the image slightly
+ * inward so the curved corners don't get clipped by the border; values
+ * above 1.0 crop in tighter.
+ * Recommended: 0.88-0.96.
+ */
 uniform float curve_zoom : hint_range(0.5, 1.2, 0.01) = 0.92;
+
+/**
+ * How many times the curve distortion is applied in a row. 1 is a gentle
+ * classic curve; higher values compound the warp into a much more extreme,
+ * bulging tube shape. Expensive to raise since it's a real loop, not a
+ * cosmetic multiplier.
+ * Recommended: 1-2. Use 3-4 only for a deliberately broken/nightmare screen.
+ */
 uniform int curve_iterations : hint_range(1, 4, 1) = 2;
 
 
 // ─────────────────────────────────────────────
 // Chromatic aberration / RGB separation
 // ─────────────────────────────────────────────
+group_uniforms Chromatic_Aberration;
 
+/**
+ * Master multiplier for the primary chromatic aberration (the six offsets
+ * below). Scales chromatic_r/g/b_offset and chromatic_y_r/g/b together
+ * without needing to touch each channel individually.
+ * Recommended: 0.0 to disable primary CA entirely, 1.0 for the tuned
+ * default, up to ~1.5-2.0 for a heavier \"signal breaking up\" look.
+ */
+uniform float chromatic_intensity : hint_range(0.0, 2.0, 0.01) = 1.0;
+
+/**
+ * Horizontal (X) sampling offset for the red channel, in UV units.
+ * Positive shifts red right; negative shifts it left. Combined with the
+ * green/blue offsets this creates the classic RGB fringing along edges.
+ * Recommended: keep within +/-0.003 for a subtle CRT look.
+ */
 uniform float chromatic_r_offset : hint_range(-0.02, 0.02, 0.0001) = 0.001;
+
+/**
+ * Horizontal (X) sampling offset for the green channel, in UV units.
+ * Usually left at or near 0 so green stays as the \"anchor\" channel.
+ * Recommended: -0.001 to 0.001.
+ */
 uniform float chromatic_g_offset : hint_range(-0.02, 0.02, 0.0001) = 0.000;
+
+/**
+ * Horizontal (X) sampling offset for the blue channel, in UV units.
+ * Recommended: keep within +/-0.003, usually opposite sign from
+ * chromatic_r_offset for a symmetric red/blue split.
+ */
 uniform float chromatic_b_offset : hint_range(-0.02, 0.02, 0.0001) = -0.002;
 
+/**
+ * Vertical (Y) sampling offset for the red channel, in UV units. Adds a
+ * slight vertical fringe on top of the horizontal offset above.
+ * Recommended: keep small, +/-0.003, or the fringing starts to look like
+ * a vertical sync issue rather than lens aberration.
+ */
 uniform float chromatic_y_r : hint_range(-0.02, 0.02, 0.0001) = 0.001;
-uniform float chromatic_y_g : hint_range(-0.02, 0.02, 0.0001) = -0.002;
-uniform float chromatic_y_b : hint_range(-0.02, 0.02, 0.0001) = 0.000;
 
-uniform float chromatic_intensity : hint_range(0.0, 2.0, 0.01) = 1.0;
+/**
+ * Vertical (Y) sampling offset for the green channel, in UV units.
+ * Recommended: +/-0.003.
+ */
+uniform float chromatic_y_g : hint_range(-0.02, 0.02, 0.0001) = -0.002;
+
+/**
+ * Vertical (Y) sampling offset for the blue channel, in UV units.
+ * Recommended: +/-0.003.
+ */
+uniform float chromatic_y_b : hint_range(-0.02, 0.02, 0.0001) = 0.000;
 
 
 // ─────────────────────────────────────────────
 // CRT glow / color
 // ─────────────────────────────────────────────
+group_uniforms CRT_Glow_And_Color;
 
+/**
+ * Linear contribution of the raw sampled color into the final tone curve
+ * (col * color_mix). Lower values darken and flatten the image before the
+ * squared term below adds contrast back in.
+ * Recommended: 0.4-0.8.
+ */
 uniform float color_mix : hint_range(0.0, 2.0, 0.01) = 0.6;
+
+/**
+ * Contribution of color*color (a simple contrast/gamma boost) into the
+ * final tone curve. Higher values punch up highlights and add a \"hot\"
+ * phosphor look; too high blows out bright areas.
+ * Recommended: 0.2-0.6.
+ */
 uniform float color_squared_mix : hint_range(0.0, 2.0, 0.01) = 0.4;
+
+/**
+ * Flat brightness added to every pixel before the tone curve, simulating
+ * black-level lift / phosphor glow so blacks aren't pure black.
+ * Recommended: 0.0-0.1. Push higher for a washed-out, old/damaged CRT feel.
+ */
 uniform float color_bias : hint_range(0.0, 0.5, 0.01) = 0.05;
 
+/**
+ * Color tint multiplied over the whole image after the tone curve. Use to
+ * push the overall picture toward a sickly green, cold blue, or warm amber
+ * phosphor tint. Values above 1.0 on a channel boost that channel.
+ * Recommended: keep close to (1,1,1), nudge one channel +/-0.1-0.15 for
+ * a mood tint.
+ */
 uniform vec3 color_tint : source_color = vec3(0.95, 1.05, 0.95);
+
+/**
+ * Overall brightness multiplier applied after tint, before vignette and
+ * scanlines. This shader's tone-mapping curve darkens the image
+ * substantially, so this tends to run higher than you'd expect.
+ * Recommended: 2.0-3.2. Re-check after changing color_mix/color_squared_mix,
+ * since those change how much headroom this needs.
+ */
 uniform float brightness : hint_range(0.0, 5.0, 0.01) = 2.8;
 
 
 // ─────────────────────────────────────────────
 // Vignette
 // ─────────────────────────────────────────────
+group_uniforms Vignette;
 
+/**
+ * Strength of the darkened corners/edges. 0 disables the vignette
+ * entirely. This is a multiplier on the vignette falloff, not a simple
+ * opacity, so changes interact with vignette_power below.
+ * Recommended: 0.8-1.3.
+ */
 uniform float vignette_strength : hint_range(0.0, 3.0, 0.01) = 1.0;
+
+/**
+ * Exponent applied to the vignette falloff. Values below 1.0 keep more of
+ * the frame bright and only darken right at the very edge; values above
+ * 1.0 spread the darkening further toward the center.
+ * Recommended: 0.2-0.5 for a subtle edge darken, higher for a tunnel-vision
+ * horror effect.
+ */
 uniform float vignette_power : hint_range(0.01, 2.0, 0.01) = 0.3;
 
 
 // ─────────────────────────────────────────────
 // Scanlines
 // ─────────────────────────────────────────────
+group_uniforms Scanlines;
 
+/**
+ * Speed at which the scanline pattern rolls/animates over time. 0 = static
+ * scanlines with no rolling motion.
+ * Recommended: 1.0-5.0 for a subtle roll, 0 for a perfectly stable image.
+ */
 uniform float scanline_speed : hint_range(0.0, 10.0, 0.1) = 3.5;
+
+/**
+ * How tightly packed the scanlines are (frequency of the sine pattern
+ * relative to screen height). Higher = more, thinner lines.
+ * Recommended: 1.0-2.5.
+ */
 uniform float scanline_frequency : hint_range(0.0, 10.0, 0.1) = 1.5;
+
+/**
+ * Baseline (floor) darkness value the scanline oscillation starts from,
+ * before scanline_amplitude is added. Raising this makes the dark parts of
+ * each scanline less dark.
+ * Recommended: 0.2-0.5.
+ */
 uniform float scanline_min : hint_range(0.0, 1.0, 0.01) = 0.35;
+
+/**
+ * How far the scanline brightness swings above scanline_min. Higher values
+ * create more contrast between the bright and dark bands of each line pair.
+ * Recommended: 0.2-0.5.
+ */
 uniform float scanline_amplitude : hint_range(0.0, 1.0, 0.01) = 0.35;
+
+/**
+ * Exponent applied to the scanline wave before it's used to darken the
+ * image. Higher values make the dark bands narrower and sharper (thin
+ * crisp lines); lower values make the shading soft and broad.
+ * Recommended: 1.0-2.5.
+ */
 uniform float scanline_power : hint_range(0.1, 5.0, 0.1) = 1.7;
+
+/**
+ * How much the scanline pattern is allowed to darken the image overall.
+ * 0 = scanlines have no darkening effect at all.
+ * Recommended: 0.4-0.9.
+ */
 uniform float scanline_darkness : hint_range(0.0, 2.0, 0.01) = 0.7;
+
+/**
+ * Flat brightness floor added back on top of the scanline darkening, so
+ * scanlines dim the image rather than crushing it to black.
+ * Recommended: 0.3-0.6.
+ */
 uniform float scanline_brightness : hint_range(0.0, 2.0, 0.01) = 0.4;
 
 
 // ─────────────────────────────────────────────
 // Screen noise / flicker
 // ─────────────────────────────────────────────
+group_uniforms Screen_Noise_And_Flicker;
 
+/**
+ * Amplitude of the global brightness flicker (sinusoidal, not random
+ * noise). 0 disables flicker entirely.
+ * Recommended: 0.0-0.03 for a barely-there unstable signal, up to ~0.08 for
+ * an obviously failing monitor moment.
+ */
 uniform float flicker_strength : hint_range(0.0, 0.2, 0.001) = 0.01;
+
+/**
+ * Speed of the flicker oscillation. Higher values flicker faster/more
+ * erratically; lower values give a slow, uneasy pulse.
+ * Recommended: 60-150 for a fast nervous flicker, under 20 for a slow pulse.
+ */
 uniform float flicker_speed : hint_range(0.0, 300.0, 1.0) = 110.0;
 
 
 // ─────────────────────────────────────────────
 // Pixel / shadow-mask effect
 // ─────────────────────────────────────────────
+group_uniforms Pixel_And_Shadow_Mask;
 
+/**
+ * How strongly the vertical shadow-mask stripes darken the image. 0 = no
+ * visible pixel/mask structure at all.
+ * Recommended: 0.4-0.8. Very high values can make the image look gridded
+ * rather than like a CRT mask.
+ */
 uniform float pixel_effect_strength : hint_range(0.0, 1.0, 0.01) = 0.65;
+
+/**
+ * Width, in pixels, of each shadow-mask stripe. Smaller values give a
+ * finer, higher-resolution-looking mask; larger values give chunkier,
+ * more visible pixel columns.
+ * Recommended: 1.5-3.0 depending on target output resolution.
+ */
 uniform float pixel_effect_scale : hint_range(0.1, 10.0, 0.1) = 2.0;
 
 
 // ─────────────────────────────────────────────
 // Secondary chromatic glow
 // ─────────────────────────────────────────────
+group_uniforms Secondary_Chromatic_Glow;
 
+/**
+ * Scale of the secondary glow sample's offset pattern relative to the
+ * glow_*_offset/glow_*_y values below. 0 disables the secondary glow's
+ * positional spread (it collapses onto the primary CA sample point).
+ * Recommended: 0.5-1.0.
+ */
 uniform float glow_scale : hint_range(0.0, 2.0, 0.01) = 0.75;
+
+/**
+ * Horizontal offset of the red channel's secondary glow sample, layered on
+ * top of the primary chromatic aberration offset. Larger than the primary
+ * CA offsets by design — this is a soft \"bloom\" halo, not a sharp fringe.
+ * Recommended: 0.015-0.035.
+ */
 uniform float glow_r_offset : hint_range(-0.1, 0.1, 0.001) = 0.025;
+
+/**
+ * Horizontal offset of the green channel's secondary glow sample.
+ * Recommended: -0.035 to -0.015.
+ */
 uniform float glow_g_offset : hint_range(-0.1, 0.1, 0.001) = -0.022;
+
+/**
+ * Horizontal offset of the blue channel's secondary glow sample.
+ * Recommended: -0.035 to -0.015.
+ */
 uniform float glow_b_offset : hint_range(-0.1, 0.1, 0.001) = -0.020;
 
+/**
+ * Vertical offset of the red channel's secondary glow sample.
+ * Recommended: -0.035 to -0.015.
+ */
 uniform float glow_r_y : hint_range(-0.1, 0.1, 0.001) = -0.027;
+
+/**
+ * Vertical offset of the green channel's secondary glow sample.
+ * Recommended: -0.035 to -0.015.
+ */
 uniform float glow_g_y : hint_range(-0.1, 0.1, 0.001) = -0.020;
+
+/**
+ * Vertical offset of the blue channel's secondary glow sample.
+ * Recommended: -0.035 to -0.015.
+ */
 uniform float glow_b_y : hint_range(-0.1, 0.1, 0.001) = -0.018;
 
+/**
+ * How much the red secondary glow sample adds back into the final red
+ * channel. 0 disables red's contribution to the soft glow halo.
+ * Recommended: 0.05-0.12.
+ */
 uniform float glow_r_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
+
+/**
+ * How much the green secondary glow sample adds back into the final green
+ * channel. Usually kept lower than red/blue since green dominates
+ * perceived brightness and can wash the image out.
+ * Recommended: 0.03-0.08.
+ */
 uniform float glow_g_strength : hint_range(0.0, 1.0, 0.01) = 0.05;
+
+/**
+ * How much the blue secondary glow sample adds back into the final blue
+ * channel.
+ * Recommended: 0.05-0.12.
+ */
 uniform float glow_b_strength : hint_range(0.0, 1.0, 0.01) = 0.08;
 
 
@@ -182,39 +478,39 @@ void fragment() {
 		sin(0.3 + 0.33 * TIME + uv.y * 31.0) *
 		0.0017;
 
-	// RGB-separated sampling
+	// RGB-separated sampling (chromatic_intensity now scales this group)
 	col.r = texture(
 		screen_texture,
-		vec2(x + uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+		vec2(x + uv.x + chromatic_r_offset * chromatic_intensity, uv.y + chromatic_y_r * chromatic_intensity)
 	).x;
 
 	col.g = texture(
 		screen_texture,
-		vec2(x + uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+		vec2(x + uv.x + chromatic_g_offset * chromatic_intensity, uv.y + chromatic_y_g * chromatic_intensity)
 	).y;
 
 	col.b = texture(
 		screen_texture,
-		vec2(x + uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+		vec2(x + uv.x + chromatic_b_offset * chromatic_intensity, uv.y + chromatic_y_b * chromatic_intensity)
 	).z;
 
 	// Secondary RGB glow
 	col.r += glow_r_strength * texture(
 		screen_texture,
 		glow_scale * vec2(x + glow_r_offset, glow_r_y)
-		+ vec2(uv.x + chromatic_r_offset, uv.y + chromatic_y_r)
+		+ vec2(uv.x + chromatic_r_offset * chromatic_intensity, uv.y + chromatic_y_r * chromatic_intensity)
 	).x;
 
 	col.g += glow_g_strength * texture(
 		screen_texture,
 		glow_scale * vec2(x + glow_g_offset, glow_g_y)
-		+ vec2(uv.x + chromatic_g_offset, uv.y + chromatic_y_g)
+		+ vec2(uv.x + chromatic_g_offset * chromatic_intensity, uv.y + chromatic_y_g * chromatic_intensity)
 	).y;
 
 	col.b += glow_b_strength * texture(
 		screen_texture,
 		glow_scale * vec2(x + glow_b_offset, glow_b_y)
-		+ vec2(uv.x + chromatic_b_offset, uv.y + chromatic_y_b)
+		+ vec2(uv.x + chromatic_b_offset * chromatic_intensity, uv.y + chromatic_y_b * chromatic_intensity)
 	).z;
 
 	// Color / CRT glow
@@ -282,13 +578,17 @@ void fragment() {
 
 	col *= 1.0 - pixel_effect_strength * vec3(pixel_mask);
 
+	// Master blend: fade the whole CRT effect back toward the clean source
+	col = mix(oricol, col, crt_intensity);
+
 	COLOR = vec4(col, 1.0);
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8gbba"]
 shader = SubResource("Shader_bo1nx")
-shader_parameter/fisheye_strength = 1.15
-shader_parameter/curve_scale = 1.1
+shader_parameter/crt_intensity = 0.999999977648
+shader_parameter/fisheye_strength = 1.1499999742951998
+shader_parameter/curve_scale = 0.999999988824
 shader_parameter/curve_x_strength = 1.999999955296
 shader_parameter/curve_y_strength = 0.1499999966472
 shader_parameter/curve_x_power = 5.000000074506
@@ -296,17 +596,17 @@ shader_parameter/curve_y_power = 2.0
 shader_parameter/curve_border = 0.04
 shader_parameter/curve_zoom = 0.92
 shader_parameter/curve_iterations = 1
-shader_parameter/chromatic_r_offset = -5.896999902277322e-11
+shader_parameter/chromatic_intensity = 0.5999999865888
+shader_parameter/chromatic_r_offset = -0.00010000005644000137
 shader_parameter/chromatic_g_offset = 0.0
 shader_parameter/chromatic_b_offset = -0.002
 shader_parameter/chromatic_y_r = 0.001
 shader_parameter/chromatic_y_g = -0.002
 shader_parameter/chromatic_y_b = 0.0
-shader_parameter/chromatic_intensity = 1.0
-shader_parameter/color_mix = 0.6
+shader_parameter/color_mix = 0.5999999865888
 shader_parameter/color_squared_mix = 0.4
 shader_parameter/color_bias = 0.05
-shader_parameter/color_tint = Color(1.0387418, 1.0046363, 1.0004495, 1)
+shader_parameter/color_tint = Color(0.95, 1.05, 0.95, 1)
 shader_parameter/brightness = 2.8
 shader_parameter/vignette_strength = 1.0
 shader_parameter/vignette_power = 0.3
@@ -400,7 +700,7 @@ autoplay = true
 stream = ExtResource("3_d1ilt")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
-modulate = Color(0.7372549, 0.5294118, 0.44313726, 1)
+modulate = Color(0.37536725, 0.24561548, 0.18940711, 1)
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("1_21xkr")
@@ -418,9 +718,17 @@ grow_vertical = 2
 
 [node name="MC1" type="Sprite2D" parent="UI" unique_id=1256210219]
 modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
+light_mask = 3
 position = Vector2(1021, 422)
 scale = Vector2(0.24, 0.24)
-texture = ExtResource("2_kry3j")
+texture = ExtResource("5_d1ilt")
+
+[node name="Light" type="PointLight2D" parent="UI/MC1" unique_id=2087611393]
+position = Vector2(229.16666, 187.50005)
+scale = Vector2(2.21, 2.21)
+range_item_cull_mask = 2
+shadow_item_cull_mask = 0
+texture = ExtResource("6_6iyac")
 
 [node name="DialogueBox" type="Sprite2D" parent="UI" unique_id=1384319198]
 position = Vector2(960, 894)
