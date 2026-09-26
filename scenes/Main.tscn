@@ -783,6 +783,7 @@ grow_vertical = 2
 alignment = 2
 
 [node name="Slam" type="TextureButton" parent="UI/VBoxContainer" unique_id=1658700015]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

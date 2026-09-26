@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	$UI/VBoxContainer/Choice/No/Label.text = no_array[dialogue_index]
 	$UI/VBoxContainer/Choice/No/Translation.text = no_translation[dialogue_index]
 	
-	if Autoloads.day != 1 and dialogue_index == 3:
+	if Autoloads.day != 1 and dialogue_index == 2:
 		$UI/VBoxContainer/Slam.visible = true
 	else:
 		$UI/VBoxContainer/Slam.visible = false
