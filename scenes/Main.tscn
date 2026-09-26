@@ -597,7 +597,7 @@ shader_parameter/curve_border = 0.04
 shader_parameter/curve_zoom = 0.92
 shader_parameter/curve_iterations = 1
 shader_parameter/chromatic_intensity = 0.5999999865888
-shader_parameter/chromatic_r_offset = -0.00010000005644000137
+shader_parameter/chromatic_r_offset = -0.00010000005644
 shader_parameter/chromatic_g_offset = 0.0
 shader_parameter/chromatic_b_offset = -0.002
 shader_parameter/chromatic_y_r = 0.001
@@ -634,6 +634,7 @@ shader_parameter/glow_b_strength = 0.08
 
 [sub_resource type="Animation" id="Animation_hptm8"]
 resource_name = "Black_to_View"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -641,7 +642,7 @@ tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
@@ -649,6 +650,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6iyac"]
 resource_name = "Fade_to_Black"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -656,7 +658,7 @@ tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.099999994, 1),
+"times": PackedFloat32Array(0.099999994, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -765,31 +767,60 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Choice" type="HBoxContainer" parent="UI" unique_id=3457405]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1000256942]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -635.0
-offset_top = 83.0
-offset_right = 635.0
-offset_bottom = 140.0
+offset_left = -648.0
+offset_top = 48.0
+offset_right = 648.0
+offset_bottom = 166.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.4, 1.4)
-pivot_offset = Vector2(635, 0)
+alignment = 2
+
+[node name="Slam" type="TextureButton" parent="UI/VBoxContainer" unique_id=1658700015]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_344ge")
+texture_pressed = ExtResource("6_ynf5e")
+texture_hover = ExtResource("6_ynf5e")
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/Slam" unique_id=1130033987]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.5
+offset_top = -22.499992
+offset_right = 161.5
+offset_bottom = 20.500008
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 30
+text = "Slam Door."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Choice" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=3457405]
+layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Yes" type="TextureButton" parent="UI/Choice" unique_id=502986540]
+[node name="Yes" type="TextureButton" parent="UI/VBoxContainer/Choice" unique_id=502986540]
 layout_mode = 2
 texture_normal = ExtResource("5_344ge")
 texture_pressed = ExtResource("6_ynf5e")
 texture_hover = ExtResource("6_ynf5e")
 
-[node name="Label" type="Label" parent="UI/Choice/Yes" unique_id=1869303518]
+[node name="Label" type="Label" parent="UI/VBoxContainer/Choice/Yes" unique_id=1869303518]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -809,7 +840,7 @@ text = "Mayong gab-e."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Translation" type="Label" parent="UI/Choice/Yes" unique_id=2044269246]
+[node name="Translation" type="Label" parent="UI/VBoxContainer/Choice/Yes" unique_id=2044269246]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -829,13 +860,13 @@ text = "(Good evening)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="No" type="TextureButton" parent="UI/Choice" unique_id=1348148114]
+[node name="No" type="TextureButton" parent="UI/VBoxContainer/Choice" unique_id=1348148114]
 layout_mode = 2
 texture_normal = ExtResource("5_344ge")
 texture_pressed = ExtResource("6_ynf5e")
 texture_hover = ExtResource("6_ynf5e")
 
-[node name="Label" type="Label" parent="UI/Choice/No" unique_id=1506212261]
+[node name="Label" type="Label" parent="UI/VBoxContainer/Choice/No" unique_id=1506212261]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -854,7 +885,7 @@ text = "..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Translation" type="Label" parent="UI/Choice/No" unique_id=1416245722]
+[node name="Translation" type="Label" parent="UI/VBoxContainer/Choice/No" unique_id=1416245722]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -950,12 +981,16 @@ color = Color(0, 0, 0, 0)
 libraries/ = SubResource("AnimationLibrary_hptm8")
 
 [node name="Timer" type="Timer" parent="." unique_id=934772056]
+wait_time = 1.5
 
 [connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
-[connection signal="mouse_entered" from="UI/Choice/Yes" to="." method="_on_yes_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Choice/Yes" to="." method="_on_yes_mouse_exited"]
-[connection signal="pressed" from="UI/Choice/Yes" to="." method="_on_yes_pressed"]
-[connection signal="mouse_entered" from="UI/Choice/No" to="." method="_on_no_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Choice/No" to="." method="_on_no_mouse_exited"]
-[connection signal="pressed" from="UI/Choice/No" to="." method="_on_no_pressed"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/Slam" to="." method="_on_slam_mouse_entered"]
+[connection signal="mouse_exited" from="UI/VBoxContainer/Slam" to="." method="_on_slam_mouse_exited"]
+[connection signal="pressed" from="UI/VBoxContainer/Slam" to="." method="_on_slam_pressed"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/Choice/Yes" to="." method="_on_yes_mouse_entered"]
+[connection signal="mouse_exited" from="UI/VBoxContainer/Choice/Yes" to="." method="_on_yes_mouse_exited"]
+[connection signal="pressed" from="UI/VBoxContainer/Choice/Yes" to="." method="_on_yes_pressed"]
+[connection signal="mouse_entered" from="UI/VBoxContainer/Choice/No" to="." method="_on_no_mouse_entered"]
+[connection signal="mouse_exited" from="UI/VBoxContainer/Choice/No" to="." method="_on_no_mouse_exited"]
+[connection signal="pressed" from="UI/VBoxContainer/Choice/No" to="." method="_on_no_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
