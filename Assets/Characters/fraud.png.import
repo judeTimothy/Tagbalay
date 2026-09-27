@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y6jyg5ovn7df"
-path="res://.godot/imported/sibling - base.png-289194090fdc9fb25f50f3ff42674ef8.ctex"
+uid="uid://degxf7iu2q54w"
+path="res://.godot/imported/fraud.png-bfdf2e5a98a4909a2ce9625575fdf498.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/sibling - base.png"
-dest_files=["res://.godot/imported/sibling - base.png-289194090fdc9fb25f50f3ff42674ef8.ctex"]
+source_file="res://Assets/Characters/fraud.png"
+dest_files=["res://.godot/imported/fraud.png-bfdf2e5a98a4909a2ce9625575fdf498.ctex"]
 
 [params]
 

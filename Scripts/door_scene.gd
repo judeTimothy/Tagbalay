@@ -7,10 +7,6 @@ extends Node2D
 @onready var toast = preload("res://Scenes/toast.tscn")
 
 
-var meds = 0
-var money = 500
-var mother = 20
-var condition = 20
 var day = 1
 var night = false
 var knocking = false
@@ -21,6 +17,7 @@ var given_medicine = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#$UI/CanvasLayer/Color.color = Color8(1,1,1,0)
+	$UI/Money.text = "Cash: P" + str(float(Autoloads.money))
 	day = Autoloads.day
 	if day == 1:
 		$UI/Stats.visible = false
@@ -29,9 +26,10 @@ func _ready() -> void:
 	if Autoloads.after_encounter == true:
 		night = true
 		Autoloads.after_encounter = false
-	#Autoloads.visitor_count = Autoloads.visitor_array[day]
-	print(Autoloads.visitor_count)
-	
+
+	print(Autoloads.visitors_remaining_today())
+	print(Autoloads.current_visitor_id)
+
 	if Autoloads.from_intro == true:
 		$BGM.seek(Autoloads.current_bgm_seek)
 		$AnimationPlayer.play("Black_to_View_Intro")
@@ -43,11 +41,11 @@ func _ready() -> void:
 			find_visitor()
 	else:
 		night = true
-		if Autoloads.visitor_count > 0:
+		if Autoloads.visitors_remaining_today() > 0:
 			$Knock.stream = knock_sfx
 			knocking = true
 			$Knock.play()
-	
+
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -60,17 +58,17 @@ func _process(delta: float) -> void:
 		$TextureRect.modulate = Color.from_rgba8(91,71,207,255)
 		$Door.disabled = false
 	
-	if money >= 40:
+	if Autoloads.money >= 40:
 		$UI/DayActions/Buy.disabled = false
 	else:
 		$UI/DayActions/Buy.disabled = true
 		
-	if meds >= 1:
+	if Autoloads.meds >= 1:
 		$UI/DayActions/Meds.disabled = false
 	else:
 		$UI/DayActions/Meds.disabled = true
 	
-	if Autoloads.visitor_count == 0:
+	if Autoloads.visitors_remaining_today() == 0:
 		$UI/CanvasLayer/NoMore.visible = true
 		$UI/CanvasLayer/Sleep.visible = true
 		$Door.disabled = true
@@ -83,7 +81,6 @@ func _process(delta: float) -> void:
 			$Door.disabled = true
 		$UI/CanvasLayer/Sleep.visible = false
 	
-
 
 func _on_work_mouse_entered() -> void:
 	$UI/DayActions/Work/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
@@ -150,10 +147,10 @@ func _on_work_pressed() -> void:
 func _on_rest_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
-	if condition <= 75:
-		condition += 25
+	if Autoloads.condition <= 75:
+		Autoloads.condition += 25
 	else:
-		condition = 100
+		Autoloads.condition = 100
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
 	
@@ -161,20 +158,20 @@ func _on_rest_pressed() -> void:
 func _on_care_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
-	if mother <= 74:
+	if Autoloads.mother <= 74:
 		$UI/DayActions/Meds.visible = true
 		$UI/DayActions/Buy.visible = true
-		if mother <= 74 and mother >= 50:
+		if Autoloads.mother <= 74 and Autoloads.mother >= 50:
 			var t = toast.instantiate()
 			t.display_text("Mother is in a worse state.")
 			t.global_position = $UI/CanvasLayer/Point.global_position/4
 			$UI/CanvasLayer/Point.add_child(t)
-		elif mother <= 49 and mother >= 25:
+		elif Autoloads.mother <= 49 and Autoloads.mother >= 25:
 			var t = toast.instantiate()
 			t.display_text("Mother is in horrible condition.")
 			t.global_position = $UI/CanvasLayer/Point.global_position/4
 			$UI/CanvasLayer/Point.add_child(t)
-		elif mother <= 24:
+		elif Autoloads.mother <= 24:
 			var t = toast.instantiate()
 			t.display_text("Mother is in critical condition.")
 			t.global_position = $UI/CanvasLayer/Point.global_position/4
@@ -188,9 +185,9 @@ func _on_care_pressed() -> void:
 		$UI/CanvasLayer/Point.add_child(t)
 
 func _on_buy_pressed() -> void:
-	if money >= 40:
-		money -= 40
-		meds += 1
+	if Autoloads.money >= 40:
+		Autoloads.money -= 40
+		Autoloads.meds += 1
 		var t = toast.instantiate()
 		t.display_text("You've bought medicine.")
 		t.global_position = $UI/CanvasLayer/Point.global_position/4
@@ -199,11 +196,12 @@ func _on_buy_pressed() -> void:
 		$UI/DayActions/Buy/Label.remove_theme_color_override("font_color")
 	$SFX.stream = select_sfx
 	$SFX.play()
+	$UI/Money.text = "Cash: P" + str(float(Autoloads.money))
 
 func _on_meds_pressed() -> void:
 	if given_medicine == false:
-		meds -= 1
-		mother += 10
+		Autoloads.meds -= 1
+		Autoloads.mother += 10
 		var t = toast.instantiate()
 		t.display_text("Mother took her meds. She's recovering.")
 		t.global_position = $UI/CanvasLayer/Point.global_position/4
@@ -216,7 +214,7 @@ func _on_meds_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
 	given_medicine = true
-	if meds == 0:
+	if Autoloads.meds == 0:
 		$UI/DayActions/Meds/Label.remove_theme_color_override("font_color")
 
 
@@ -224,6 +222,7 @@ func _on_door_pressed() -> void:
 	$SFX.stream = next_sfx
 	$SFX.play()
 	$Knock.stop()
+	Autoloads.pick_visitor_for_today()
 	$AnimationPlayer.play("Fade_to_Black")
 	$SceneChange.start()
 	knocking = false
@@ -246,8 +245,7 @@ func _on_sleep_pressed() -> void:
 	$SFX.play()
 	$AnimationPlayer.play("Fade_to_Black")
 	$TimerMorn.start()
-	Autoloads.day += 1
-	Autoloads.visitor_count = Autoloads.visitor_array[Autoloads.day]
+	Autoloads.advance_to_next_day()
 
 
 func _on_timer_morn_timeout() -> void:
@@ -257,9 +255,10 @@ func _on_timer_morn_timeout() -> void:
 
 
 func _on_knock_countdown_timeout() -> void:
-	$Knock.stream = knock_sfx
-	$Knock.play()
-	knocking = true
+	if Autoloads.visitors_remaining_today() > 0:
+		$Knock.stream = knock_sfx
+		$Knock.play()
+		knocking = true
 
 
 func _on_knock_finished() -> void:

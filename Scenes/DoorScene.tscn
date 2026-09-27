@@ -734,6 +734,7 @@ volume_db = -6.0
 autoplay = true
 
 [node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
+volume_db = 24.0
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
 
@@ -893,6 +894,16 @@ theme_override_font_sizes/font_size = 550
 text = "P69,420.67"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Money" type="Label" parent="UI" unique_id=1206177767]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 34.0
+offset_right = 400.0
+offset_bottom = 82.0
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 36
+text = "Cash: P3,500.00"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
 

@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://e0upokc6x5nm" path="res://Assets/Sounds/Writing_On_Paper.ogg" id="3_d1ilt"]
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="3_jjvhh"]
 [ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="5_344ge"]
-[ext_resource type="Texture2D" uid="uid://y6jyg5ovn7df" path="res://Assets/Characters/sibling - base.png" id="5_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://y6jyg5ovn7df" path="res://Assets/Characters/sibling_base.png" id="5_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://dc7vwclfc0g7l" path="res://Assets/Misc/LightProbe.png" id="6_6iyac"]
 [ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="6_ynf5e"]
 
@@ -694,7 +694,7 @@ stream = ExtResource("2_hptm8")
 volume_db = -6.0
 autoplay = true
 
-[node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
+[node name="VoiceLine" type="AudioStreamPlayer" parent="." unique_id=1547010725]
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
 
@@ -718,14 +718,14 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MC1" type="Sprite2D" parent="UI" unique_id=1256210219]
+[node name="VisitorSprite" type="Sprite2D" parent="UI" unique_id=1256210219]
 modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
 light_mask = 3
 position = Vector2(1021, 422)
 scale = Vector2(0.24, 0.24)
 texture = ExtResource("5_d1ilt")
 
-[node name="Light" type="PointLight2D" parent="UI/MC1" unique_id=2087611393]
+[node name="Light" type="PointLight2D" parent="UI/VisitorSprite" unique_id=2087611393]
 position = Vector2(229.16666, 187.50005)
 scale = Vector2(2.21, 2.21)
 range_item_cull_mask = 2
@@ -944,6 +944,16 @@ theme_override_font_sizes/font_size = 550
 text = "P69,420.67"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Money" type="Label" parent="UI" unique_id=134227719]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 34.0
+offset_right = 400.0
+offset_bottom = 82.0
+theme_override_fonts/font = ExtResource("3_jjvhh")
+theme_override_font_sizes/font_size = 36
+text = "Cash: P3,500.00"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
 
