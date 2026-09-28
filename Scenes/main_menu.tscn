@@ -444,13 +444,16 @@ script = ExtResource("1_28flt")
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1901188971]
 stream = ExtResource("2_48xlc")
 autoplay = true
+bus = &"BGM"
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=530936707]
+bus = &"SFX"
 
 [node name="Static" type="AudioStreamPlayer" parent="." unique_id=719607224]
 stream = ExtResource("3_n45e2")
 volume_db = -30.0
 autoplay = true
+bus = &"SFX"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=901702447]
 layout_mode = 1

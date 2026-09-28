@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d18w73o3fywxt"
+path="res://.godot/imported/collector_fraud_day2_D2_P.ogg-9abf2a7485e9e9a8f295ea9c30f21981.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 2/collector_fraud_day2_D2_P.ogg"
+dest_files=["res://.godot/imported/collector_fraud_day2_D2_P.ogg-9abf2a7485e9e9a8f295ea9c30f21981.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

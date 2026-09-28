@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_4fqap"]
 [ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="7_c2lec"]
 [ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="8_7if5x"]
-[ext_resource type="Texture2D" uid="uid://c136dsf440uhh" path="res://Assets/UI/paper.png" id="9_a14qh"]
+[ext_resource type="Texture2D" uid="uid://kxwu86a3oy36" path="res://Assets/UI/StatusBar.png" id="9_g722q"]
 [ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="10_j1dur"]
 [ext_resource type="Texture2D" uid="uid://24cviadaaen2" path="res://Assets/UI/button_disabled.png" id="11_g722q"]
 
@@ -732,13 +732,17 @@ script = ExtResource("1_g722q")
 stream = ExtResource("2_g722q")
 volume_db = -6.0
 autoplay = true
+bus = &"BGM"
 
 [node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
 volume_db = 24.0
+bus = &"Voice"
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
+bus = &"SFX"
 
 [node name="Knock" type="AudioStreamPlayer" parent="." unique_id=678743897]
+bus = &"SFX"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
 modulate = Color(0.38439402, 0.27913073, 0.8100319, 1)
@@ -856,56 +860,74 @@ text = "This is the no choice."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Stats" type="Sprite2D" parent="UI" unique_id=910894360]
-position = Vector2(1693, 181)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("9_a14qh")
-
-[node name="Label" type="Label" parent="UI/Stats" unique_id=1170608964]
-offset_left = -1337.5
-offset_top = -1550.0
-offset_right = -233.5
-offset_bottom = -975.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 434
-text = "Utang kay:"
-
-[node name="Debtor" type="Label" parent="UI/Stats" unique_id=875222162]
-offset_left = -2075.0
-offset_top = -975.0
-offset_right = 1971.0
-offset_bottom = -50.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 630
-text = "Pedro Lending"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Amount" type="Label" parent="UI/Stats" unique_id=548091280]
-offset_left = -2075.0
-offset_top = 50.0
-offset_right = 1971.0
-offset_bottom = 975.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 550
-text = "P69,420.67"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Money" type="Label" parent="UI" unique_id=1206177767]
-layout_mode = 0
-offset_left = 91.0
-offset_top = 34.0
-offset_right = 400.0
-offset_bottom = 82.0
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 36
-text = "Cash: P3,500.00"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
+
+[node name="Cover" type="Sprite2D" parent="UI/CanvasLayer" unique_id=7791879]
+position = Vector2(1028, -86)
+scale = Vector2(1.6000012, 1)
+texture = ExtResource("5_m7brq")
+
+[node name="StatusBar" type="Sprite2D" parent="UI/CanvasLayer" unique_id=2008199015]
+position = Vector2(959, 93)
+texture = ExtResource("9_g722q")
+
+[node name="MoneyLabel" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=1096529104]
+offset_left = -872.0
+offset_top = -30.0
+offset_right = -777.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 40
+text = "Cash:"
+
+[node name="Money" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=1278589483]
+offset_left = -613.0
+offset_top = -30.0
+offset_right = -320.0
+offset_bottom = 24.0
+pivot_offset = Vector2(293, 0)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 40
+text = "P999,999.99"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Day" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=701885072]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1106.5
+offset_top = -49.0
+offset_right = -813.5
+offset_bottom = 47.0
+grow_horizontal = 2
+pivot_offset = Vector2(293, 0)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 72
+text = "NIGHT 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DebtLabel" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=747919415]
+offset_left = 227.0
+offset_top = -30.0
+offset_right = 426.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 40
+text = "Total Debt:"
+
+[node name="TotalDebt" type="Label" parent="UI/CanvasLayer/StatusBar/DebtLabel" unique_id=731744373]
+layout_mode = 0
+offset_left = 372.0
+offset_right = 665.0
+offset_bottom = 54.0
+pivot_offset = Vector2(293, 0)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 40
+text = "P999,999.99"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Fisheye" type="ColorRect" parent="UI/CanvasLayer" unique_id=437030349]
 visible = false
@@ -999,10 +1021,10 @@ color = Color(0, 0, 0, 0)
 
 [node name="DayActions" type="VBoxContainer" parent="UI" unique_id=625878632]
 layout_mode = 0
-offset_left = 101.0
-offset_top = 138.0
-offset_right = 734.0
-offset_bottom = 378.0
+offset_left = 199.0
+offset_top = 383.0
+offset_right = 832.0
+offset_bottom = 623.0
 
 [node name="Work" type="TextureButton" parent="UI/DayActions" unique_id=1028783027]
 layout_mode = 2

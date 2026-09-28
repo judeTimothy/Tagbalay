@@ -1,6 +1,6 @@
 {
   "collector_young_day1": {
-	"sprite": "res://Assets/Characters/sibling_base.png",
+	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
 	"bgm": "res://Assets/Music/(4) Creepy Ambience.ogg",
 	"reveal_index": 3,
 	"slam_index": -1,
@@ -88,7 +88,7 @@
 		  "translation": "(Debt?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_P1.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D1.ogg"
 	  },
 	  {
 		"text": "Si ano bala... Si 'Nay Carmen.",
@@ -103,7 +103,7 @@
 		  "translation": "(I can't pay yet.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_P2.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D2_P.ogg"
 	  },
 	  {
 		"text": "Pwede ka man kahulog danay biskan ginagmay lang noy. Dako dako gd sang utang ya pero mabaton kami P200 subong ah.",
@@ -111,14 +111,14 @@
 		"yes": {
 		  "text": "Sige ari P200.",
 		  "translation": "(Here's P200.)",
-		  "effect": "payment(200)"
+		  "effect": "fraud(200)"
 		},
 		"no": {
 		  "text": "Alang alang gid katama nong.",
 		  "translation": "(It's really impossible to pay right now.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_P3.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D3_P.ogg"
 	  },
 	  {
 		"text": "Salamat gid noy. Markahan ko lang di.",
@@ -133,7 +133,7 @@
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_P4.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D4_P.ogg"
 	  }
 	],
 	"lines_negative": [
@@ -150,7 +150,7 @@
 		  "translation": "(Debt?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_N1.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D1.ogg"
 	  },
 	  {
 		"text": "Oo, 69 tawsan.",
@@ -165,7 +165,7 @@
 		  "translation": "(I can't pay yet.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_N2.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D2_N.ogg"
 	  },
 	  {
 		"text": "Di nyo bala pwede pag-lagyuhan ang inyo utang noy. Dako gid na nga perwisyo sa inyo.",
@@ -180,7 +180,7 @@
 		  "translation": "(It's really impossible to pay right now.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_N3.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D3_N.ogg"
 	  },
 	  {
 		"text": "Ikaw bahala. Pero indi ka namon pag untatan. Mangamote ka gid sang interes.",
@@ -195,12 +195,12 @@
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_N4.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_fraud_day2_D4_N.ogg"
 	  }
 	]
   },
   "collector_young_day2": {
-	"sprite": "res://Assets/Characters/sibling_base.png",
+	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
@@ -219,7 +219,7 @@
 		  "translation": "(Someone already came, are you scamming us?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_P1.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D1.ogg"
 	  },
 	  {
 		"text": "Ha? May nagkadto na? Amo lang kami ni nga oras gina pakadto ni Boss.",
@@ -234,7 +234,7 @@
 		  "translation": "(So who was that?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_P2.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D2_P.ogg"
 	  },
 	  {
 		"text": "Wala pa gani may ginpadala. Te naghatag ka?",
@@ -249,7 +249,7 @@
 		  "translation": "(How would I know? I thought he was with you.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_P3.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D3_P.ogg"
 	  },
 	  {
 		"text": "Sige na lang. Hambalon ko lang si Boss. Nde na mag pa scam liwat. Balik lang ko bwas.",
@@ -264,7 +264,7 @@
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_P4.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D4_P.ogg"
 	  }
 	],
 	"lines_negative": [
@@ -281,7 +281,7 @@
 		  "translation": "(Someone already came, are you scamming us?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_N1.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D1.ogg"
 	  },
 	  {
 		"text": "Nakastorya nata kagab-e. Ako lang gin padala ni Boss ya.",
@@ -296,7 +296,7 @@
 		  "translation": "(So who was that?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_N2.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D2_N.ogg"
 	  },
 	  {
 		"text": "Naghambal gid sya nga halin sa kay Boss Pedro? Basi si sin-o lang to ya.",
@@ -311,7 +311,7 @@
 		  "translation": "(How would I know? I thought he was with you.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_N3.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D3_N.ogg"
 	  },
 	  {
 		"text": "Sulaton ko lang di nga wala ka kabayad. Indi ko lang pag sakaan ang imo interes. Balik lang ko ko bwas.",
@@ -326,12 +326,12 @@
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_N4.ogg"
+		"voice": "res://Assets/Dialogue/Day 2/collector_young_day2_D4_N.ogg"
 	  }
 	]
   },
   "old_lady_day3": {
-	"sprite": "res://Assets/Characters/old_lady.png",
+	"sprite": "res://Assets/Characters/Old_Lady.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": -1,
@@ -592,7 +592,7 @@
 	]
   },
   "ugly_beggar_day3": {
-	"sprite": "res://Assets/Characters/ugly_beggar.png",
+	"sprite": "res://Assets/Characters/Ugly_Beggar.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": -1,
@@ -722,7 +722,7 @@
 	]
   },
   "chismosa_day4": {
-	"sprite": "res://Assets/Characters/chismosa.png",
+	"sprite": "res://Assets/Characters/Chismosa_Young_Woman.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": -1,
@@ -953,7 +953,7 @@
 	]
   },
   "old_lady_day4": {
-	"sprite": "res://Assets/Characters/old_lady.png",
+	"sprite": "res://Assets/Characters/Old_Lady.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": -1,

@@ -48,13 +48,15 @@ func _ready() -> void:
 	$UI/CanvasLayer/ColorRect.color = Color.BLACK
 	$AnimationPlayer.play("Black_to_View")
 	$BGM.seek(Autoloads.current_bgm_seek)
+	$UI/CanvasLayer/StatusBar/Day.text = "NIGHT " + str(Autoloads.day)
 
 	_load_visitor()
 	_apply_visitor_setup()
 
 	# Stats reveal is a one-time flip stored on Autoloads, not tied to
 	# "is it day 1" — once revealed it stays visible on every later day.
-	$UI/Stats.visible = Autoloads.stats_revealed
+	#$UI/Stats.visible = Autoloads.stats_revealed
+	$UI/CanvasLayer/StatusBar/DebtLabel.visible = Autoloads.stats_revealed
 	_refresh_stat_labels()
 
 	_dbg("_ready() calling set_dialogue(0)")
@@ -65,7 +67,8 @@ func _ready() -> void:
 # any effect, rather than trying to figure out which specific stat an
 # effect touched -- one place to extend as more stat labels get added.
 func _refresh_stat_labels() -> void:
-	$UI/Money.text = "Cash: " + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P" + str(float(Autoloads.total_debt))
 	# $UI/Stats/Mother.text = "Mother: " + str(Autoloads.mother)
 	# $UI/Stats/Condition.text = "Condition: " + str(Autoloads.condition)
 	# $UI/Stats/Meds.text = "Meds: " + str(Autoloads.meds)
@@ -177,7 +180,8 @@ func set_dialogue(index: int) -> void:
 	var reveal_index = visitor.get("reveal_index", -1)
 	if not Autoloads.stats_revealed and index == reveal_index:
 		Autoloads.stats_revealed = true
-		$UI/Stats.visible = true
+		$UI/CanvasLayer/StatusBar/DebtLabel.visible = true
+		#$UI/Stats.visible = true
 		$Paper.play()
 
 

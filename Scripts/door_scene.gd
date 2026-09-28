@@ -17,16 +17,26 @@ var given_medicine = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#$UI/CanvasLayer/Color.color = Color8(1,1,1,0)
-	$UI/Money.text = "Cash: P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P" + str(float(Autoloads.total_debt))
 	day = Autoloads.day
 	if day == 1:
-		$UI/Stats.visible = false
+		if night == false:
+			$UI/CanvasLayer/StatusBar/DebtLabel.visible = false
+			#$UI/Stats.visible = false
+		else:
+			$UI/CanvasLayer/StatusBar/DebtLabel.visible = true
 	else:
-		$UI/Stats.visible = true
+		#$UI/Stats.visible = true
+		$UI/CanvasLayer/StatusBar/DebtLabel.visible = true
 	if Autoloads.after_encounter == true:
+		if day == 1:
+			$UI/CanvasLayer/StatusBar/DebtLabel.visible = true
 		night = true
 		Autoloads.after_encounter = false
-
+	
+	
+	
 	print(Autoloads.visitors_remaining_today())
 	print(Autoloads.current_visitor_id)
 
@@ -45,7 +55,15 @@ func _ready() -> void:
 			$Knock.stream = knock_sfx
 			knocking = true
 			$Knock.play()
-
+	var buffer = ""
+	print(night)
+	if night:
+		buffer = "NIGHT "
+	else:
+		buffer = "DAY "
+	$UI/CanvasLayer/StatusBar/Day.text = buffer + str(Autoloads.day)
+	
+	
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -143,6 +161,8 @@ func _on_work_pressed() -> void:
 	$SFX.play()
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
+	
+	
 
 func _on_rest_pressed() -> void:
 	$SFX.stream = select_sfx
@@ -238,6 +258,7 @@ func _on_timer_timeout() -> void:
 	night = true
 	$AnimationPlayer.play("Black_to_View")
 	find_visitor()
+	$UI/CanvasLayer/StatusBar/Day.text = "NIGHT " + str(Autoloads.day)
 
 
 func _on_sleep_pressed() -> void:
