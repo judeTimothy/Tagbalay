@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iqmp4gfktv7c"
-path="res://.godot/imported/main character fem - base.png-c9fa577d0e70215cefdde1cffad60043.ctex"
+uid="uid://beffk27fjuruo"
+path="res://.godot/imported/father - base.png-a7c7cd76a2cd4e7c16ccc4a1b18091c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/main character fem - base.png"
-dest_files=["res://.godot/imported/main character fem - base.png-c9fa577d0e70215cefdde1cffad60043.ctex"]
+source_file="res://Assets/Characters/Retired/father - base.png"
+dest_files=["res://.godot/imported/father - base.png-a7c7cd76a2cd4e7c16ccc4a1b18091c2.ctex"]
 
 [params]
 

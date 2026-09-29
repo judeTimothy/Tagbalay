@@ -61,6 +61,9 @@ func _ready() -> void:
 
 	_dbg("_ready() calling set_dialogue(0)")
 	set_dialogue(0)
+	
+	if Autoloads.current_visitor_id == "ugly_beggar_day3":
+		$Ambient.play()
 
 
 # Repaints every visible stat label straight from Autoloads. Called after
@@ -286,3 +289,7 @@ func _on_timer_timeout() -> void:
 	Autoloads.after_encounter = true
 	Autoloads.from_intro = false
 	get_tree().change_scene_to_file("res://Scenes/DoorScene.tscn")
+
+
+func _on_ambient_finished() -> void:
+	$Ambient.play()

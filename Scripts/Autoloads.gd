@@ -4,17 +4,18 @@ var current_bgm_seek = 0
 var main_bgm_seek = 0
 var night = true
 var total_debt = 69420.67
-var day = 1
+var day = 3
 var after_encounter = false
 var from_intro = true
 var stats_revealed = false
 
 var money = 3500
 var mother = 20
-var condition = 20
+var condition = 100
 var meds = 0
-var trust = 0
+var trust = 50
 var suspicion = 0
+var animosity = 0
 
 var current_visitor_id: String = ""
 var day_visitor_index: int = 0   # position within today's list
@@ -75,10 +76,15 @@ func apply_effect(effect: String) -> void:
 		"condition":
 			condition = clamp(condition + int(amount), 0, 100)
 		"meds":
-			meds = max(meds + int(amount), 0)
+			meds = max(meds + int(amount), 100)
 		"trust":
 			trust = clamp(trust + int(amount), 0, 100)
 		"suspicion":
 			suspicion = clamp(suspicion + int(amount), 0, 100)
+		"animosity":
+			animosity = clamp(animosity + int(amount), 0, 100)
+		"hate":
+			suspicion = clamp(animosity + int(amount*0.7), 0, 100)
+			animosity = clamp(animosity + int(amount*0.3), 0, 100)
 		_:
 			push_warning("apply_effect: unknown effect name '" + effect_name + "'")

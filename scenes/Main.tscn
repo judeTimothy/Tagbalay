@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="3_21xkr"]
 [ext_resource type="AudioStream" uid="uid://e0upokc6x5nm" path="res://Assets/Sounds/Writing_On_Paper.ogg" id="3_d1ilt"]
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="3_jjvhh"]
+[ext_resource type="AudioStream" uid="uid://m43tfu8jnc7m" path="res://Assets/Sounds/Thunderstorm.mp3" id="3_jkdf5"]
 [ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="5_344ge"]
 [ext_resource type="Texture2D" uid="uid://c24tycyvmiwdb" path="res://Assets/Characters/Ugly_Beggar.png" id="5_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://dc7vwclfc0g7l" path="res://Assets/Misc/LightProbe.png" id="6_6iyac"]
@@ -696,6 +697,11 @@ volume_db = -6.0
 autoplay = true
 bus = &"BGM"
 
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1464030834]
+stream = ExtResource("3_jkdf5")
+volume_db = -6.0
+bus = &"Ambient"
+
 [node name="VoiceLine" type="AudioStreamPlayer" parent="." unique_id=1547010725]
 volume_db = 6.0
 bus = &"Voice"
@@ -1057,6 +1063,7 @@ libraries/ = SubResource("AnimationLibrary_hptm8")
 wait_time = 1.5
 
 [connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
+[connection signal="finished" from="Ambient" to="." method="_on_ambient_finished"]
 [connection signal="mouse_entered" from="UI/VBoxContainer/Slam" to="." method="_on_slam_mouse_entered"]
 [connection signal="mouse_exited" from="UI/VBoxContainer/Slam" to="." method="_on_slam_mouse_exited"]
 [connection signal="pressed" from="UI/VBoxContainer/Slam" to="." method="_on_slam_pressed"]

@@ -63,6 +63,15 @@ func _ready() -> void:
 		buffer = "DAY "
 	$UI/CanvasLayer/StatusBar/Day.text = buffer + str(Autoloads.day)
 	
+	if (Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "collector_young_day3") and night:
+		$Ambient.play()
+		var t = toast.instantiate()
+		t.display_text("It's raining outside.")
+		t.global_position = $UI/CanvasLayer/Point.global_position/4
+		$UI/CanvasLayer/Point.add_child(t)
+	else:
+		$Ambient.stop()
+	
 	
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -161,16 +170,14 @@ func _on_work_pressed() -> void:
 	$SFX.play()
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
+	Autoloads.apply_effect("money(550)")
 	
 	
 
 func _on_rest_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
-	if Autoloads.condition <= 75:
-		Autoloads.condition += 25
-	else:
-		Autoloads.condition = 100
+	Autoloads.apply_effect("condition(25)")
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
 	
@@ -206,8 +213,8 @@ func _on_care_pressed() -> void:
 
 func _on_buy_pressed() -> void:
 	if Autoloads.money >= 40:
-		Autoloads.money -= 40
-		Autoloads.meds += 1
+		Autoloads.apply_effect("payment(40)")
+		Autoloads.apply_effect("meds(1)")
 		var t = toast.instantiate()
 		t.display_text("You've bought medicine.")
 		t.global_position = $UI/CanvasLayer/Point.global_position/4
@@ -216,12 +223,12 @@ func _on_buy_pressed() -> void:
 		$UI/DayActions/Buy/Label.remove_theme_color_override("font_color")
 	$SFX.stream = select_sfx
 	$SFX.play()
-	$UI/Money.text = "Cash: P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/Money.text = "Cash: P" + str(float(Autoloads.money))
 
 func _on_meds_pressed() -> void:
 	if given_medicine == false:
-		Autoloads.meds -= 1
-		Autoloads.mother += 10
+		Autoloads.apply_effect("mother(15)")
+		Autoloads.apply_effect("meds(-1)")
 		var t = toast.instantiate()
 		t.display_text("Mother took her meds. She's recovering.")
 		t.global_position = $UI/CanvasLayer/Point.global_position/4
@@ -291,3 +298,7 @@ func find_visitor():
 	var rand = rng.randf_range(3,5)
 	$KnockCountdown.wait_time = rand
 	$KnockCountdown.start()
+
+
+func _on_ambient_finished() -> void:
+	$Ambient.play()

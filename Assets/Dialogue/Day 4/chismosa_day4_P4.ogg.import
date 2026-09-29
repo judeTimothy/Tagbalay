@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bp1rlx4sv7kwe"
+path="res://.godot/imported/chismosa_day4_P4.ogg-f3e3699b1a03821d7071fdb4cdefb964.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 4/chismosa_day4_P4.ogg"
+dest_files=["res://.godot/imported/chismosa_day4_P4.ogg-f3e3699b1a03821d7071fdb4cdefb964.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://digpx3ml54lta" path="res://Scripts/door_scene.gd" id="1_g722q"]
 [ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_g722q"]
+[ext_resource type="AudioStream" uid="uid://m43tfu8jnc7m" path="res://Assets/Sounds/Thunderstorm.mp3" id="3_g722q"]
 [ext_resource type="Texture2D" uid="uid://b3dn2nw7y33rd" path="res://Assets/Backgrounds/DoorScene.jpg" id="3_ipro8"]
 [ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="5_m7brq"]
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_4fqap"]
@@ -734,6 +735,11 @@ volume_db = -6.0
 autoplay = true
 bus = &"BGM"
 
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1405661404]
+stream = ExtResource("3_g722q")
+volume_db = -6.0
+bus = &"Ambient"
+
 [node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
 volume_db = 24.0
 bus = &"Voice"
@@ -1189,6 +1195,7 @@ one_shot = true
 one_shot = true
 
 [connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
+[connection signal="finished" from="Ambient" to="." method="_on_ambient_finished"]
 [connection signal="finished" from="Knock" to="." method="_on_knock_finished"]
 [connection signal="mouse_entered" from="UI/Choice/Yes" to="." method="_on_yes_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Choice/Yes" to="." method="_on_yes_mouse_exited"]

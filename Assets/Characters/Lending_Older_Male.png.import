@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vgdvtm186r4y"
-path="res://.godot/imported/mother - base.png-055f9658b4f16e1b779dd2e40e2e2d57.ctex"
+uid="uid://dbtlyev0h2tpu"
+path="res://.godot/imported/Lending_Older_Male.png-9c06f59f19830eb6c84ea625c8186fea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/mother - base.png"
-dest_files=["res://.godot/imported/mother - base.png-055f9658b4f16e1b779dd2e40e2e2d57.ctex"]
+source_file="res://Assets/Characters/Lending_Older_Male.png"
+dest_files=["res://.godot/imported/Lending_Older_Male.png-9c06f59f19830eb6c84ea625c8186fea.ctex"]
 
 [params]
 

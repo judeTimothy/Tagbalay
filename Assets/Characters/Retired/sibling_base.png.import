@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y6jyg5ovn7df"
-path="res://.godot/imported/sibling_base.png-bfff759b2bc74d41d9823e9d5757cfab.ctex"
+uid="uid://d27vmpgkueitb"
+path="res://.godot/imported/sibling_base.png-427706796d3adc7e322c49b71cb28d2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/sibling_base.png"
-dest_files=["res://.godot/imported/sibling_base.png-bfff759b2bc74d41d9823e9d5757cfab.ctex"]
+source_file="res://Assets/Characters/Retired/sibling_base.png"
+dest_files=["res://.godot/imported/sibling_base.png-427706796d3adc7e322c49b71cb28d2f.ctex"]
 
 [params]
 

@@ -4,7 +4,7 @@
 	"bgm": "res://Assets/Music/(4) Creepy Ambience.ogg",
 	"reveal_index": 3,
 	"slam_index": -1,
-	"slam_effect": "suspicion(30)",
+	"slam_effect": "hate(30)",
 	"lines": [
 	  {
 		"text": "Mayong gab-e, to. Pasensya gd sa distorbo. Amo ni ang balay ni Carmen?",
@@ -73,7 +73,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "suspicion(30)",
+	"slam_effect": "animosity(5)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e noy. Ari ko di gale para sa utang ni nanay mo.",
@@ -204,7 +204,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "suspicion(30)",
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Ginpabalik na ko ni Boss Pedro. Naka storya nata kagab-e.",
@@ -334,7 +334,8 @@
 	"sprite": "res://Assets/Characters/Old_Lady.png",
 	"bgm": "",
 	"reveal_index": -1,
-	"slam_index": -1,
+	"slam_index": 2,
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Daw damo di gakadto sa inyo subong to haw? Okay lang kamo?",
@@ -411,7 +412,7 @@
 		  "translation": "(It's nothing, ma'am.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N1.ogg"
+		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_P1.ogg"
 	  },
 	  {
 		"text": "Ano problema nyo to haw? Utang na?",
@@ -426,7 +427,7 @@
 		  "translation": "(Why do you ask?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N2.ogg"
+		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N1.ogg"
 	  },
 	  {
 		"text": "Grabe man gid na bi mangutang si nanay mo.",
@@ -441,7 +442,7 @@
 		  "translation": "(It's fine, ma'am.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N3.ogg"
+		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N2.ogg"
 	  },
 	  {
 		"text": "Basi sabadon kami sang mga gapanukot sa inyo ha.",
@@ -456,16 +457,16 @@
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N4.ogg"
+		"voice": "res://Assets/Dialogue/Day 3/old_lady_day3_N3.ogg"
 	  }
 	]
   },
   "collector_young_day3": {
-	"sprite": "res://Assets/Characters/collector_young.png",
+	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 2,
-	"slam_effect": "suspicion(20)",
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Ari naman ko liwat. Halin kay Boss Pedro.",
@@ -595,7 +596,8 @@
 	"sprite": "res://Assets/Characters/Ugly_Beggar.png",
 	"bgm": "",
 	"reveal_index": -1,
-	"slam_index": -1,
+	"slam_index": 2,
+	"slam_effect": "hate(20)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to.",
@@ -725,7 +727,8 @@
 	"sprite": "res://Assets/Characters/Chismosa_Young_Woman.png",
 	"bgm": "",
 	"reveal_index": -1,
-	"slam_index": -1,
+	"slam_index": 2,
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Uy mayong gab-e. Daw damo tawo di gakadto kada gab-e haw?",
@@ -852,11 +855,11 @@
 	]
   },
   "collector_young_day4": {
-	"sprite": "res://Assets/Characters/collector_young.png",
+	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 1,
-	"slam_effect": "suspicion(20)",
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Ari naman ko liwat. Halin kay Boss Pedro.",
@@ -956,7 +959,8 @@
 	"sprite": "res://Assets/Characters/Old_Lady.png",
 	"bgm": "",
 	"reveal_index": -1,
-	"slam_index": -1,
+	"slam_index": 2,
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Kita ko to ang tinawo ni Boss Pedro. Sa iya gali nangutang si nanay mo?",
@@ -1083,11 +1087,11 @@
 	]
   },
   "collector_old_day5": {
-	"sprite": "res://Assets/Characters/collector_old.png",
+	"sprite": "res://Assets/Characters/Lending_Older_Male.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 2,
-	"slam_effect": "suspicion(25)",
+	"slam_effect": "hate(40)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Halin kay Boss Pedro.",
@@ -1214,10 +1218,11 @@
 	]
   },
   "young_kid_day5": {
-	"sprite": "res://Assets/Characters/young_kid.png",
+	"sprite": "res://Assets/Characters/Young_Kid.png",
 	"bgm": "",
 	"reveal_index": -1,
-	"slam_index": -1,
+	"slam_index": 2,
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e.",
@@ -1344,11 +1349,11 @@
 	]
   },
   "sinister_male_day5": {
-	"sprite": "res://Assets/Characters/sinister_male.png",
+	"sprite": "res://Assets/Characters/Sinister_Male.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 3,
-	"slam_effect": "suspicion(30)",
+	"slam_effect": "hate(20)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e. Kalabay di si Ermita?",
@@ -1475,11 +1480,11 @@
 	]
   },
   "collector_old_day6": {
-	"sprite": "res://Assets/Characters/collector_old.png",
+	"sprite": "res://Assets/Characters/Lending_Older_Male.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 2,
-	"slam_effect": "suspicion(25)",
+	"slam_effect": "hate(40)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Halin kay Boss Pedro.",
@@ -1606,11 +1611,11 @@
 	]
   },
   "sinister_male_day6": {
-	"sprite": "res://Assets/Characters/sinister_male.png",
+	"sprite": "res://Assets/Characters/Sinister_Male.png",
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 3,
-	"slam_effect": "suspicion(35)",
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Wala gid da si Ermita?",
@@ -1741,6 +1746,7 @@
 	"bgm": "",
 	"reveal_index": -1,
 	"slam_index": 0,
+	"slam_effect": "",
 	"lines": [
 	  {
 		"text": "",
