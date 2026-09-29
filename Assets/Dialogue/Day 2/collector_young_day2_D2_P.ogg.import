@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bpaqar1rxmvm1"
+path="res://.godot/imported/collector_young_day2_D2_P.ogg-112cd35e902dd3a826fab5bcb5a40eed.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 2/collector_young_day2_D2_P.ogg"
+dest_files=["res://.godot/imported/collector_young_day2_D2_P.ogg-112cd35e902dd3a826fab5bcb5a40eed.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

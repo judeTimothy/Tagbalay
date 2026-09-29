@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://dn5g0ckm5nybf"
+
 [autoload]
 
 Autoloads="*uid://b0y8vrg5lgpe4"
@@ -25,7 +29,7 @@ Autoloads="*uid://b0y8vrg5lgpe4"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
+window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0

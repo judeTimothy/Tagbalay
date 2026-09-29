@@ -66,6 +66,8 @@ func apply_effect(effect: String) -> void:
 			# Player pays down the debt out of pocket.
 			total_debt = max(total_debt - amount, 0.0)
 			money = max(money - int(amount), 0)
+		"fraud":
+			money = max(money - int(amount),0)
 		"money":
 			money = max(money + int(amount), 0)
 		"mother":
