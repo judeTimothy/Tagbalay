@@ -6,17 +6,15 @@ extends Node2D
 @onready var knock_sfx = preload("res://Assets/Sounds/Knock.ogg")
 @onready var toast = preload("res://Scenes/toast.tscn")
 
-
 var day = 1
 var night = false
 var knocking = false
 var given_medicine = false
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#$UI/CanvasLayer/Color.color = Color8(1,1,1,0)
+	#Autoloads.build_today_pool()
 	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
 	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P" + str(float(Autoloads.total_debt))
 	day = Autoloads.day
@@ -34,7 +32,6 @@ func _ready() -> void:
 			$UI/CanvasLayer/StatusBar/DebtLabel.visible = true
 		night = true
 		Autoloads.after_encounter = false
-	
 	
 	
 	print(Autoloads.visitors_remaining_today())
@@ -73,7 +70,6 @@ func _ready() -> void:
 		$Ambient.stop()
 	
 	
-		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if night == false:
@@ -266,6 +262,7 @@ func _on_timer_timeout() -> void:
 	$AnimationPlayer.play("Black_to_View")
 	find_visitor()
 	$UI/CanvasLayer/StatusBar/Day.text = "NIGHT " + str(Autoloads.day)
+	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
 
 
 func _on_sleep_pressed() -> void:

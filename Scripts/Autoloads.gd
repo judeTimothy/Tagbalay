@@ -4,7 +4,7 @@ var current_bgm_seek = 0
 var main_bgm_seek = 0
 var night = true
 var total_debt = 69420.67
-var day = 3
+var day = 1
 var after_encounter = false
 var from_intro = true
 var stats_revealed = false
@@ -17,8 +17,16 @@ var trust = 50
 var suspicion = 0
 var animosity = 0
 
-var current_visitor_id: String = ""
-var day_visitor_index: int = 0   # position within today's list
+var current_visitor_id = ""
+var day_visitor_index = 0
+
+var flags = {}
+var today_pool = []
+
+var visitor_requires = {
+	"old_lady_day4": ["helped_old_lady"],
+	"sinister_male_day6": ["!ermita_hidden"],
+}
 
 var visitor_schedule := {
 	1: ["collector_young_day1"],
@@ -30,12 +38,32 @@ var visitor_schedule := {
 	7: ["collector_fraud_day2", "collector_young_day2"]
 }
 
+# still not working, trying to fix
+func build_today_pool() -> void:
+	today_pool.clear()
+	for id in visitor_schedule.get(day, []):
+		if _conditions_met(id):
+			today_pool.append(id)
+	day_visitor_index = 0
 
+func _conditions_met(id: String) -> bool:
+	for req in visitor_requires.get(id, []):
+		if req.begins_with("!"):
+			if flags.has(req.substr(1)):
+				return false
+		elif not flags.has(req):
+			return false
+	return true
+
+# debugging with new function
 func pick_visitor_for_today() -> void:
 	var pool: Array = visitor_schedule.get(day, ["collector_young_day1"])
+	print("Pool, ", pool)
+	#var pool: Array = today_pool[day_visitor_index]
 	if day_visitor_index >= pool.size():
-		day_visitor_index = pool.size() - 1  # safety net, stay on last entry
+		day_visitor_index = pool.size() - 1
 	current_visitor_id = pool[day_visitor_index]
+
 
 
 func visitors_remaining_today() -> int:
@@ -45,6 +73,7 @@ func visitors_remaining_today() -> int:
 
 func advance_to_next_day() -> void:
 	day += 1
+	build_today_pool()
 	day_visitor_index = 0
 
 
@@ -52,19 +81,18 @@ func apply_effect(effect: String) -> void:
 	if effect == "":
 		return
 
-	var open_paren = effect.find("(")
-	var close_paren = effect.find(")")
-	if open_paren == -1 or close_paren == -1 or close_paren < open_paren:
+	var open_end = effect.find("(")
+	var close_end = effect.find(")")
+	if open_end == -1 or close_end == -1 or close_end < open_end:
 		push_warning("apply_effect: malformed effect string '" + effect + "'")
 		return
 
-	var effect_name = effect.substr(0, open_paren)
-	var arg_str = effect.substr(open_paren + 1, close_paren - open_paren - 1)
+	var effect_name = effect.substr(0, open_end)
+	var arg_str = effect.substr(open_end + 1, close_end - open_end - 1)
 	var amount = arg_str.to_float()
 
 	match effect_name:
 		"payment":
-			# Player pays down the debt out of pocket.
 			total_debt = max(total_debt - amount, 0.0)
 			money = max(money - int(amount), 0)
 		"fraud":
@@ -86,5 +114,7 @@ func apply_effect(effect: String) -> void:
 		"hate":
 			suspicion = clamp(animosity + int(amount*0.7), 0, 100)
 			animosity = clamp(animosity + int(amount*0.3), 0, 100)
+		"flag":
+			flags[arg_str] = true
 		_:
 			push_warning("apply_effect: unknown effect name '" + effect_name + "'")

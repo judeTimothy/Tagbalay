@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="5_344ge"]
 [ext_resource type="Texture2D" uid="uid://c24tycyvmiwdb" path="res://Assets/Characters/Ugly_Beggar.png" id="5_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://dc7vwclfc0g7l" path="res://Assets/Misc/LightProbe.png" id="6_6iyac"]
+[ext_resource type="Texture2D" uid="uid://prnh6wciqj5f" path="res://Assets/Characters/Sinister_Male.png" id="6_wsu2k"]
 [ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="6_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://kxwu86a3oy36" path="res://Assets/UI/StatusBar.png" id="12_fdnlq"]
 
@@ -718,6 +719,22 @@ modulate = Color(0.37536725, 0.24561548, 0.18940711, 1)
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("1_21xkr")
+
+[node name="Preview" type="Sprite2D" parent="." unique_id=1854607146]
+visible = false
+modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
+light_mask = 3
+position = Vector2(796.00006, 508)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_wsu2k")
+
+[node name="Light" type="PointLight2D" parent="Preview" unique_id=1340482466]
+position = Vector2(-11.9999695, 287)
+scale = Vector2(2.21, 2.21)
+energy = 1.37
+range_item_cull_mask = 2
+shadow_item_cull_mask = 0
+texture = ExtResource("6_6iyac")
 
 [node name="UI" type="Control" parent="." unique_id=1440015256]
 custom_minimum_size = Vector2(1920, 1080)
