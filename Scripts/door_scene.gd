@@ -10,6 +10,7 @@ var day = 1
 var night = false
 var knocking = false
 var given_medicine = false
+var taken_care = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -80,6 +81,9 @@ func _process(delta: float) -> void:
 		$UI/DayActions.visible = false
 		$TextureRect.modulate = Color.from_rgba8(91,71,207,255)
 		$Door.disabled = false
+	
+	$UI/CanvasLayer/Hearts/MotherCondition.value = Autoloads.mother
+	$UI/CanvasLayer/Hearts/Condition.value = Autoloads.condition
 	
 	if Autoloads.money >= 40:
 		$UI/DayActions/Buy.disabled = false
@@ -161,19 +165,28 @@ func _on_sleep_mouse_entered() -> void:
 func _on_sleep_mouse_exited() -> void:
 	$UI/CanvasLayer/Sleep/Label.remove_theme_color_override("font_color")
 
+func _on_take_care_mouse_entered() -> void:
+	$UI/DayActions/TakeCare/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$SFX.stream = hover_sfx
+	$SFX.play()
+
+func _on_take_care_mouse_exited() -> void:
+	$UI/DayActions/TakeCare/Label.remove_theme_color_override("font_color")
+
+
 func _on_work_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
 	Autoloads.apply_effect("money(550)")
+	Autoloads.apply_effect("condition(-10)")
 	
-	
-
 func _on_rest_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
-	Autoloads.apply_effect("condition(25)")
+	
+	Autoloads.apply_effect("condition(5)")
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
 	
@@ -181,31 +194,55 @@ func _on_rest_pressed() -> void:
 func _on_care_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
-	if Autoloads.mother <= 74:
+	$UI/DayActions/Meds/Label.text = "Give Meds(" + str(Autoloads.meds) + ")"
+	if Autoloads.mother <= 30:
 		$UI/DayActions/Meds.visible = true
 		$UI/DayActions/Buy.visible = true
-		if Autoloads.mother <= 74 and Autoloads.mother >= 50:
+		$UI/DayActions/TakeCare.visible = true
+
+		if Autoloads.mother >= 25:
 			var t = toast.instantiate()
 			t.display_text("Mother is in a worse state.")
-			t.global_position = $UI/CanvasLayer/Point.global_position/4
+			t.global_position = $UI/CanvasLayer/Point.global_position / 4
 			$UI/CanvasLayer/Point.add_child(t)
-		elif Autoloads.mother <= 49 and Autoloads.mother >= 25:
+
+		elif Autoloads.mother >= 15:
 			var t = toast.instantiate()
 			t.display_text("Mother is in horrible condition.")
-			t.global_position = $UI/CanvasLayer/Point.global_position/4
+			t.global_position = $UI/CanvasLayer/Point.global_position / 4
 			$UI/CanvasLayer/Point.add_child(t)
-		elif Autoloads.mother <= 24:
+
+		else:
 			var t = toast.instantiate()
 			t.display_text("Mother is in critical condition.")
-			t.global_position = $UI/CanvasLayer/Point.global_position/4
+			t.global_position = $UI/CanvasLayer/Point.global_position / 4
 			$UI/CanvasLayer/Point.add_child(t)
+
 	else:
 		$UI/DayActions/Meds.visible = false
 		$UI/DayActions/Buy.visible = false
+		$UI/DayActions/TakeCare.visible = false
 		var t = toast.instantiate()
 		t.display_text("Mother is in stable condition.")
 		t.global_position = $UI/CanvasLayer/Point.global_position/4
 		$UI/CanvasLayer/Point.add_child(t)
+
+func _on_take_care_pressed() -> void:
+	if taken_care == false:
+		Autoloads.apply_effect("mother(5)")
+		Autoloads.apply_effect("condition(-10)")
+		var t = toast.instantiate()
+		t.display_text("You took care of Mother.")
+		t.global_position = $UI/CanvasLayer/Point.global_position/4
+		$UI/CanvasLayer/Point.add_child(t)
+	else:
+		var t = toast.instantiate()
+		t.display_text("You already took care of Mother.")
+		t.global_position = $UI/CanvasLayer/Point.global_position/4
+		$UI/CanvasLayer/Point.add_child(t)
+	$SFX.stream = select_sfx
+	$SFX.play()
+	taken_care = true
 
 func _on_buy_pressed() -> void:
 	if Autoloads.money >= 40:
@@ -220,10 +257,11 @@ func _on_buy_pressed() -> void:
 	$SFX.stream = select_sfx
 	$SFX.play()
 	$UI/CanvasLayer/StatusBar/Money.text = "Cash: P" + str(float(Autoloads.money))
+	$UI/DayActions/Meds/Label.text = "Give Meds(" + str(Autoloads.meds) + ")"
 
 func _on_meds_pressed() -> void:
 	if given_medicine == false:
-		Autoloads.apply_effect("mother(15)")
+		Autoloads.apply_effect("mother(10)")
 		Autoloads.apply_effect("meds(-1)")
 		var t = toast.instantiate()
 		t.display_text("Mother took her meds. She's recovering.")
@@ -239,6 +277,7 @@ func _on_meds_pressed() -> void:
 	given_medicine = true
 	if Autoloads.meds == 0:
 		$UI/DayActions/Meds/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/Meds/Label.text = "Give Meds(" + str(Autoloads.meds) + ")"
 
 
 func _on_door_pressed() -> void:
@@ -271,11 +310,22 @@ func _on_sleep_pressed() -> void:
 	$AnimationPlayer.play("Fade_to_Black")
 	$TimerMorn.start()
 	Autoloads.advance_to_next_day()
+	
+	
 
 
 func _on_timer_morn_timeout() -> void:
 	$SFX.stream = next_sfx
 	$SFX.play()
+	if Autoloads.day == 1 or Autoloads.day == 2 or Autoloads.day == 3:
+		Autoloads.apply_effect("mother(-5)")
+	elif Autoloads.day == 4 or Autoloads.day == 5 or Autoloads.day == 6:
+		Autoloads.apply_effect("mother(-10)")
+	elif Autoloads.day == 7 or Autoloads.day == 8 or Autoloads.day == 9 or Autoloads.day == 10:
+		Autoloads.apply_effect("mother(-15)")
+	else:
+		Autoloads.apply_effect("mother(-10)")
+	Autoloads.apply_effect("condition(10)")
 	get_tree().reload_current_scene()
 
 

@@ -9,9 +9,9 @@ var after_encounter = false
 var from_intro = true
 var stats_revealed = false
 
-var money = 3500
-var mother = 20
-var condition = 100
+var money = 2000
+var mother = 10
+var condition = 40
 var meds = 0
 var trust = 50
 var suspicion = 0
@@ -104,7 +104,7 @@ func apply_effect(effect: String) -> void:
 		"condition":
 			condition = clamp(condition + int(amount), 0, 100)
 		"meds":
-			meds = max(meds + int(amount), 100)
+			meds = max(meds + int(amount), 0)
 		"trust":
 			trust = clamp(trust + int(amount), 0, 100)
 		"suspicion":
@@ -114,6 +114,12 @@ func apply_effect(effect: String) -> void:
 		"hate":
 			suspicion = clamp(animosity + int(amount*0.7), 0, 100)
 			animosity = clamp(animosity + int(amount*0.3), 0, 100)
+		"interest":
+			total_debt = max(total_debt + amount, 0.0)
+		"slam":
+			total_debt = max(total_debt + amount, 0.0)
+			suspicion = clamp(animosity + int(amount*0.1), 0, 100)
+			animosity = clamp(animosity + int(amount*0.2), 0, 100)
 		"flag":
 			flags[arg_str] = true
 		_:

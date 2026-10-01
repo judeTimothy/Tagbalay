@@ -1445,7 +1445,7 @@
 		  "translation": "(I don't even know her.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 5/sinister_male_day5_N2.ogg"
+		"voice": "res://Assets/Dialogue/Day 5/sinister_male_day5_P2.ogg"
 	  },
 	  {
 		"text": "Basi gina tago mo da sa ha. Kabata pa bala sa imo.",
@@ -1460,7 +1460,7 @@
 		  "translation": "(I really don't know her, sir.)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 5/sinister_male_day5_N3.ogg"
+		"voice": "res://Assets/Dialogue/Day 5/sinister_male_day5_P3.ogg"
 	  },
 	  {
 		"text": "Sige. May madiskubrehan lang ko, tapat ka gid sa akon.",

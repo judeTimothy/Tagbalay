@@ -119,8 +119,12 @@ func set_dialogue(index: int) -> void:
 
 	$UI/Dialogue/Dialogue.text = line.get("text", "")
 	$UI/Dialogue/Translation.text = line.get("translation", "")
-
-
+	
+	if $UI/Dialogue/Dialogue.text == "" and $UI/Dialogue/Translation.text == "":
+		$UI/Dialogue.visible = false
+	else:
+		$UI/Dialogue.visible = true
+	
 	$VoiceLine.stop()
 	var voice_path = line.get("voice", "")
 	if voice_path != "":
@@ -134,6 +138,21 @@ func set_dialogue(index: int) -> void:
 	$UI/VBoxContainer/Choice/Yes/Translation.text = yes.get("translation", "")
 	$UI/VBoxContainer/Choice/No/Label.text = no.get("text", "")
 	$UI/VBoxContainer/Choice/No/Translation.text = no.get("translation", "")
+	
+	if $UI/Dialogue/Dialogue.text == "" and $UI/Dialogue/Translation.text == "":
+		$UI/DialogueBox.visible = false
+	else:
+		$UI/DialogueBox.visible = true
+
+	
+	if $UI/VBoxContainer/Choice/Yes/Label.text == "" and $UI/VBoxContainer/Choice/Yes/Translation.text == "":
+		$UI/VBoxContainer/Choice/Yes.visible = false
+	else:
+		$UI/VBoxContainer/Choice/Yes.visible = true
+	if $UI/VBoxContainer/Choice/No/Label.text == "" and $UI/VBoxContainer/Choice/No/Translation.text == "":
+		$UI/VBoxContainer/Choice/No.visible = false
+	else:
+		$UI/VBoxContainer/Choice/No.visible = true
 
 
 	var slam_index = visitor.get("slam_index", -1)
