@@ -1375,7 +1375,7 @@
 		"translation": "(Someone told me she stopped by here last night. She's still not home.)",
 		"yes": {
 		  "text": "Naghapit di siya pero mangutang to siya tani ya.",
-		  "translation": "(She did stop by, but she was here to borrow, I think.)",
+		  "translation": "(She did stop by, but she was here to borrow money.)",
 		  "effect": ""
 		},
 		"no": {
@@ -1387,7 +1387,7 @@
 	  },
 	  {
 		"text": "Basi gina tago mo da sa ha. Kabata pa bala sa imo.",
-		"translation": "(Maybe you're hiding her. You're just a kid to her.)",
+		"translation": "(Maybe you're hiding her. You're too young to be doing such things.)",
 		"yes": {
 		  "text": "Wala gani. Pramis.",
 		  "translation": "(No, really. I promise.)",
@@ -1437,7 +1437,7 @@
 		"translation": "(Someone told me she stopped by here last night. She's still not home.)",
 		"yes": {
 		  "text": "Naghapit di siya pero mangutang to siya tani ya.",
-		  "translation": "(She did stop by, but she was here to borrow, I think.)",
+		  "translation": "(She did stop by, but she was here to borrow money.)",
 		  "effect": ""
 		},
 		"no": {
@@ -1449,7 +1449,7 @@
 	  },
 	  {
 		"text": "Basi gina tago mo da sa ha. Kabata pa bala sa imo.",
-		"translation": "(Maybe you're hiding her. You're just a kid to her.)",
+		"translation": "(Maybe you're hiding her. You're too young to do such things.)",
 		"yes": {
 		  "text": "Wala gani. Pramis.",
 		  "translation": "(No, really. I promise.)",
@@ -1464,7 +1464,7 @@
 	  },
 	  {
 		"text": "Sige. May madiskubrehan lang ko, tapat ka gid sa akon.",
-		"translation": "(Alright. If I find out anything, you'd better be honest with me.)",
+		"translation": "(Alright. If I ever find out anything, you'll answer to me.)",
 		"yes": {
 		  "text": "...",
 		  "translation": "(Stay silent.)",
@@ -1649,7 +1649,7 @@
 	  },
 	  {
 		"text": "Sigurado ka ha? Indi pag hulta nga sudlon ta kamo da.",
-		"translation": "(Are you sure? Don't make us force our way in.)",
+		"translation": "(Are you sure? Don't make me force my way in.)",
 		"yes": {
 		  "text": "Wala gid tuod nong.",
 		  "translation": "(She's really, truly not here, sir.)",
@@ -1711,7 +1711,7 @@
 	  },
 	  {
 		"text": "Sigurado ka ha? Indi pag hulta nga sudlon ta kamo da.",
-		"translation": "(Are you sure? Don't make us force our way in.)",
+		"translation": "(Are you sure? Don't make me force my way in.)",
 		"yes": {
 		  "text": "Wala gid tuod nong.",
 		  "translation": "(She's really, truly not here, sir.)",
@@ -1726,7 +1726,7 @@
 	  },
 	  {
 		"text": "Umandam ka lang gid to. Balik-balikid ka lang sa likod mo ah.",
-		"translation": "(Just watch yourself. Keep looking over your shoulder.)",
+		"translation": "(Be careful, now. You better watch your back, kid.)",
 		"yes": {
 		  "text": "...",
 		  "translation": "(Stay silent.)",
@@ -1741,6 +1741,1838 @@
 	  }
 	]
   },
+  
+  "ugly_beggar_day6": {
+    "sprite": "res://Assets/Characters/Ugly_Beggar.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e to.",
+        "translation": "(Good evening.)",
+        "yes": {
+          "text": "Mayong gab-e man.",
+          "translation": "(Good evening to you too.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ari ka na naman?",
+          "translation": "(You're here again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_P1.ogg"
+      },
+      {
+        "text": "Grabe naman ang inulan.",
+        "translation": "(It's raining hard again.)",
+        "yes": {
+          "text": "Masulod ka naman di?",
+          "translation": "(Do you want to come in again?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ay nano, wala ka balay haw?",
+          "translation": "(Don't you have a house?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_P2.ogg"
+      },
+      {
+        "text": "Pwede to? Ikaw lang bi ang pinakalapit nga makadtuan.",
+        "translation": "(Can I? You're the closest person I can go to.)",
+        "yes": {
+          "text": "Sige nong.",
+          "translation": "(Alright, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid nong pero indi pwede.",
+          "translation": "(I'm really sorry, sir, but I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_P3.ogg"
+      },
+      {
+        "text": "Salamat gid to ha. Mahalin lang ko bwas sa aga.",
+        "translation": "(Thank you so much. I'll leave tomorrow morning.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e to.",
+        "translation": "(Good evening.)",
+        "yes": {
+          "text": "Mayong gab-e man.",
+          "translation": "(Good evening to you too.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ari ka na naman?",
+          "translation": "(You're here again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_N1.ogg"
+      },
+      {
+        "text": "Grabe naman ang inulan.",
+        "translation": "(It's raining hard again.)",
+        "yes": {
+          "text": "Masulod ka naman di?",
+          "translation": "(Do you want to come in again?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ay nano, wala ka balay haw?",
+          "translation": "(Don't you have a house?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_N2.ogg"
+      },
+      {
+        "text": "Pwede to? Ikaw lang bi ang pinakalapit nga makadtuan.",
+        "translation": "(Can I? You're the closest person I can go to.)",
+        "yes": {
+          "text": "Sige nong.",
+          "translation": "(Alright, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid nong pero indi pwede.",
+          "translation": "(I'm really sorry, sir, but I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_N3.ogg"
+      },
+      {
+        "text": "Sige, amo ka na gali? Abi ko lain ka sa iban.",
+        "translation": "(Alright, so that's how you are? I thought you were different from the others.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/ugly_beggar_day6_N4.ogg"
+      }
+    ]
+  },
+
+  "cat_man_day6": {
+    "sprite": "res://Assets/Characters/Cat_Man.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Mayong gab-e.",
+          "translation": "(Good evening.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Maano ka tani?",
+          "translation": "(What do you want?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/cat_man_day6_P1.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Gaano ka da sa gwa?",
+          "translation": "(What are you doing outside?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede ka kahalin?",
+          "translation": "(Can you leave?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/cat_man_day6_P2.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/cat_man_day6_P3.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Mayong gab-e.",
+          "translation": "(Good evening.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Maano ka tani?",
+          "translation": "(What do you want?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/cat_man_day6_N1.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Gaano ka da sa gwa?",
+          "translation": "(What are you doing outside?))",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede ka kahalin?",
+          "translation": "(Can you leave?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/cat_man_day6_N2.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 6/cat_man_day6_N3.ogg"
+      }
+    ]
+  },
+
+  "collector_old_day7": {
+    "sprite": "res://Assets/Characters/Lending.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e to. Halin kay Boss Pedro.",
+        "translation": "(Good evening. I'm from Boss Pedro.)",
+        "yes": {
+          "text": "Mayong gab-e nong.",
+          "translation": "(Good evening, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_P1.ogg"
+      },
+      {
+        "text": "Bayad ka subong?",
+        "translation": "(Are you paying today?)",
+        "yes": {
+          "text": "Sige, mabayad ko subong.",
+          "translation": "(Alright, I'll pay today.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede indi lang danay?",
+          "translation": "(Can it wait for now?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_P2.ogg"
+      },
+      {
+        "text": "Pila ihatag mo subong? P500? P1000?",
+        "translation": "(How much will you give today? P500? P1000?)",
+        "yes": {
+          "text": "Sige ari P1000.",
+          "translation": "(Alright, here's P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+          "translation": "(I'll increase your interest if you don't pay today.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_P3.ogg"
+      },
+      {
+        "text": "Sige salamat. Padayuna lang to ah.",
+        "translation": "(Alright, thank you. Just keep going.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Salamat.",
+          "translation": "(Thank you.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e to. Halin kay Boss Pedro.",
+        "translation": "(Good evening. I'm from Boss Pedro.)",
+        "yes": {
+          "text": "Mayong gab-e nong.",
+          "translation": "(Good evening, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_N1.ogg"
+      },
+      {
+        "text": "Bayad ka subong?",
+        "translation": "(Are you paying today?)",
+        "yes": {
+          "text": "Sige mabayad ko subong.",
+          "translation": "(Alright, I'll pay today.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede indi lang danay?",
+          "translation": "(Can it wait for now?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_N2.ogg"
+      },
+      {
+        "text": "Pila ihatag mo subong? P500? P1000?",
+        "translation": "(How much will you give today? P500? P1000?)",
+        "yes": {
+          "text": "Sige ari P1000.",
+          "translation": "(Alright, here's P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+          "translation": "(I'll increase your interest if you don't pay today.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_N3.ogg"
+      },
+      {
+        "text": "Sige salamat. Padayuna lang to ah.",
+        "translation": "(Alright, thank you. Just keep going.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Salamat.",
+          "translation": "(Thank you.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/collector_old_day7_N4.ogg"
+      }
+    ]
+  },
+
+  "old_lady_day7": {
+    "sprite": "res://Assets/Characters/Old_Lady.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Kamusta ka to?",
+        "translation": "(How are you?)",
+        "yes": {
+          "text": "Okay, lang kami nay.",
+          "translation": "(We're okay, nay.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Okay lang man.",
+          "translation": "(We're okay.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_P1.ogg"
+      },
+      {
+        "text": "Kinahanglan mo bala sang bulig sa kwarta? Daw wala ka gid kabisita to sa amon haw?",
+        "translation": "(Do you need some help with money? It seems like you haven't visited us at all, huh?)",
+        "yes": {
+          "text": "Kaya pa man nay ah.",
+          "translation": "(We're still managing, nay.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Gabayad man ko ah.",
+          "translation": "(Still paying.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_P2.ogg"
+      },
+      {
+        "text": "Pwede taka gaan subong P1000 para mag mag-an man ang inyo problema.",
+        "translation": "(I can give you P1000 now to ease your problems a little.)",
+        "yes": {
+          "text": "Kuhaon ang P1000.",
+          "translation": "(Take the P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Indi lang nay ah.",
+          "translation": "(No, ma'am.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_P3.ogg"
+      },
+      {
+        "text": "Indi na mag kabalaka kung san-o mo bayran.",
+        "translation": "(Don't worry about when you'll pay me back.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Kamusta ka to?",
+        "translation": "(How are you?)",
+        "yes": {
+          "text": "Okay, lang kami nay.",
+          "translation": "(We're okay, ma'am.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Okay lang man.",
+          "translation": "(We're okay.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_N1.ogg"
+      },
+      {
+        "text": "Kinahanglan mo bala sang bulig sa kwarta? Daw wala ka gid kabisita to sa amon haw?",
+        "translation": "(Do you need some help with money? It seems like you haven't visited us at all, huh?)",
+        "yes": {
+          "text": "Kaya pa man nay ah.",
+          "translation": "(We're still managing, ma'am.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Gabayad man ko ah.",
+          "translation": "(I'm paying.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_N2.ogg"
+      },
+      {
+        "text": "Pwede taka gaan subong P1000 para mag mag-an man ang inyo problema.",
+        "translation": "(I can give you P1000 now to ease your problems a little.)",
+        "yes": {
+          "text": "Kuhaon ang P1000.",
+          "translation": "(Take the P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Indi lang nay ah.",
+          "translation": "(No, ma'am.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_N3.ogg"
+      },
+      {
+        "text": "Panumduma lang si nanay mo sa tanan mo nga desisyon.",
+        "translation": "(Just think of your mother with every decision you make.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+		  "text": "...",
+		  "translation": "(Stay silent.)",
+		  "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/old_lady_day7_N4.ogg"
+      }
+    ]
+  },
+
+  "chismosa_day7": {
+    "sprite": "res://Assets/Characters/Chismosa.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "To. Pasudla ko da bi danay. Subong lang na gab-e.",
+        "translation": "(Please. Let me in for a while. Just for tonight.)",
+        "yes": {
+          "text": "Mayong gab-e nang.",
+          "translation": "(Good evening, ma'am.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Oh ano tani?",
+          "translation": "(Oh, what is it?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/chismosa_day7_P1.ogg"
+      },
+      {
+        "text": "Sige na, subong lang.",
+        "translation": "(Please, just for tonight.)",
+        "yes": {
+          "text": "Sige sulod.",
+          "translation": "(Alright, come in.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Indi ko ah.",
+          "translation": "(I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/chismosa_day7_P2.ogg"
+      },
+      {
+        "text": "Salamat gid. Malakat lang ko dayon sa aga.",
+        "translation": "(Thank you very much. I'll leave first thing in the morning.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/chismosa_day7_P3.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "To. Pasudla ko da bi danay. Subong lang na gab-e.",
+        "translation": "(Please. Let me in for a while. Just for tonight.)",
+        "yes": {
+          "text": "Mayong gab-e nang.",
+          "translation": "(Good evening, ma'am.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Oh ano tani?",
+          "translation": "(Oh, what is it?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/chismosa_day7_N1.ogg"
+      },
+      {
+        "text": "Sige na, subong lang.",
+        "translation": "(Please, just for tonight.)",
+        "yes": {
+          "text": "Sige sulod.",
+          "translation": "(Alright, come in.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Indi ko ah.",
+          "translation": "(I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/chismosa_day7_N2.ogg"
+      },
+      {
+		"text": "Hays. Indi ka gid masaligan.",
+		"translation": "(Sigh. I really can't rely on you.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/chismosa_day7_N3.ogg"
+      }
+    ]
+  },
+
+  "cat_man_day7": {
+    "sprite": "res://Assets/Characters/Cat_Man.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Mayong gab-e.",
+          "translation": "(Good evening.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ikaw na naman?",
+          "translation": "(You again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/cat_man_day7_P1.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Pwede nga indi ka lang di sa amon?",
+          "translation": "(Can you just not stay here?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Halin!",
+          "translation": "(Leave!)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/cat_man_day7_P2.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/cat_man_day7_P3.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Mayong gab-e.",
+          "translation": "(Good evening.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ikaw na naman?",
+          "translation": "(You again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/cat_man_day7_N1.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "Pwede nga indi ka lang di sa amon?",
+          "translation": "(Can you just not stay here?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Halin!",
+          "translation": "(Leave!)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/cat_man_day7_N2.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/cat_man_day7_N3.ogg"
+      }
+    ]
+  },
+
+  "shady_man_day7": {
+    "sprite": "res://Assets/Characters/Shady_Man.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e gali to. Halin kami gle sa barangay. Masurvey lang ah.",
+        "translation": "(Good evening. We're from the barangay. We're just doing a survey.)",
+        "yes": {
+          "text": "Survey? Para sa ano.",
+          "translation": "(Survey? For what?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Tama naman ni ya ka gab-e para sa survey.",
+          "translation": "(It's pretty late for a survey.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_P1.ogg"
+      },
+      {
+        "text": "Kinanglan lang ni kap ang datos ah. Gusto lang namon mabal-an ang mga panimalay sa ini nga gamay nga suok-suok ah.",
+        "translation": "(The captain just needs the data. We just want to know the households in this little area.)",
+        "yes": {
+          "text": "Duwa lang kami di sang nanay ko.",
+          "translation": "(It's just me and my mother here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Araw araw na gid na ya si kap.",
+          "translation": "(That seems absurd.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_P2.ogg"
+      },
+      {
+        "text": "Te pwede ko da kasulod para maka survey ta? Dasig lang, mga lima ka minuto ah.",
+        "translation": "(So can I come in to do the survey? It'll be quick, just about five minutes.)",
+        "yes": {
+          "text": "Sige nong, sulod lang.",
+          "translation": "(Alright, sir, come in.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Indi pwede. Bwas lang na.",
+          "translation": "(No. Just come earlier tomorrow.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_P3.ogg"
+      },
+      {
+        "text": "Salamat gid to.",
+        "translation": "(Thank you very much.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": "game_over"
+        },
+        "no": {
+          "text": "Ikaw bahala. Wala ka gid ayuda halin kay kap.",
+          "translation": "(Up to you. You won't get any help from Kap.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e gali to. Halin kami gle sa barangay. Masurvey lang ah.",
+        "translation": "(Good evening. We're from the barangay. We're just doing a survey.)",
+        "yes": {
+          "text": "Survey? Para sa ano.",
+          "translation": "(Survey? For what?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Tama naman ni ya ka gab-e para sa survey.",
+          "translation": "(It's pretty late for a survey.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_N1.ogg"
+      },
+      {
+        "text": "Kinanglan lang ni kap ang datos ah. Gusto lang namon mabal-an ang mga panimalay sa ini nga gamay nga suok-suok ah.",
+        "translation": "(Kap just needs the data. We just want to know the households in this little area.)",
+        "yes": {
+          "text": "Duwa lang kami di sang nanay ko.",
+          "translation": "(It's just me and my mother here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Araw araw na gid na ya si kap.",
+          "translation": "(That seems absurd.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_N2.ogg"
+      },
+      {
+        "text": "Te pwede ko da kasulod para maka survey ta? Dasig lang, mga lima ka minuto ah.",
+        "translation": "(So can I come in to do the survey? It'll be quick, just about five minutes.)",
+        "yes": {
+          "text": "Sige nong, sulod lang.",
+          "translation": "(Alright, sir, come in.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Indi pwede. Bwas lang na.",
+          "translation": "(Can't. Just come tomorrow.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_N3.ogg"
+      },
+      {
+        "text": "Ikaw bahala. Wala ka gid ayuda halin kay kap.",
+        "translation": "(Up to you. You won't get any help from Kap.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 7/shady_man_day7_N4.ogg"
+      }
+    ]
+  },
+
+  "collector_old_day8": {
+    "sprite": "res://Assets/Characters/Lending.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e to. Halin kay Boss Pedro.",
+        "translation": "(Good evening. I'm from Boss Pedro.)",
+        "yes": {
+          "text": "Mayong gab-e nong.",
+          "translation": "(Good evening, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_P1.ogg"
+      },
+      {
+        "text": "Bayad ka subong?",
+        "translation": "(Are you paying today?)",
+        "yes": {
+          "text": "Sige mabayad ko subong.",
+          "translation": "(Alright, I'll pay today.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede indi lang danay?",
+          "translation": "(Can it wait for now?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_P2.ogg"
+      },
+      {
+        "text": "Pila ihatag mo subong? P500? P1000?",
+        "translation": "(How much will you give today? P500? P1000?)",
+        "yes": {
+          "text": "Sige ari P1000.",
+          "translation": "(Alright, here's P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+          "translation": "(I'll increase your interest if you don't pay today.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_P3.ogg"
+      },
+      {
+        "text": "Sige salamat. Amat amat lang to ah.",
+        "translation": "(Alright, thank you. Just take it little by little.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Salamat.",
+          "translation": "(Thank you.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e to. Halin kay Boss Pedro.",
+        "translation": "(Good evening. I'm from Boss Pedro.)",
+        "yes": {
+          "text": "Mayong gab-e nong.",
+          "translation": "(Good evening, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_N1.ogg"
+      },
+      {
+        "text": "Bayad ka subong?",
+        "translation": "(Are you paying today?)",
+        "yes": {
+          "text": "Sige mabayad ko subong.",
+          "translation": "(Alright, I'll pay today.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede indi lang danay?",
+          "translation": "(Can it wait for now?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_N2.ogg"
+      },
+      {
+        "text": "Pila ihatag mo subong? P500? P1000?",
+        "translation": "(How much will you give today? P500? P1000?)",
+        "yes": {
+          "text": "Sige ari P1000.",
+          "translation": "(Alright, here's P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+          "translation": "(I'll increase your interest if you don't pay today.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_N3.ogg"
+      },
+      {
+        "text": "Sige salamat. Amat amat lang to ah.",
+        "translation": "(Alright, thank you. Just take it little by little.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Salamat.",
+          "translation": "(Thank you.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_old_day8_N4.ogg"
+      }
+    ]
+  },
+
+  "cat_man_day8": {
+    "sprite": "res://Assets/Characters/Cat_Man.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Indi na magbukas pertahan sa iban subong nga gab-e.",
+        "translation": "(Don't open the door for anyone else tonight.)",
+        "yes": {
+          "text": "Ha? Ngaa.",
+          "translation": "(Huh? Why?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ikaw na naman?",
+          "translation": "(You again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/cat_man_day8_P1.ogg"
+      },
+      {
+        "text": "Pati lang sakon.",
+        "translation": "(Just trust me.)",
+        "yes": {
+          "text": "Indi na di mag balik, palihog.",
+          "translation": "(Please don't come back here anymore.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Halin!",
+          "translation": "(Leave!)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/cat_man_day8_P2.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/cat_man_day8_P3.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Indi na magbukas pertahan sa iban subong nga gab-e.",
+        "translation": "(Don't open the door for anyone else tonight.)",
+        "yes": {
+          "text": "Ha? Ngaa.",
+          "translation": "(Huh? Why?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ikaw na naman?",
+          "translation": "(You again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/cat_man_day8_N1.ogg"
+      },
+      {
+        "text": "Pati lang sakon.",
+        "translation": "(Just trust me.)",
+        "yes": {
+          "text": "Indi na di mag balik, palihog.",
+          "translation": "(Please don't come back here anymore.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Halin!",
+          "translation": "(Leave!)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/cat_man_day8_N2.ogg"
+      },
+      {
+        "text": "…",
+        "translation": "(...)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/cat_man_day8_N3.ogg"
+      }
+    ]
+  },
+
+  "collector_young_day8": {
+    "sprite": "res://Assets/Characters/Lending.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e to. Dumduman mo pa ko?",
+        "translation": "(Good evening. Do you still remember me?)",
+        "yes": {
+          "text": "Robert?",
+          "translation": "(Robert?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sin-o ka ya?",
+          "translation": "(Who are you?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_P1.ogg"
+      },
+      {
+        "text": "Oo. Ako ni si Robert.",
+        "translation": "(Yes. It's me, Robert.)",
+        "yes": {
+          "text": "Oh, naano ka Robert?",
+          "translation": "(Oh, what happened to you, Robert?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ngaa nagbalik ka di? Ginpahalin ka na diba ni Boss Pedro?",
+          "translation": "(Why did you come back here? Boss Pedro already fired you, right?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_P2.ogg"
+      },
+      {
+        "text": "Gin kaksan ko ubra to. Kag gin pabalang sa iban ya na tinawo. Pwede ko danay da kasulod? Subong lang na gab-e.",
+        "translation": "(I quit that job. And I was handed over to someone else. Can I stay inside for a while? Just tonight.)",
+        "yes": {
+          "text": "Sige. Sulod.",
+          "translation": "(Alright. Come in.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid nong. Indi pwede.",
+          "translation": "(I'm really sorry, sir. I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_P3.ogg"
+      },
+      {
+        "text": "Indi mag kabalaka to ah. Mahalin ko bwas dayon.",
+        "translation": "(Don't worry. I'll leave tomorrow.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige pasensya gid.",
+          "translation": "(Alright, I'm really sorry.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e to. Dumduman mo pa ko?",
+        "translation": "(Good evening. Do you still remember me?)",
+        "yes": {
+          "text": "Robert?",
+          "translation": "(Robert?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sin-o ka ya?",
+          "translation": "(Who are you?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_N1.ogg"
+      },
+      {
+        "text": "Oo. Ako ni si Robert.",
+        "translation": "(Yes. It's me, Robert.)",
+        "yes": {
+          "text": "Oh, naano ka Robert?",
+          "translation": "(Oh, what happened to you, Robert?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ngaa nagbalik ka di? Ginpahalin ka na diba ni Boss Pedro?",
+          "translation": "(Why did you come back here? Boss Pedro already fired you, right?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_N2.ogg"
+      },
+      {
+        "text": "Gin palaya ko ni Boss Pedro. Kabalo ka naman kung ano na sila klase nga tawo. Pwede ko kasulod? Subong lang na gab-e.",
+        "translation": "(Boss Pedro fired me. You know what kind of people they are. Can I come inside? Just tonight.)",
+        "yes": {
+          "text": "Sige. Sulod.",
+          "translation": "(Alright. Come in.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid nong. Indi pwede.",
+          "translation": "(I'm really sorry, sir. I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_N3.ogg"
+      },
+      {
+        "text": "Indi mag kabalaka to ah. Mahalin ko bwas dayon.",
+        "translation": "(Don't worry. I'll leave tomorrow.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige pasensya gid.",
+          "translation": "(Alright, I'm really sorry.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/collector_young_day8_N4.ogg"
+      }
+    ]
+  },
+  
+  
+  "ugly_beggar_day8": {
+    "sprite": "res://Assets/Characters/Ugly_Beggar.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": 3,
+    "slam_effect": "hate(30)",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e to.",
+        "translation": "(Good evening.)",
+        "yes": {
+          "text": "Mayong gab-e man.",
+          "translation": "(Good evening to you too.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ari ka na naman?",
+          "translation": "(You're here again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_P1.ogg"
+      },
+      {
+        "text": "Oo. kita mo man nga gainulan naman.",
+        "translation": "(Yes. You can see it's raining again.)",
+        "yes": {
+          "text": "Te, masulod ka naman di?",
+          "translation": "(So, do you want to come in again?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala ka gid iban na kadtuan?",
+          "translation": "(You really have nowhere else to go?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_P2.ogg"
+      },
+      {
+        "text": "Pwede to? Ikaw lang bi ang masaligan nga makadtuan.",
+        "translation": "(Can I? You're the only one I can trust to go to.)",
+        "yes": {
+          "text": "Sige nong.",
+          "translation": "(Alright, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid nong pero indi pwede.",
+          "translation": "(I'm really sorry, sir, but I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_P3.ogg"
+      },
+      {
+        "text": "Salamat gid to ha. Mahalin lang ko bwas sa aga.",
+        "translation": "(Thank you so much. I'll leave tomorrow morning.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige. Salamat gid ha.",
+          "translation": "(Alright. Thank you so much.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e to.",
+        "translation": "(Good evening.)",
+        "yes": {
+          "text": "Mayong gab-e man.",
+          "translation": "(Good evening to you too.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ari ka na naman?",
+          "translation": "(You're here again?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N1.ogg"
+      },
+      {
+        "text": "Oo. kita mo man nga gainulan naman.",
+        "translation": "(Yes. You can see it's raining again.)",
+        "yes": {
+          "text": "Te, masulod ka naman di?",
+          "translation": "(So, do you want to come in again?)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala ka gid iban na kadtuan?",
+          "translation": "(You really have nowhere else to go?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N2.ogg"
+      },
+      {
+        "text": "Pwede to? Ikaw lang bi ang masaligan nga makadtuan.",
+        "translation": "(Can I? You're the only one I can trust to go to.)",
+        "yes": {
+          "text": "Sige nong.",
+          "translation": "(Alright, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid nong pero indi pwede.",
+          "translation": "(I'm really sorry, sir, but I can't.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N3.ogg"
+      },
+      {
+        "text": "Salamat gid to ha. Mahalin lang ko bwas sa aga.",
+        "translation": "(Thank you so much. I'll leave tomorrow morning.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige. Salamat gid ha.",
+          "translation": "(Alright. Thank you so much.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N4.ogg"
+      }
+    ]
+  },
+
+  "collector_old_day9": {
+    "sprite": "res://Assets/Characters/Lending.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e to. Halin kay Boss Pedro.",
+        "translation": "(Good evening. I'm from Boss Pedro.)",
+        "yes": {
+          "text": "Mayong gab-e nong.",
+          "translation": "(Good evening, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P1.ogg"
+      },
+      {
+        "text": "Bayad ka subong?",
+        "translation": "(Are you paying today?)",
+        "yes": {
+          "text": "Sige mabayad ko subong.",
+          "translation": "(Alright, I'll pay today.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede indi lang danay?",
+          "translation": "(Can it wait for now?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P2.ogg"
+      },
+      {
+        "text": "Pila ihatag mo subong? P500? P1000?",
+        "translation": "(How much will you give today? P500? P1000?)",
+        "yes": {
+          "text": "Sige ari P1000.",
+          "translation": "(Alright, here's P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+          "translation": "(I'll increase your interest if you don't pay today.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P3.ogg"
+      },
+      {
+        "text": "Sige salamat gid.",
+        "translation": "(Alright, thank you very much.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala problema.",
+          "translation": "(No problem.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e to. Halin kay Boss Pedro.",
+        "translation": "(Good evening. I'm from Boss Pedro.)",
+        "yes": {
+          "text": "Mayong gab-e nong.",
+          "translation": "(Good evening, sir.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N1.ogg"
+      },
+      {
+        "text": "Bayad ka subong?",
+        "translation": "(Are you paying today?)",
+        "yes": {
+          "text": "Sige mabayad ko subong.",
+          "translation": "(Alright, I'll pay today.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pwede indi lang danay?",
+          "translation": "(Can it wait for now?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N2.ogg"
+      },
+      {
+        "text": "Pila ihatag mo subong? P500? P1000?",
+        "translation": "(How much will you give today? P500? P1000?)",
+        "yes": {
+          "text": "Sige ari P1000.",
+          "translation": "(Alright, here's P1000.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+          "translation": "(I'll increase your interest if you don't pay today.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N3.ogg"
+      },
+      {
+        "text": "Sige salamat gid.",
+        "translation": "(Alright, thank you very much.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala problema.",
+          "translation": "(No problem.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N4.ogg"
+      }
+    ]
+  },
+
+  "chismosa_day9": {
+    "sprite": "res://Assets/Characters/Chismosa.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "To to to. Pasudla ko bi.",
+        "translation": "(Please, please, please. Let me in.)",
+        "yes": {
+          "text": "Mayong gab-e nang.",
+          "translation": "(Good evening, ma'am.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Oh ano tani?",
+          "translation": "(Oh, what is it?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/chismosa_day9_P1.ogg"
+      },
+      {
+        "text": "Pasudla ko bi subong liwat. Palihog. Wala ko kabalo diin makadto.",
+        "translation": "(Please let me in again. Please. I don't know where to go.)",
+        "yes": {
+          "text": "Sige sulod. Dali.",
+          "translation": "(Alright, come in. Quickly.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid.",
+          "translation": "(I'm really sorry.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/chismosa_day9_P2.ogg"
+      },
+      {
+        "text": "Salamat gid. Malakat lang ko dayon sa aga.",
+        "translation": "(Thank you very much. I'll leave first thing in the morning.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige.",
+          "translation": "(Alright.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/chismosa_day9_P3.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "To to to. Pasudla ko bi.",
+        "translation": "(Please, please, please. Let me in.)",
+        "yes": {
+          "text": "Mayong gab-e nang.",
+          "translation": "(Good evening, ma'am.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Oh ano tani?",
+          "translation": "(Oh, what is it?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/chismosa_day9_N1.ogg"
+      },
+      {
+        "text": "Pasudla ko bi subong liwat. Palihog. Wala ko kabalo diin makadto.",
+        "translation": "(Please let me in again. Please. I don't know where to go.)",
+        "yes": {
+          "text": "Sige sulod. Dali.",
+          "translation": "(Alright, come in. Quickly.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Pasensya gid.",
+          "translation": "(I'm really sorry.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/chismosa_day9_N2.ogg"
+      },
+      {
+        "text": "Salamat gid. Malakat lang ko dayon sa aga.",
+        "translation": "(Thank you very much. I'll leave first thing in the morning.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige.",
+          "translation": "(Alright.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/chismosa_day9_N3.ogg"
+      }
+    ]
+  },
+
+  "sinister_male_day9": {
+    "sprite": "res://Assets/Characters/Sinister_Male.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": 3,
+    "slam_effect": "hate(30)",
+    "lines_positive": [
+      {
+        "text": "Si Ermita diin?",
+        "translation": "(Where is Ermita?)",
+        "yes": {
+          "text": "Wala di sya.",
+          "translation": "(She's not here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_P1.ogg"
+      },
+      {
+        "text": "Si Ermita diin? Kabalo ko nga ari di sya.",
+        "translation": "(Where is Ermita? I know she's here.)",
+        "yes": {
+          "text": "Wala di siya kakadto.",
+          "translation": "(She didn't come here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala ko ya kakita sa iya nong.",
+          "translation": "(I didn't see her, sir.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_P2.ogg"
+      },
+      {
+        "text": "Indi ko pag butigi. Nakita ko siya nagdalagan diri.",
+        "translation": "(Don't lie to me. I saw her running here.)",
+        "yes": {
+          "text": "Ari sya.",
+          "translation": "(She's here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala gid di siya.",
+          "translation": "(She's really not here.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_P3.ogg"
+      },
+      {
+        "text": "Sige, salamat gid. Magkadto di siya liwat. Hambala lang ko.",
+        "translation": "(Alright, thank you very much. I'll come here again. Just tell me.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige. Balikan ta ka to. Umandam ka lang.",
+          "translation": "(Alright. I'll come back for you. Just be ready.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Si Ermita diin?",
+        "translation": "(Where is Ermita?)",
+        "yes": {
+          "text": "Wala di sya.",
+          "translation": "(She's not here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_N1.ogg"
+      },
+      {
+        "text": "Si Ermita diin? Kabalo ko nga ari di sya.",
+        "translation": "(Where is Ermita? I know she's here.)",
+        "yes": {
+          "text": "Wala di siya kakadto.",
+          "translation": "(She didn't come here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala ko ya kakita sa iya nong.",
+          "translation": "(I didn't see her, sir.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_N2.ogg"
+      },
+      {
+        "text": "Indi ko pag butigi. Nakita ko siya nagdalagan diri.",
+        "translation": "(Don't lie to me. I saw her running here.)",
+        "yes": {
+          "text": "Ari sya.",
+          "translation": "(She's here.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala gid di siya.",
+          "translation": "(She's really not here.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_N3.ogg"
+      },
+      {
+        "text": "Sige, salamat gid. Magkadto di siya liwat. Hambala lang ko.",
+        "translation": "(Alright, thank you very much. I'll come here again. Just tell me.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Sige. Balikan ta ka to. Umandam ka lang.",
+          "translation": "(Alright. I'll come back for you. Just be ready.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/sinister_male_day9_N4.ogg"
+      }
+    ]
+  },
+
+  "shady_man_day9": {
+    "sprite": "res://Assets/Characters/Shady_Man.png",
+    "bgm": "",
+    "reveal_index": -1,
+    "slam_index": -1,
+    "slam_effect": "",
+    "lines_positive": [
+      {
+        "text": "Mayong gab-e gali to. Tanod kami gle sa barangay.",
+        "translation": "(Good evening. We're barangay watchmen.)",
+        "yes": {
+          "text": "Oh, mayong gab-e gid.",
+          "translation": "(Oh, good evening.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Maano kamo tani chip?",
+          "translation": "(What brings you here, chip?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_P1.ogg"
+      },
+      {
+        "text": "Ga suroy-suroy lang kami di sa inyo lugar. Daw kita ko damo-damo di gakadto sa balay nyo haw?",
+        "translation": "(We're just making rounds around your area. Seems like I see a lot of people coming to your house, huh?)",
+        "yes": {
+          "text": "Wala man lang chip ah.",
+          "translation": "(Not really, chip.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala chip ah.",
+          "translation": "(No, chip.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_P2.ogg"
+      },
+      {
+        "text": "Te pwede ko da kacheck kung kamusta kamo da?",
+        "translation": "(So can I come in and check how you're doing?)",
+        "yes": {
+          "text": "Sige chip, sulod lang.",
+          "translation": "(Alright, chip, come in.)",
+          "effect": "game_over"
+        },
+        "no": {
+          "text": "Pwede bwas lang chip?",
+          "translation": "(Can it be tomorrow instead, chip?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_P3.ogg"
+      },
+      {
+        "text": "Salamat gid to.",
+        "translation": "(Thank you very much.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ikaw bahala. Sulatan ko lang di sa checking namon inyo address ah.",
+          "translation": "(Up to you. I'll just write down your address for our check.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_P4.ogg"
+      }
+    ],
+    "lines_negative": [
+      {
+        "text": "Mayong gab-e gali to. Tanod kami gle sa barangay.",
+        "translation": "(Good evening. We're barangay watchmen.)",
+        "yes": {
+          "text": "Oh, mayong gab-e gid.",
+          "translation": "(Oh, good evening.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Maano kamo tani chip?",
+          "translation": "(What brings you here, chip?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_N1.ogg"
+      },
+      {
+        "text": "Ga suroy-suroy lang kami di sa inyo lugar. Daw kita ko damo-damo di gakadto sa balay nyo haw?",
+        "translation": "(We're just making rounds around your area. Seems like I see a lot of people coming to your house, huh?)",
+        "yes": {
+          "text": "Wala man lang chip ah.",
+          "translation": "(Not really, chip.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Wala chip ah.",
+          "translation": "(No, chip.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_N2.ogg"
+      },
+      {
+        "text": "Te pwede ko da kacheck kung kamusta kamo da?",
+        "translation": "(So can I come in and check how you're doing?)",
+        "yes": {
+          "text": "Sige chip, sulod lang.",
+          "translation": "(Alright, chip, come in.)",
+          "effect": "game_over"
+        },
+        "no": {
+          "text": "Pwede bwas lang chip?",
+          "translation": "(Can it be tomorrow instead, chip?)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_N3.ogg"
+      },
+      {
+        "text": "Salamat gid to.",
+        "translation": "(Thank you very much.)",
+        "yes": {
+          "text": "...",
+          "translation": "(Stay silent.)",
+          "effect": ""
+        },
+        "no": {
+          "text": "Ikaw bahala. Sulatan ko lang di sa checking namon inyo address ah.",
+          "translation": "(Up to you. I'll just write down your address for our check.)",
+          "effect": ""
+        },
+        "voice": "res://Assets/Dialogue/Day 9/shady_man_day9_N4.ogg"
+      }
+    ]
+  },
+  
   "empty_day5": {
 	"sprite": "",
 	"bgm": "",
