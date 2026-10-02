@@ -4,7 +4,7 @@ var current_bgm_seek = 0
 var main_bgm_seek = 0
 var night = true
 var total_debt = 69420.67
-var day = 1
+var day = 5
 var after_encounter = false
 var from_intro = true
 var stats_revealed = false
@@ -34,8 +34,13 @@ var visitor_schedule := {
 	3: ["old_lady_day3", "collector_young_day3", "ugly_beggar_day3"],
 	4: ["chismosa_day4", "collector_young_day4", "old_lady_day4"],
 	5: ["collector_old_day5", "young_kid_day5", "sinister_male_day5", "empty_day5"],
-	6: ["collector_old_day6", "sinister_male_day6", "collector_young_day2"],
-	7: ["collector_fraud_day2", "collector_young_day2"]
+	6: ["collector_old_day6", "sinister_male_day6", "ugly_beggar_day6", "cat_man_day6"],
+	7: ["collector_old_day7", "old_lady_day7", "chismosa_day7", "cat_man_day7", "shady_man_day7"],
+	8: ["collector_old_day8", "cat_man_day8", "collector_young_day8", "ugly_beggar_day8"],
+	9: ["collector_old_day9", "chismosa_day9", "sinister_male_day9", "shady_man_day9"],
+	10: ["boss_pedro"],
+	11: ["test"]
+		
 }
 
 # still not working, trying to fix
@@ -95,14 +100,12 @@ func apply_effect(effect: String) -> void:
 		"payment":
 			total_debt = max(total_debt - amount, 0.0)
 			money = max(money - int(amount), 0)
-		"fraud":
-			money = max(money - int(amount),0)
 		"money":
 			money = max(money + int(amount), 0)
 		"mother":
-			mother = clamp(mother + int(amount), 0, 100)
+			mother = clamp(mother + int(amount), 0, 40)
 		"condition":
-			condition = clamp(condition + int(amount), 0, 100)
+			condition = clamp(condition + int(amount), 0, 40)
 		"meds":
 			meds = max(meds + int(amount), 0)
 		"trust":

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb88w5fedl0ev"
-path="res://.godot/imported/Shady Man - shades.png-009a8131f0ef365f67e38f1b48abb4f0.ctex"
+path="res://.godot/imported/Shady_Man - shades.png-baf023a1fdcd58edbfc63fe7902e1fb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Shady Man - shades.png"
-dest_files=["res://.godot/imported/Shady Man - shades.png-009a8131f0ef365f67e38f1b48abb4f0.ctex"]
+source_file="res://Assets/Characters/Shady_Man - shades.png"
+dest_files=["res://.godot/imported/Shady_Man - shades.png-baf023a1fdcd58edbfc63fe7902e1fb6.ctex"]
 
 [params]
 

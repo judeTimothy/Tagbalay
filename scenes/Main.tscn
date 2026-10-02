@@ -720,6 +720,18 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("1_21xkr")
 
+[node name="Rain" type="CPUParticles2D" parent="." unique_id=724248215]
+position = Vector2(940, 135.00002)
+scale = Vector2(0.45, 0.45)
+emitting = false
+amount = 200
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+direction = Vector2(1, 0.745)
+angular_velocity_max = 370.91
+angle_min = -381.8
+
 [node name="Preview" type="Sprite2D" parent="." unique_id=1854607146]
 visible = false
 modulate = Color(0.507202, 0.19733563, 0.32220325, 1)

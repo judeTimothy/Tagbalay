@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://21tdr2qtai81"
-path="res://.godot/imported/Shady Man.png-b8710440eb9a0505a87e4ca908a94ce3.ctex"
+uid="uid://dvdv5trmjmdhc"
+path="res://.godot/imported/Cat_Man.png-cced3c67327384cd45c8cf98ba043e9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Shady Man.png"
-dest_files=["res://.godot/imported/Shady Man.png-b8710440eb9a0505a87e4ca908a94ce3.ctex"]
+source_file="res://Assets/Characters/Cat_Man.png"
+dest_files=["res://.godot/imported/Cat_Man.png-cced3c67327384cd45c8cf98ba043e9b.ctex"]
 
 [params]
 

@@ -41,8 +41,9 @@ func _ready() -> void:
 	_dbg("_ready() calling set_dialogue(0)")
 	set_dialogue(0)
 	
-	if Autoloads.current_visitor_id == "ugly_beggar_day3":
+	if Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8":
 		$Ambient.play()
+		$Rain.emitting = true
 
 
 func _refresh_stat_labels() -> void:
@@ -102,6 +103,20 @@ func _apply_visitor_setup() -> void:
 		_dbg("Loading bgm: " + str(visitor["bgm"]))
 		$BGM.stream = load(visitor["bgm"])
 		$BGM.play()
+	
+	_start_idle_sway()
+
+func _start_idle_sway() -> void:
+	var sprite := $UI/VisitorSprite
+	var base_pos: Vector2 = sprite.position
+ 
+	var tween := create_tween()
+	tween.set_loops()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(sprite, "position", base_pos + Vector2(3, -2), 1.6)
+	tween.tween_property(sprite, "position", base_pos + Vector2(-3, 2), 1.6)
+	tween.tween_property(sprite, "position", base_pos, 1.6)
 
 
 func set_dialogue(index: int) -> void:

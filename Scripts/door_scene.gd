@@ -61,7 +61,7 @@ func _ready() -> void:
 		buffer = "DAY "
 	$UI/CanvasLayer/StatusBar/Day.text = buffer + str(Autoloads.day)
 	
-	if (Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "collector_young_day3") and night:
+	if (Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "sinister_male_day5" or Autoloads.current_visitor_id == "collector_young_day3" or Autoloads.current_visitor_id == "sinister_male_day6" or Autoloads.current_visitor_id == "collector_young_day8") and night:
 		$Ambient.play()
 		var t = toast.instantiate()
 		t.display_text("It's raining outside.")
@@ -246,7 +246,7 @@ func _on_take_care_pressed() -> void:
 
 func _on_buy_pressed() -> void:
 	if Autoloads.money >= 40:
-		Autoloads.apply_effect("payment(40)")
+		Autoloads.apply_effect("money(-40)")
 		Autoloads.apply_effect("meds(1)")
 		var t = toast.instantiate()
 		t.display_text("You've bought medicine.")
