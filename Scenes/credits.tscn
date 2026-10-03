@@ -1,25 +1,12 @@
-[gd_scene format=3 uid="uid://bd5vpro07mnfn"]
+[gd_scene format=3 uid="uid://cyutmd8csafw3"]
 
-[ext_resource type="Script" uid="uid://digpx3ml54lta" path="res://Scripts/door_scene.gd" id="1_g722q"]
-[ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_g722q"]
-[ext_resource type="AudioStream" uid="uid://m43tfu8jnc7m" path="res://Assets/Sounds/Thunderstorm.mp3" id="3_g722q"]
-[ext_resource type="Texture2D" uid="uid://b3dn2nw7y33rd" path="res://Assets/Backgrounds/DoorScene.jpg" id="3_ipro8"]
-[ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="5_m7brq"]
-[ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_4fqap"]
-[ext_resource type="Texture2D" uid="uid://cjgtqbokqpvyr" path="res://Assets/UI/EmptyCondition.png" id="6_wm8oe"]
-[ext_resource type="Texture2D" uid="uid://cvl4oj6uwtexc" path="res://Assets/UI/MotherCondition2.png" id="7_4fqap"]
-[ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="7_c2lec"]
-[ext_resource type="Texture2D" uid="uid://cri5x8f02shxp" path="res://Assets/UI/Condition.png" id="7_m7brq"]
-[ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="8_7if5x"]
-[ext_resource type="Texture2D" uid="uid://kxwu86a3oy36" path="res://Assets/UI/StatusBar.png" id="9_g722q"]
-[ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="10_j1dur"]
-[ext_resource type="Texture2D" uid="uid://24cviadaaen2" path="res://Assets/UI/button_disabled.png" id="11_g722q"]
+[ext_resource type="Script" uid="uid://bla5jbsto5i42" path="res://Scripts/credits.gd" id="1_1bamb"]
+[ext_resource type="AudioStream" uid="uid://dowjwmlxycsk" path="res://Assets/Music/(3) Darkness Shall Prevail.ogg" id="2_gryuy"]
+[ext_resource type="Texture2D" uid="uid://t0y54tllg0x4" path="res://Assets/Fonts/partnership.png" id="3_1bamb"]
+[ext_resource type="Texture2D" uid="uid://cl4s6mcpx32jh" path="res://Assets/Fonts/title_card.png" id="3_ccovl"]
+[ext_resource type="Texture2D" uid="uid://b2hsir361gb70" path="res://Assets/Fonts/credits_roll.png" id="4_xelri"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
-shader = ExtResource("10_j1dur")
-shader_parameter/amount = 36.50100648379751
-
-[sub_resource type="Shader" id="Shader_m7brq"]
+[sub_resource type="Shader" id="Shader_ipro8"]
 code = "shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
@@ -586,8 +573,8 @@ void fragment() {
 	COLOR = vec4(col, 1.0);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g722q"]
-shader = SubResource("Shader_m7brq")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccovl"]
+shader = SubResource("Shader_ipro8")
 shader_parameter/crt_intensity = 0.999999977648
 shader_parameter/fisheye_strength = 1.1499999742951998
 shader_parameter/curve_scale = 0.999999988824
@@ -634,132 +621,119 @@ shader_parameter/glow_r_strength = 0.08
 shader_parameter/glow_g_strength = 0.05
 shader_parameter/glow_b_strength = 0.08
 
-[sub_resource type="Animation" id="Animation_wm8oe"]
-resource_name = "Black_to_View"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BGM:volume_db")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-6.0, -6.0]
-}
-
-[sub_resource type="Animation" id="Animation_m7brq"]
-resource_name = "Black_to_View_Intro"
-length = 3.0000000000000004
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BGM:volume_db")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-80.0, -6.0]
-}
-
-[sub_resource type="Animation" id="Animation_g722q"]
-resource_name = "Fade_to_Black"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_yrdjb"]
+[sub_resource type="Animation" id="Animation_1bamb"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BGM:volume_db")
+tracks/0/path = NodePath("UI/MovingContainer/TitleCard:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/MovingContainer/Partnership:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/CreditRoll:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/CreditRoll:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-6.0]
+"values": [Vector2(966, 2152.405)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wm8oe"]
+[sub_resource type="Animation" id="Animation_ccovl"]
+resource_name = "credits"
+length = 120.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/MovingContainer/TitleCard:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/MovingContainer/Partnership:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/CreditRoll:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/CreditRoll:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 10, 15, 60),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(966, 2489.78), Vector2(966, 2489.78), Vector2(966, 2489.78), Vector2(966, -1261.715)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bamb"]
 _data = {
-&"Black_to_View": SubResource("Animation_wm8oe"),
-&"Black_to_View_Intro": SubResource("Animation_m7brq"),
-&"Fade_to_Black": SubResource("Animation_g722q"),
-&"RESET": SubResource("Animation_yrdjb")
+&"RESET": SubResource("Animation_1bamb"),
+&"credits": SubResource("Animation_ccovl")
 }
 
-[node name="Door" type="Node2D" unique_id=1626590382]
-script = ExtResource("1_g722q")
+[node name="Credits" type="Node2D" unique_id=843684918]
+script = ExtResource("1_1bamb")
 
-[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=610521921]
-stream = ExtResource("2_g722q")
-volume_db = -6.0
-autoplay = true
-bus = &"BGM"
-
-[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1405661404]
-stream = ExtResource("3_g722q")
-volume_db = -6.0
-bus = &"Ambient"
-
-[node name="Voicelines" type="AudioStreamPlayer" parent="." unique_id=1547010725]
-volume_db = 24.0
-bus = &"Voice"
-
-[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
-bus = &"SFX"
-
-[node name="Knock" type="AudioStreamPlayer" parent="." unique_id=678743897]
-bus = &"SFX"
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
-modulate = Color(0.38439402, 0.27913073, 0.8100319, 1)
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("3_ipro8")
-
-[node name="UI" type="Control" parent="." unique_id=1440015256]
+[node name="UI" type="Control" parent="." unique_id=659418373]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
@@ -770,178 +744,44 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
-
-[node name="Cover" type="Sprite2D" parent="UI/CanvasLayer" unique_id=7791879]
-position = Vector2(1028, -86)
-scale = Vector2(1.6000012, 1)
-texture = ExtResource("5_m7brq")
-
-[node name="Hearts" type="Control" parent="UI/CanvasLayer" unique_id=1258057441]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1520.0
-offset_top = 170.0
-offset_right = 1560.0
-offset_bottom = 210.0
-
-[node name="MotherCondition" type="TextureProgressBar" parent="UI/CanvasLayer/Hearts" unique_id=660151494]
-modulate = Color(0.641934, 0.641934, 0.641934, 1)
-layout_mode = 0
-offset_right = 294.0
-offset_bottom = 74.0
-max_value = 40.0
-value = 40.0
-texture_under = ExtResource("6_wm8oe")
-texture_progress = ExtResource("7_4fqap")
-
-[node name="Condition" type="TextureProgressBar" parent="UI/CanvasLayer/Hearts" unique_id=459075011]
-modulate = Color(0.51809186, 0.345688, 0.2736722, 1)
-layout_mode = 0
-offset_left = -1421.0
-offset_right = -1127.0
-offset_bottom = 74.0
-max_value = 40.0
-value = 40.0
-texture_under = ExtResource("6_wm8oe")
-texture_progress = ExtResource("7_m7brq")
-
-[node name="StatusBar" type="Sprite2D" parent="UI/CanvasLayer" unique_id=2008199015]
-position = Vector2(959, 93)
-texture = ExtResource("9_g722q")
-
-[node name="MoneyLabel" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=1096529104]
-offset_left = -872.0
-offset_top = -30.0
-offset_right = -777.0
-offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 40
-text = "Cash:"
-
-[node name="Money" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=1278589483]
-offset_left = -613.0
-offset_top = -30.0
-offset_right = -320.0
-offset_bottom = 24.0
-pivot_offset = Vector2(293, 0)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 40
-text = "P999,999.99"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Day" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=701885072]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -1106.5
-offset_top = -49.0
-offset_right = -813.5
-offset_bottom = 47.0
-grow_horizontal = 2
-pivot_offset = Vector2(293, 0)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 72
-text = "NIGHT 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DebtLabel" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=747919415]
-offset_left = 227.0
-offset_top = -30.0
-offset_right = 426.0
-offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 40
-text = "Total Debt:"
-
-[node name="TotalDebt" type="Label" parent="UI/CanvasLayer/StatusBar/DebtLabel" unique_id=731744373]
-layout_mode = 0
-offset_left = 372.0
-offset_right = 665.0
-offset_bottom = 54.0
-pivot_offset = Vector2(293, 0)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 40
-text = "P999,999.99"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Fisheye" type="ColorRect" parent="UI/CanvasLayer" unique_id=437030349]
-visible = false
-material = SubResource("ShaderMaterial_xrivr")
+[node name="Black" type="ColorRect" parent="UI" unique_id=1942712666]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = 3.0
-offset_right = -5.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
-[node name="Point" type="Node2D" parent="UI/CanvasLayer" unique_id=811899620]
+[node name="MovingContainer" type="Control" parent="UI" unique_id=778789816]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleCard" type="Sprite2D" parent="UI/MovingContainer" unique_id=173020802]
+visible = false
+position = Vector2(960, 540)
+scale = Vector2(2.13, 2.13)
+texture = ExtResource("3_ccovl")
+
+[node name="Partnership" type="Sprite2D" parent="UI/MovingContainer" unique_id=2072941961]
+position = Vector2(960, 540)
+scale = Vector2(2.425, 2.425)
+texture = ExtResource("3_1bamb")
+
+[node name="CreditRoll" type="Sprite2D" parent="UI" unique_id=1104339653]
+position = Vector2(966, 2152.405)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_xelri")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=721014617]
+
+[node name="Point" type="Node2D" parent="UI/CanvasLayer" unique_id=843194612]
 position = Vector2(829, 582)
 
-[node name="NoMore" type="Sprite2D" parent="UI/CanvasLayer" unique_id=855515416]
-position = Vector2(1010, 852.8662)
-scale = Vector2(0.54, 0.207)
-texture = ExtResource("5_m7brq")
-
-[node name="Label" type="Label" parent="UI/CanvasLayer/NoMore" unique_id=1840840394]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1074.5
-offset_top = -234.96487
-offset_right = -205.5
-offset_bottom = -161.96487
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 3)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 55
-text = "There seems to be no more visitors."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Sleep" type="TextureButton" parent="UI/CanvasLayer" unique_id=1084641578]
-offset_left = 751.0
-offset_top = 881.0
-offset_right = 1384.0
-offset_bottom = 938.0
-scale = Vector2(0.82, 0.82)
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/CanvasLayer/Sleep" unique_id=15570519]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.5
-offset_top = -11.5
-offset_right = 37.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Sleep?"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CRT" type="ColorRect" parent="UI/CanvasLayer" unique_id=2132601242]
-material = SubResource("ShaderMaterial_g722q")
+[node name="CRT" type="ColorRect" parent="UI/CanvasLayer" unique_id=1085062832]
+material = SubResource("ShaderMaterial_ccovl")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -949,238 +789,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Color" type="ColorRect" parent="UI/CanvasLayer" unique_id=1723473653]
+[node name="Color" type="ColorRect" parent="UI/CanvasLayer" unique_id=949182339]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
-[node name="DayActions" type="VBoxContainer" parent="UI" unique_id=625878632]
-layout_mode = 0
-offset_left = 199.0
-offset_top = 383.0
-offset_right = 832.0
-offset_bottom = 623.0
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1628427450]
+stream = ExtResource("2_gryuy")
+volume_db = -6.0
+autoplay = true
+bus = &"BGM"
 
-[node name="Work" type="TextureButton" parent="UI/DayActions" unique_id=1028783027]
-layout_mode = 2
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/DayActions/Work" unique_id=1426321150]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -37.5
-offset_top = -11.5
-offset_right = 37.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Go to Work"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Rest" type="TextureButton" parent="UI/DayActions" unique_id=1486082308]
-layout_mode = 2
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/DayActions/Rest" unique_id=721127759]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -21.5
-offset_right = 159.5
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Sleep In"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Care" type="TextureButton" parent="UI/DayActions" unique_id=80283259]
-layout_mode = 2
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/DayActions/Care" unique_id=2089388559]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -21.5
-offset_right = 159.5
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Check on Mother"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TakeCare" type="TextureButton" parent="UI/DayActions" unique_id=446125606]
-visible = false
-layout_mode = 2
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/DayActions/TakeCare" unique_id=1782350284]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -21.5
-offset_right = 159.5
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Take Care of Mother"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Meds" type="TextureButton" parent="UI/DayActions" unique_id=676421997]
-visible = false
-layout_mode = 2
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/DayActions/Meds" unique_id=1352452997]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -21.5
-offset_right = 159.5
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Give Meds"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buy" type="TextureButton" parent="UI/DayActions" unique_id=1675239636]
-visible = false
-layout_mode = 2
-texture_normal = ExtResource("7_c2lec")
-texture_pressed = ExtResource("8_7if5x")
-texture_hover = ExtResource("8_7if5x")
-texture_disabled = ExtResource("11_g722q")
-
-[node name="Label" type="Label" parent="UI/DayActions/Buy" unique_id=1020560448]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -21.5
-offset_right = 159.5
-offset_bottom = 21.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("6_4fqap")
-theme_override_font_sizes/font_size = 32
-text = "Buy Meds (P40)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Door" type="Button" parent="." unique_id=859843174]
-offset_left = 923.0
-offset_top = 74.0
-offset_right = 1371.0
-offset_bottom = 1078.0
-flat = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=234417531]
-libraries/ = SubResource("AnimationLibrary_wm8oe")
-
-[node name="SceneChange" type="Timer" parent="." unique_id=1578064081]
-wait_time = 1.5
-one_shot = true
-
-[node name="Timer" type="Timer" parent="." unique_id=229626299]
-wait_time = 1.5
-one_shot = true
-
-[node name="SceneChangeMorn" type="Timer" parent="." unique_id=600008025]
-wait_time = 1.5
-one_shot = true
-
-[node name="TimerMorn" type="Timer" parent="." unique_id=1147337899]
-wait_time = 1.5
-one_shot = true
-
-[node name="KnockCountdown" type="Timer" parent="." unique_id=820271057]
-one_shot = true
-
-[connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
-[connection signal="finished" from="Ambient" to="." method="_on_ambient_finished"]
-[connection signal="finished" from="Knock" to="." method="_on_knock_finished"]
-[connection signal="mouse_entered" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_mouse_exited"]
-[connection signal="pressed" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_pressed"]
-[connection signal="mouse_entered" from="UI/DayActions/Work" to="." method="_on_work_mouse_entered"]
-[connection signal="mouse_exited" from="UI/DayActions/Work" to="." method="_on_work_mouse_exited"]
-[connection signal="pressed" from="UI/DayActions/Work" to="." method="_on_work_pressed"]
-[connection signal="mouse_entered" from="UI/DayActions/Rest" to="." method="_on_rest_mouse_entered"]
-[connection signal="mouse_exited" from="UI/DayActions/Rest" to="." method="_on_rest_mouse_exited"]
-[connection signal="pressed" from="UI/DayActions/Rest" to="." method="_on_rest_pressed"]
-[connection signal="mouse_entered" from="UI/DayActions/Care" to="." method="_on_care_mouse_entered"]
-[connection signal="mouse_exited" from="UI/DayActions/Care" to="." method="_on_care_mouse_exited"]
-[connection signal="pressed" from="UI/DayActions/Care" to="." method="_on_care_pressed"]
-[connection signal="mouse_entered" from="UI/DayActions/TakeCare" to="." method="_on_take_care_mouse_entered"]
-[connection signal="mouse_exited" from="UI/DayActions/TakeCare" to="." method="_on_take_care_mouse_exited"]
-[connection signal="pressed" from="UI/DayActions/TakeCare" to="." method="_on_take_care_pressed"]
-[connection signal="mouse_entered" from="UI/DayActions/Meds" to="." method="_on_meds_mouse_entered"]
-[connection signal="mouse_exited" from="UI/DayActions/Meds" to="." method="_on_meds_mouse_exited"]
-[connection signal="pressed" from="UI/DayActions/Meds" to="." method="_on_meds_pressed"]
-[connection signal="mouse_entered" from="UI/DayActions/Buy" to="." method="_on_buy_mouse_entered"]
-[connection signal="mouse_exited" from="UI/DayActions/Buy" to="." method="_on_buy_mouse_exited"]
-[connection signal="pressed" from="UI/DayActions/Buy" to="." method="_on_buy_pressed"]
-[connection signal="pressed" from="Door" to="." method="_on_door_pressed"]
-[connection signal="timeout" from="SceneChange" to="." method="_on_scene_change_timeout"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="SceneChangeMorn" to="." method="_on_scene_change_timeout"]
-[connection signal="timeout" from="TimerMorn" to="." method="_on_timer_morn_timeout"]
-[connection signal="timeout" from="KnockCountdown" to="." method="_on_knock_countdown_timeout"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=175633389]
+libraries/ = SubResource("AnimationLibrary_1bamb")

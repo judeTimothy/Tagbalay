@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dowjwmlxycsk"
+path="res://.godot/imported/(3) Darkness Shall Prevail.ogg-3ead7c3c1a13b8bf7bc476f9ec032be5.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Music/(3) Darkness Shall Prevail.ogg"
+dest_files=["res://.godot/imported/(3) Darkness Shall Prevail.ogg-3ead7c3c1a13b8bf7bc476f9ec032be5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlen83xe3iql8"
-path="res://.godot/imported/hand.png-52810e8f6e0f8629a552ff75498d9a44.ctex"
+uid="uid://dcppm155yyh4v"
+path="res://.godot/imported/RoomEnding.jpg-2ca1735477e8fd45249216a6bfaebc55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Misc/hand.png"
-dest_files=["res://.godot/imported/hand.png-52810e8f6e0f8629a552ff75498d9a44.ctex"]
+source_file="res://Assets/Backgrounds/RoomEnding.jpg"
+dest_files=["res://.godot/imported/RoomEnding.jpg-2ca1735477e8fd45249216a6bfaebc55.ctex"]
 
 [params]
 

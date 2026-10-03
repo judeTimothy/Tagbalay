@@ -6,6 +6,8 @@ extends Node2D
 @onready var knock_sfx = preload("res://Assets/Sounds/Knock.ogg")
 @onready var toast = preload("res://Scenes/toast.tscn")
 
+
+
 var day = 1
 var night = false
 var knocking = false
@@ -14,6 +16,7 @@ var taken_care = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	check_mother_status()
 	#$UI/CanvasLayer/Color.color = Color8(1,1,1,0)
 	#Autoloads.build_today_pool()
 	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
@@ -346,6 +349,9 @@ func find_visitor():
 	$KnockCountdown.wait_time = rand
 	$KnockCountdown.start()
 
+func check_mother_status():
+	if night == false and Autoloads.mother <= 0:
+		get_tree().change_scene_to_file("res://Scenes/mother_ending.tscn")
 
 func _on_ambient_finished() -> void:
 	$Ambient.play()
