@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cm10o0lpbxd02"
+path="res://.godot/imported/shady_man_day9_N2.ogg-d0a8e621f1a78a92bc789cd01b5aa5fb.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 9/shady_man_day9_N2.ogg"
+dest_files=["res://.godot/imported/shady_man_day9_N2.ogg-d0a8e621f1a78a92bc789cd01b5aa5fb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

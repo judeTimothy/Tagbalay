@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_g722q"]
 [ext_resource type="AudioStream" uid="uid://m43tfu8jnc7m" path="res://Assets/Sounds/Thunderstorm.mp3" id="3_g722q"]
 [ext_resource type="Texture2D" uid="uid://b3dn2nw7y33rd" path="res://Assets/Backgrounds/DoorScene.jpg" id="3_ipro8"]
+[ext_resource type="AudioStream" uid="uid://byxs7jcnlq86m" path="res://Assets/Sounds/Knock_Boss.ogg" id="4_4fqap"]
 [ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="5_m7brq"]
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_4fqap"]
 [ext_resource type="Texture2D" uid="uid://cjgtqbokqpvyr" path="res://Assets/UI/EmptyCondition.png" id="6_wm8oe"]
@@ -753,8 +754,12 @@ bus = &"SFX"
 [node name="Knock" type="AudioStreamPlayer" parent="." unique_id=678743897]
 bus = &"SFX"
 
+[node name="Boss" type="AudioStreamPlayer" parent="." unique_id=770035256]
+stream = ExtResource("4_4fqap")
+bus = &"SFX"
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
-modulate = Color(0.38439402, 0.27913073, 0.8100319, 1)
+modulate = Color(0.38431373, 0.2784314, 0.8117647, 1)
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("3_ipro8")
@@ -949,6 +954,244 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Sleep2" type="TextureButton" parent="UI/CanvasLayer" unique_id=1865018530]
+modulate = Color(1, 1, 1, 0)
+offset_left = 695.0
+offset_top = 927.145
+offset_right = 1328.0005
+offset_bottom = 984.1454
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/Sleep2" unique_id=397284512]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Sleep?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DayActions" type="Control" parent="UI/CanvasLayer" unique_id=63716745]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 119.37
+offset_top = 375.93
+offset_right = 752.37
+offset_bottom = 615.9293
+
+[node name="Work" type="TextureButton" parent="UI/CanvasLayer/DayActions" unique_id=1641617800]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 4.63
+offset_top = -2.715
+offset_right = 637.63
+offset_bottom = 54.285
+rotation = -0.03141593
+scale = Vector2(1.064, 0.921)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/DayActions/Work" unique_id=1620492321]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -11.5
+offset_right = 37.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Go to Work"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rest" type="TextureButton" parent="UI/CanvasLayer/DayActions" unique_id=1066512287]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = 56.1
+offset_right = 633.0
+offset_bottom = 113.10006
+rotation = -0.015707964
+scale = Vector2(1.05, 1.055)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/DayActions/Rest" unique_id=535240617]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Sleep In"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Care" type="TextureButton" parent="UI/CanvasLayer/DayActions" unique_id=489011876]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = 126.345
+offset_right = 633.0
+offset_bottom = 183.34503
+scale = Vector2(1.045, 1.135)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/DayActions/Care" unique_id=32294953]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Check on Mother"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TakeCare" type="TextureButton" parent="UI/CanvasLayer/DayActions" unique_id=863528138]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = 198.58
+offset_right = 633.0
+offset_bottom = 255.58005
+scale = Vector2(1.05, 1.215)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/DayActions/TakeCare" unique_id=1925976413]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Take Care of Mother"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Meds" type="TextureButton" parent="UI/CanvasLayer/DayActions" unique_id=543788753]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = 269.545
+offset_right = 633.0
+offset_bottom = 326.545
+rotation = 0.008726646
+scale = Vector2(1.075, 1.095)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/DayActions/Meds" unique_id=145000008]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Give Meds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buy" type="TextureButton" parent="UI/CanvasLayer/DayActions" unique_id=1355057787]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = 333.305
+offset_right = 633.0
+offset_bottom = 390.305
+rotation = 0.02617994
+scale = Vector2(1.075, 1)
+texture_normal = ExtResource("7_c2lec")
+texture_pressed = ExtResource("8_7if5x")
+texture_hover = ExtResource("8_7if5x")
+texture_disabled = ExtResource("11_g722q")
+
+[node name="Label" type="Label" parent="UI/CanvasLayer/DayActions/Buy" unique_id=764399927]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.5
+offset_top = -21.5
+offset_right = 159.5
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_4fqap")
+theme_override_font_sizes/font_size = 32
+text = "Buy Meds (P40)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Color" type="ColorRect" parent="UI/CanvasLayer" unique_id=1723473653]
 anchors_preset = 15
 anchor_right = 1.0
@@ -956,7 +1199,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="DayActions" type="VBoxContainer" parent="UI" unique_id=625878632]
 layout_mode = 0
@@ -1157,9 +1400,31 @@ one_shot = true
 [connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
 [connection signal="finished" from="Ambient" to="." method="_on_ambient_finished"]
 [connection signal="finished" from="Knock" to="." method="_on_knock_finished"]
+[connection signal="finished" from="Boss" to="." method="_on_boss_finished"]
 [connection signal="mouse_entered" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_mouse_entered"]
 [connection signal="mouse_exited" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_mouse_exited"]
 [connection signal="pressed" from="UI/CanvasLayer/Sleep" to="." method="_on_sleep_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/Sleep2" to="." method="_on_sleep_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/Sleep2" to="." method="_on_sleep_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/Sleep2" to="." method="_on_sleep_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/DayActions/Work" to="." method="_on_work_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/DayActions/Work" to="." method="_on_work_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/DayActions/Work" to="." method="_on_work_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/DayActions/Rest" to="." method="_on_rest_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/DayActions/Rest" to="." method="_on_rest_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/DayActions/Rest" to="." method="_on_rest_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/DayActions/Care" to="." method="_on_care_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/DayActions/Care" to="." method="_on_care_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/DayActions/Care" to="." method="_on_care_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/DayActions/TakeCare" to="." method="_on_take_care_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/DayActions/TakeCare" to="." method="_on_take_care_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/DayActions/TakeCare" to="." method="_on_take_care_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/DayActions/Meds" to="." method="_on_meds_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/DayActions/Meds" to="." method="_on_meds_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/DayActions/Meds" to="." method="_on_meds_pressed"]
+[connection signal="mouse_entered" from="UI/CanvasLayer/DayActions/Buy" to="." method="_on_buy_mouse_entered"]
+[connection signal="mouse_exited" from="UI/CanvasLayer/DayActions/Buy" to="." method="_on_buy_mouse_exited"]
+[connection signal="pressed" from="UI/CanvasLayer/DayActions/Buy" to="." method="_on_buy_pressed"]
 [connection signal="mouse_entered" from="UI/DayActions/Work" to="." method="_on_work_mouse_entered"]
 [connection signal="mouse_exited" from="UI/DayActions/Work" to="." method="_on_work_mouse_exited"]
 [connection signal="pressed" from="UI/DayActions/Work" to="." method="_on_work_pressed"]

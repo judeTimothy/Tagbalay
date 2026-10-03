@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cn4366udep01f"]
+
+[ext_resource type="Script" uid="uid://c5h2h3vhucpml" path="res://Scripts/knife_end.gd" id="1_inpld"]
+[ext_resource type="AudioStream" uid="uid://dbifiijcwnfv6" path="res://Assets/Sounds/Knife_End.ogg" id="1_talqv"]
+
+[node name="KnifeEnd" type="Control" unique_id=804557110]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_inpld")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=816281668]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1025765630]
+stream = ExtResource("1_talqv")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="." unique_id=39648645]
+wait_time = 3.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

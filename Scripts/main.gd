@@ -5,6 +5,10 @@ extends Node2D
 @onready var next_sfx = preload("res://Assets/Sounds/Game_Next Scene_Click_Selection.ogg")
 @onready var slam_sfx = preload("res://Assets/Sounds/Door_Slam.ogg")
 
+# manual changing of texture over CRt
+@onready var normal_texture = preload("res://Assets/UI/button_new.png")
+@onready var pressed_texture = preload("res://Assets/UI/button_hover.png")
+
 const VISITOR_DATA_PATH = "res://Data/visitors.json"
 
 # DEBUG
@@ -23,6 +27,7 @@ var lines_negative: Array
 
 var current_track = "positive"
 var slam_unlocked = false
+var has_paid = false
 
 
 func _ready() -> void:
@@ -41,9 +46,17 @@ func _ready() -> void:
 	_dbg("_ready() calling set_dialogue(0)")
 	set_dialogue(0)
 	
-	if Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8":
+	if Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8" or Autoloads.current_visitor_id == "boss_pedro":
 		$Ambient.play()
 		$Rain.emitting = true
+	
+	if Autoloads.current_visitor_id == "cat_man_day6" or Autoloads.current_visitor_id == "cat_man_day7" or Autoloads.current_visitor_id == "cat_man_day8":
+		$Cat.play()
+		
+	if Autoloads.current_visitor_id == "boss_pedro":
+		$UI/VisitorSprite/Cronies.visible = true
+	else:
+		$UI/VisitorSprite/Cronies.visible = false
 
 
 func _refresh_stat_labels() -> void:
@@ -104,6 +117,10 @@ func _apply_visitor_setup() -> void:
 		$BGM.stream = load(visitor["bgm"])
 		$BGM.play()
 	
+	if Autoloads.current_visitor_id == "shady_man_day7" or Autoloads.current_visitor_id == "shady_man_day9":
+		$VoiceLine.volume_db = 12
+	else:
+		$VoiceLine.volume_db = 6
 	_start_idle_sway()
 
 func _start_idle_sway() -> void:
@@ -173,7 +190,11 @@ func set_dialogue(index: int) -> void:
 	var slam_index = visitor.get("slam_index", -1)
 	if index == slam_index:
 		slam_unlocked = true
-	$UI/VBoxContainer/Slam.visible = slam_unlocked
+	var hide_slam_on_last: bool = visitor.get("slam_hide_on_last", false)
+	var is_last_line: bool = (index == active_lines.size() - 1)
+	var slam_visible: bool = slam_unlocked and not (hide_slam_on_last and is_last_line)
+	$UI/VBoxContainer/Slam.visible = slam_visible
+	$UI/CanvasLayer/Slam2.visible = slam_visible
 
 
 	var reveal_index = visitor.get("reveal_index", -1)
@@ -186,29 +207,36 @@ func set_dialogue(index: int) -> void:
 
 func _on_yes_mouse_entered() -> void:
 	$UI/VBoxContainer/Choice/Yes/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/VBoxContainer/Choice/Yes.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_yes_mouse_exited() -> void:
 	$UI/VBoxContainer/Choice/Yes/Label.remove_theme_color_override("font_color")
+	$UI/VBoxContainer/Choice/Yes.texture_normal = normal_texture
 
 
 func _on_no_mouse_entered() -> void:
 	$UI/VBoxContainer/Choice/No/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/VBoxContainer/Choice/No.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_no_mouse_exited() -> void:
 	$UI/VBoxContainer/Choice/No/Label.remove_theme_color_override("font_color")
+	$UI/VBoxContainer/Choice/No.texture_normal = normal_texture
 
 
 func _on_slam_mouse_entered() -> void:
 	$UI/VBoxContainer/Slam/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/VBoxContainer/Slam.texture_normal = pressed_texture
+	
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_slam_mouse_exited() -> void:
 	$UI/VBoxContainer/Slam/Label.remove_theme_color_override("font_color")
+	$UI/VBoxContainer/Slam.texture_normal = normal_texture
 
 
 func _on_bgm_finished() -> void:
@@ -234,6 +262,8 @@ func _on_choice_pressed(choice: String) -> void:
 	if effect != "":
 		_dbg("Applying effect: " + effect)
 		Autoloads.apply_effect(effect)
+		if effect.find("payment(") != -1:
+			has_paid = true
 		_refresh_stat_labels()
 
 	current_track = "positive" if choice == "yes" else "negative"
@@ -257,7 +287,15 @@ func _on_choice_pressed(choice: String) -> void:
 func _on_slam_pressed() -> void:
 	$VoiceLine.stop()
 
-	var effect = visitor.get("slam_effect", "")
+	var effect = ""
+	
+	if has_paid and visitor.has("slam_effect_paid"):
+		effect = visitor["slam_effect_paid"]
+	elif not has_paid and visitor.has("slam_effect_unpaid"):
+		effect = visitor["slam_effect_unpaid"]
+	else:
+		effect = visitor.get("slam_effect_" + current_track, visitor.get("slam_effect", ""))
+	
 	if effect != "":
 		_dbg("Applying slam effect: " + effect)
 		Autoloads.apply_effect(effect)
@@ -270,11 +308,18 @@ func _on_slam_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	Autoloads.current_bgm_seek = $BGM.get_playback_position()
-	Autoloads.day_visitor_index += 1
+	Autoloads.mark_visitor_encountered(Autoloads.current_visitor_id)
 	Autoloads.after_encounter = true
 	Autoloads.from_intro = false
+	if Autoloads.current_visitor_id == "boss_pedro":
+		get_tree().change_scene_to_file("res://Scenes/credits.tscn")
+		return
 	get_tree().change_scene_to_file("res://Scenes/DoorScene.tscn")
 
 
 func _on_ambient_finished() -> void:
 	$Ambient.play()
+
+
+func _on_cat_finished() -> void:
+	$Cat.play()

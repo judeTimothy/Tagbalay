@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cg12fxwd2i7w6"
+path="res://.godot/imported/ugly_beggar_day8_N1.ogg-2d932d2f550b151a26d9377b6b295b11.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 8/ugly_beggar_day8_N1.ogg"
+dest_files=["res://.godot/imported/ugly_beggar_day8_N1.ogg-2d932d2f550b151a26d9377b6b295b11.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

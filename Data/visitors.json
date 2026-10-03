@@ -69,7 +69,7 @@
 	]
   },
   "collector_fraud_day2": {
-	"sprite": "res://Assets/Characters/fraud.png",
+	"sprite": "res://Assets/Characters/Fraud_Man.png",
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
@@ -238,7 +238,7 @@
 	  },
 	  {
 		"text": "Wala pa gani may ginpadala. Te naghatag ka?",
-		"translation": "(We'll see each other again next month.)",
+		"translation": "(Nobody's been sent yet. Did you pay?)",
 		"yes": {
 		  "text": "Naghatag nako to.",
 		  "translation": "(I paid them.)",
@@ -466,6 +466,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
+	"slam_effect_unpaid": "hate(30);interest(250)",
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -858,7 +859,8 @@
 	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"slam_index": 1,
+	"slam_index": 2,
+	"slam_effect_unpaid": "hate(30);interest(250)",
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -1091,6 +1093,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
+	"slam_effect_unpaid": "hate(40);interest(250)",
 	"slam_effect": "hate(40)",
 	"lines_positive": [
 	  {
@@ -1352,7 +1355,7 @@
 	"sprite": "res://Assets/Characters/Sinister_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"slam_index": 3,
+	"slam_index": 2,
 	"slam_effect": "hate(20)",
 	"lines_positive": [
 	  {
@@ -1484,6 +1487,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
+	"slam_effect_unpaid": "hate(40);interest(250)",
 	"slam_effect": "hate(40)",
 	"lines_positive": [
 	  {
@@ -1614,7 +1618,7 @@
 	"sprite": "res://Assets/Characters/Sinister_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"slam_index": 3,
+	"slam_index": 2,
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -1746,8 +1750,8 @@
 	"sprite": "res://Assets/Characters/Ugly_Beggar.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to.",
@@ -1879,7 +1883,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "",
+	"slam_effect": "hate(20)",
 	"lines_positive": [
 	  {
 		"text": "…",
@@ -1948,7 +1952,7 @@
 		"translation": "(...)",
 		"yes": {
 		  "text": "Gaano ka da sa gwa?",
-		  "translation": "(What are you doing outside?))",
+		  "translation": "(What are you doing outside?)",
 		  "effect": ""
 		},
 		"no": {
@@ -1981,7 +1985,8 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "",
+	"slam_effect_unpaid": "hate(50);interest(250)",
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Halin kay Boss Pedro.",
@@ -2112,8 +2117,8 @@
 	"sprite": "res://Assets/Characters/Old_Lady.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Kamusta ka to?",
@@ -2151,7 +2156,7 @@
 		"yes": {
 		  "text": "Kuhaon ang P1000.",
 		  "translation": "(Take the P1000.)",
-		  "effect": ""
+		  "effect": "money(1000)"
 		},
 		"no": {
 		  "text": "Indi lang nay ah.",
@@ -2241,11 +2246,11 @@
   },
 
   "chismosa_day7": {
-	"sprite": "res://Assets/Characters/Chismosa_Young_Woman.png",
+	"sprite": "res://Assets/Characters/Chismosa_Young_Woman_Bruised.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "To. Pasudla ko da bi danay. Subong lang na gab-e.",
@@ -2346,8 +2351,8 @@
 	"sprite": "res://Assets/Characters/Cat_Man.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect": "hate(20)",
 	"lines_positive": [
 	  {
 		"text": "…",
@@ -2448,8 +2453,9 @@
 	"sprite": "res://Assets/Characters/Shady_Man.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_hide_on_last": true,
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e gali to. Halin kami gle sa barangay. Masurvey lang ah.",
@@ -2487,7 +2493,7 @@
 		"yes": {
 		  "text": "Sige nong, sulod lang.",
 		  "translation": "(Alright, sir, come in.)",
-		  "effect": ""
+		  "effect": "flag(shady_man_sheltered)"
 		},
 		"no": {
 		  "text": "Indi pwede. Bwas lang na.",
@@ -2581,7 +2587,8 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "",
+	"slam_effect_unpaid": "hate(50);interest(250)",
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Halin kay Boss Pedro.",
@@ -2712,8 +2719,8 @@
 	"sprite": "res://Assets/Characters/Cat_Man.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Indi na magbukas pertahan sa iban subong nga gab-e.",
@@ -2728,7 +2735,7 @@
 		  "translation": "(You again?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_P1.ogg"
+		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_D1.ogg"
 	  },
 	  {
 		"text": "Pati lang sakon.",
@@ -2743,7 +2750,7 @@
 		  "translation": "(Leave!)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_P2.ogg"
+		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_D2.ogg"
 	  },
 	  {
 		"text": "…",
@@ -2775,7 +2782,7 @@
 		  "translation": "(You again?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_N1.ogg"
+		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_D1.ogg"
 	  },
 	  {
 		"text": "Pati lang sakon.",
@@ -2790,7 +2797,7 @@
 		  "translation": "(Leave!)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_N2.ogg"
+		"voice": "res://Assets/Dialogue/Day 8/cat_man_day8_D2.ogg"
 	  },
 	  {
 		"text": "…",
@@ -2811,11 +2818,12 @@
   },
 
   "collector_young_day8": {
-	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
+	"sprite": "res://Assets/Characters/Lending_Young_Male_Bruised.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect_unpaid": "hate(40);interest(250)",
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Dumduman mo pa ko?",
@@ -2947,7 +2955,7 @@
 	"sprite": "res://Assets/Characters/Ugly_Beggar.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"slam_index": 3,
+	"slam_index": 2,
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -2981,8 +2989,8 @@
 		"voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_P2.ogg"
 	  },
 	  {
-		"text": "Pwede to? Ikaw lang bi ang masaligan nga makadtuan.",
-		"translation": "(Can I? You're the only one I can trust to go to.)",
+		"text": "Pwede to? Ikaw lang bi ang masaligan nga kadtuan.",
+		"translation": "(Can I? You're the only one I can depend on.)",
 		"yes": {
 		  "text": "Sige nong.",
 		  "translation": "(Alright, sir.)",
@@ -3043,8 +3051,8 @@
 		"voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N2.ogg"
 	  },
 	  {
-		"text": "Pwede to? Ikaw lang bi ang masaligan nga makadtuan.",
-		"translation": "(Can I? You're the only one I can trust to go to.)",
+		"text": "Wala gid to. Sa imo lang ko may salig.",
+		"translation": "(Unfortunately. You're the only one I trust.)",
 		"yes": {
 		  "text": "Sige nong.",
 		  "translation": "(Alright, sir.)",
@@ -3058,16 +3066,16 @@
 		"voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N3.ogg"
 	  },
 	  {
-		"text": "Salamat gid to ha. Mahalin lang ko bwas sa aga.",
-		"translation": "(Thank you so much. I'll leave tomorrow morning.)",
+		"text": "Salamat gid ha.",
+		"translation": "(Well, thaaaank you.)",
 		"yes": {
 		  "text": "...",
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"no": {
-		  "text": "Sige. Salamat gid ha.",
-		  "translation": "(Alright. Thank you so much.)",
+		  "text": "...",
+		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"voice": "res://Assets/Dialogue/Day 8/ugly_beggar_day8_N4.ogg"
@@ -3076,15 +3084,16 @@
   },
 
   "collector_old_day9": {
-	"sprite": "res://Assets/Characters/Lending.png",
+	"sprite": "res://Assets/Characters/Lending_Older_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect_unpaid": "hate(40);interest(250)",
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Halin kay Boss Pedro.",
-		"translation": "(Good evening. I'm from Boss Pedro.)",
+		"translation": "(Good evening. From Boss Pedro.)",
 		"yes": {
 		  "text": "Mayong gab-e nong.",
 		  "translation": "(Good evening, sir.)",
@@ -3102,42 +3111,42 @@
 		"translation": "(Are you paying today?)",
 		"yes": {
 		  "text": "Sige mabayad ko subong.",
-		  "translation": "(Alright, I'll pay today.)",
+		  "translation": "(Alright, I'll pay now.)",
 		  "effect": ""
 		},
 		"no": {
 		  "text": "Pwede indi lang danay?",
-		  "translation": "(Can it wait for now?)",
+		  "translation": "(Can it not be right now?)",
 		  "effect": ""
 		},
 		"voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P2.ogg"
 	  },
 	  {
 		"text": "Pila ihatag mo subong? P500? P1000?",
-		"translation": "(How much will you give today? P500? P1000?)",
+		"translation": "(How much will you give now? P500? P1000?)",
 		"yes": {
 		  "text": "Sige ari P1000.",
 		  "translation": "(Alright, here's P1000.)",
-		  "effect": ""
+		  "effect": "payment(1000)"
 		},
 		"no": {
-		  "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
-		  "translation": "(I'll increase your interest if you don't pay today.)",
-		  "effect": ""
+		  "text": "P500 lang bi.",
+		  "translation": "(Just P500.)",
+		  "effect": "payment(500)"
 		},
 		"voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P3.ogg"
 	  },
 	  {
-		"text": "Sige salamat gid.",
-		"translation": "(Alright, thank you very much.)",
+		"text": "Sige, salamat gid.",
+		"translation": "(Thanks. Okay then.)",
 		"yes": {
 		  "text": "...",
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"no": {
-		  "text": "Wala problema.",
-		  "translation": "(No problem.)",
+		  "text": "...",
+		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"voice": "res://Assets/Dialogue/Day 9/collector_old_day9_P4.ogg"
@@ -3146,7 +3155,7 @@
 	"lines_negative": [
 	  {
 		"text": "Mayong gab-e to. Halin kay Boss Pedro.",
-		"translation": "(Good evening. I'm from Boss Pedro.)",
+		"translation": "(Good evening. From Boss Pedro.)",
 		"yes": {
 		  "text": "Mayong gab-e nong.",
 		  "translation": "(Good evening, sir.)",
@@ -3164,42 +3173,42 @@
 		"translation": "(Are you paying today?)",
 		"yes": {
 		  "text": "Sige mabayad ko subong.",
-		  "translation": "(Alright, I'll pay today.)",
+		  "translation": "(Alright, I'll pay now.)",
 		  "effect": ""
 		},
 		"no": {
 		  "text": "Pwede indi lang danay?",
-		  "translation": "(Can it wait for now?)",
+		  "translation": "(Can it not be right now?)",
 		  "effect": ""
 		},
-		"voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N2.ogg"
+		"voice": "res://Assets/Dialogue/Day 8/collector_old_day9_N2.ogg"
 	  },
 	  {
-		"text": "Pila ihatag mo subong? P500? P1000?",
-		"translation": "(How much will you give today? P500? P1000?)",
+		"text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
+		"translation": "(I'll raise your interest if you don't pay now.)",
 		"yes": {
 		  "text": "Sige ari P1000.",
 		  "translation": "(Alright, here's P1000.)",
-		  "effect": ""
+		  "effect": "payment(1000)"
 		},
 		"no": {
-		  "text": "Sakaan ko interes nyo kung indi kamo magbayad subong.",
-		  "translation": "(I'll increase your interest if you don't pay today.)",
-		  "effect": ""
+		  "text": "P500 lang bi.",
+		  "translation": "(Just P500.)",
+		  "effect": "payment(500)"
 		},
 		"voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N3.ogg"
 	  },
 	  {
-		"text": "Sige salamat gid.",
-		"translation": "(Alright, thank you very much.)",
+		"text": "Wala kaso.",
+		"translation": "(It's alright.)",
 		"yes": {
 		  "text": "...",
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"no": {
-		  "text": "Wala problema.",
-		  "translation": "(No problem.)",
+		  "text": "...",
+		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"voice": "res://Assets/Dialogue/Day 9/collector_old_day9_N4.ogg"
@@ -3208,11 +3217,11 @@
   },
 
   "chismosa_day9": {
-	"sprite": "res://Assets/Characters/Chismosa.png",
+	"sprite": "res://Assets/Characters/Chismosa_Young_Woman_Bruised.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "To to to. Pasudla ko bi.",
@@ -3313,7 +3322,7 @@
 	"sprite": "res://Assets/Characters/Sinister_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"slam_index": 3,
+	"slam_index": 2,
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -3442,11 +3451,12 @@
   },
 
   "shady_man_day9": {
-	"sprite": "res://Assets/Characters/Shady_Man.png",
+	"sprite": "res://Assets/Characters/Shady_Man_Shades.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"reveal_index": 2,
-	"slam_effect": "",
+	"slam_index": 2,
+	"slam_hide_on_last": true,
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e gali to. Tanod kami gle sa barangay.",
@@ -3484,7 +3494,7 @@
 		"yes": {
 		  "text": "Sige chip, sulod lang.",
 		  "translation": "(Alright, chip, come in.)",
-		  "effect": "game_over"
+		  "effect": "flag(shady_man_sheltered)"
 		},
 		"no": {
 		  "text": "Pwede bwas lang chip?",
@@ -3502,8 +3512,8 @@
 		  "effect": ""
 		},
 		"no": {
-		  "text": "Ikaw bahala. Sulatan ko lang di sa checking namon inyo address ah.",
-		  "translation": "(Up to you. I'll just write down your address for our check.)",
+		  "text": "...",
+		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"voice": "res://Assets/Dialogue/Day 9/shady_man_day9_P4.ogg"
@@ -3556,22 +3566,245 @@
 		"voice": "res://Assets/Dialogue/Day 9/shady_man_day9_N3.ogg"
 	  },
 	  {
-		"text": "Salamat gid to.",
-		"translation": "(Thank you very much.)",
+		"text": "Ikaw bahala. Sulatan ko lang di sa checking namon inyo address ah.",
+		  "translation": "(Up to you. I'll just write down your address for our check.)",
 		"yes": {
 		  "text": "...",
 		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"no": {
-		  "text": "Ikaw bahala. Sulatan ko lang di sa checking namon inyo address ah.",
-		  "translation": "(Up to you. I'll just write down your address for our check.)",
+		  "text": "...",
+		  "translation": "(Stay silent.)",
 		  "effect": ""
 		},
 		"voice": "res://Assets/Dialogue/Day 9/shady_man_day9_N4.ogg"
 	  }
 	]
   },
+	"boss_pedro": {
+	"sprite": "res://Assets/Characters/Boss_Pedro.png",
+	"bgm": "",
+	"reveal_index": 0,
+	"slam_index": -1,
+	"slam_hide_on_last": false,
+	"slam_effect": "",
+	"lines_positive": [
+		{
+		"text": "Maayong gab-e.",
+		"translation": "(Good evening.)",
+		"yes": {
+			"text": "Oh, mayong gab-e gid.",
+			"translation": "(Oh, good evening.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Sin-o kamo tni?",
+			"translation": "(Who are you?)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P1.ogg"
+		},
+		{
+		"text": "Medyo madugay-dugay naman nga nakahulam kamo kwarta sa amon. Daw nabatian ko nga gamasakit si nanay mo. Ako gali si Pedro.",
+		"translation": "(It's been quite a while since you borrowed money from us. I heard that your mother is sick. I'm Pedro, by the way.)",
+		"yes": {
+			"text": "Oh, Boss Pedro!",
+			"translation": "(Oh, Boss Pedro!)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Gabayad man ko, boss.",
+			"translation": "(I'm paying it back, boss.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P2.ogg"
+		},
+		{
+		"text": "Kabalo ko nga gatinguha ka gid magbayad sa amon pero ang ini nga kwarta bi to indi gid ya lahog-lahog.",
+		"translation": "(I know you're trying your hardest to pay us back, but this isn't a small amount of money.)",
+		"yes": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P3.ogg"
+		},
+		{
+		"text": "Sa imo sitwasyon, Toto, indi ko sigurado nga maubos mo ina bayad. Amo na gina hatagan taka subong sang pililian.",
+		"translation": "(Given your situation, Toto, I'm not sure you'll be able to finish paying that off. That's why I'm giving you a choice now.)",
+		"yes": {
+			"text": "Ano nga pililian, boss?",
+			"translation": "(What choice, boss?)",
+			"effect": ""
+		},
+		"no": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P4.ogg"
+		},
+		{
+		"text": "Para indi ka na magkabalaka sang kadakuon sang utang sa imo iloy. Gina hatagan taka sang chansa nga maubra para sa akon.",
+		"translation": "(So you won't have to worry about the amount of debt your mother owes. I'm giving you a chance to work for me.)",
+		"yes": {
+			"text": "Paano ang akon iloy?",
+			"translation": "(What about my mother?)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Kaya ko ni bayran ang utang, boss.",
+			"translation": "(I can pay the debt, boss.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P5.ogg"
+		},
+		{
+		"text": "Upod ka sa akon subong kag siguraduhon ko gid nga indi mabudlayan ang nanay mo. Ako bahala sa inyo duwa.",
+		"translation": "(Come with me now, and I'll make sure your mother won't have to struggle. I'll take care of both of you.)",
+		"yes": {
+			"text": "Sige, boss.",
+			"translation": "(Alright, boss.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Indi ko, boss.",
+			"translation": "(I won't, boss.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P6.ogg"
+		},
+		{
+		"text": "Maayo nga sabat, Toto.",
+		"translation": "(Good answer, Toto.)",
+		"yes": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_P7.ogg"
+		}
+	],
+	"lines_negative": [
+		{
+		"text": "Maayong gab-e.",
+		"translation": "(Good evening.)",
+		"yes": {
+			"text": "Oh, mayong gab-e gid.",
+			"translation": "(Oh, good evening.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Sin-o kamo tni?",
+			"translation": "(Who are you?)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N1.ogg"
+		},
+		{
+		"text": "Medyo madugay-dugay naman nga nakahulam kamo kwarta sa amon. Daw nabatian ko nga gamasakit si nanay mo. Ako gali si Pedro.",
+		"translation": "(It's been quite a while since you borrowed money from us. I heard that your mother is sick. I'm Pedro, by the way.)",
+		"yes": {
+			"text": "Oh, Boss Pedro!",
+			"translation": "(Oh, Boss Pedro!)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Gabayad man ko, boss.",
+			"translation": "(I'm paying it back, boss.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N2.ogg"
+		},
+		{
+		"text": "Kabalo ko nga gatinguha ka gid magbayad sa amon pero ang ini nga kwarta bi to indi gid ya lahog-lahog.",
+		"translation": "(I know you're trying your hardest to pay us back, but this isn't a small amount of money.)",
+		"yes": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N3.ogg"
+		},
+		{
+		"text": "Sa imo sitwasyon, Toto, indi ko sigurado nga maubos mo ina bayad. Amo na gina hatagan taka subong sang pililian.",
+		"translation": "(Given your situation, Toto, I'm not sure you'll be able to finish paying that off. That's why I'm giving you a choice now.)",
+		"yes": {
+			"text": "Ano nga pililian, boss?",
+			"translation": "(What choice, boss?)",
+			"effect": ""
+		},
+		"no": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N4.ogg"
+		},
+		{
+		"text": "Para indi ka na magkabalaka sang kadakuon sang utang sa imo iloy. Gina hatagan taka sang chansa nga maubra para sa akon.",
+		"translation": "(So you won't have to worry about the amount of debt your mother owes. I'm giving you a chance to work for me.)",
+		"yes": {
+			"text": "Paano ang akon iloy?",
+			"translation": "(What about my mother?)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Kaya ko ni bayran ang utang, boss.",
+			"translation": "(I can pay the debt, boss.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N5.ogg"
+		},
+		{
+		"text": "Upod ka sa akon subong kag siguraduhon ko gid nga indi mabudlayan ang nanay mo. Ako bahala sa inyo duwa.",
+		"translation": "(Come with me now, and I'll make sure your mother won't have to struggle. I'll take care of both of you.)",
+		"yes": {
+			"text": "Sige, boss.",
+			"translation": "(Alright, boss.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "Indi ko, boss.",
+			"translation": "(I won't, boss.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N6.ogg"
+		},
+		{
+		"text": "Wala ko gapamilit.",
+		"translation": "(I'm not forcing you.)",
+		"yes": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"no": {
+			"text": "...",
+			"translation": "(Stay silent.)",
+			"effect": ""
+		},
+		"voice": "res://Assets/Dialogue/Day 10/boss_pedro_N7.ogg"
+		}
+	]
+	},
+
   
   "empty_day5": {
 	"sprite": "",

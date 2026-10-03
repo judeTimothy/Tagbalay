@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cydiny56y5jwn"
+path="res://.godot/imported/boss_pedro_N2.ogg-fa7c2310e49146ea17b2fbe138fec6eb.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 10/boss_pedro_N2.ogg"
+dest_files=["res://.godot/imported/boss_pedro_N2.ogg-fa7c2310e49146ea17b2fbe138fec6eb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

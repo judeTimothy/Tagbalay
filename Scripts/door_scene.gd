@@ -4,9 +4,12 @@ extends Node2D
 @onready var select_sfx = preload("res://Assets/Sounds/Menu_Click_Selection.ogg")
 @onready var next_sfx = preload("res://Assets/Sounds/Game_Next Scene_Click_Selection.ogg")
 @onready var knock_sfx = preload("res://Assets/Sounds/Knock.ogg")
+@onready var aggressive_sfx = preload("res://Assets/Sounds/Knock_Aggressive3.ogg")
 @onready var toast = preload("res://Scenes/toast.tscn")
 
-
+# manual changing of texture over CRt
+@onready var normal_texture = preload("res://Assets/UI/button_new.png")
+@onready var pressed_texture = preload("res://Assets/UI/button_hover.png")
 
 var day = 1
 var night = false
@@ -17,6 +20,11 @@ var taken_care = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	check_mother_status()
+	
+	print("Day ", Autoloads.day, " start.")
+	if Autoloads.flags.get("shady_man_sheltered", false):
+		get_tree().change_scene_to_file("res://Scenes/knife_end.tscn")
+	#print(Autoloads.flags)
 	#$UI/CanvasLayer/Color.color = Color8(1,1,1,0)
 	#Autoloads.build_today_pool()
 	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
@@ -72,6 +80,7 @@ func _ready() -> void:
 		$UI/CanvasLayer/Point.add_child(t)
 	else:
 		$Ambient.stop()
+		
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -114,67 +123,81 @@ func _process(delta: float) -> void:
 
 func _on_work_mouse_entered() -> void:
 	$UI/DayActions/Work/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/DayActions/Work.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_work_mouse_exited() -> void:
 	$UI/DayActions/Work/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/Work.texture_normal = normal_texture
 
 
 func _on_rest_mouse_entered() -> void:
 	$UI/DayActions/Rest/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/DayActions/Rest.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_rest_mouse_exited() -> void:
 	$UI/DayActions/Rest/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/Rest.texture_normal = normal_texture
 
 
 func _on_care_mouse_entered() -> void:
 	$UI/DayActions/Care/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/DayActions/Care.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_care_mouse_exited() -> void:
 	$UI/DayActions/Care/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/Care.texture_normal = normal_texture
 	
 
 func _on_meds_mouse_entered() -> void:
 	if $UI/DayActions/Meds.disabled == false:
 		$UI/DayActions/Meds/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+		$UI/DayActions/Meds.texture_normal = pressed_texture
 		$SFX.stream = hover_sfx
 		$SFX.play()
 
 
 func _on_meds_mouse_exited() -> void:
 	$UI/DayActions/Meds/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/Meds.texture_normal = normal_texture
 	
 		
 func _on_buy_mouse_entered() -> void:
 	if $UI/DayActions/Buy.disabled == false:
 		$UI/DayActions/Buy/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+		$UI/DayActions/Buy.texture_normal = pressed_texture
 		$SFX.stream = hover_sfx
 		$SFX.play()
 
 func _on_buy_mouse_exited() -> void:
 	$UI/DayActions/Buy/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/Buy.texture_normal = normal_texture
 	
 	
 func _on_sleep_mouse_entered() -> void:
 	$UI/CanvasLayer/Sleep/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/CanvasLayer/Sleep.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_sleep_mouse_exited() -> void:
 	$UI/CanvasLayer/Sleep/Label.remove_theme_color_override("font_color")
+	$UI/CanvasLayer/Sleep.texture_normal = normal_texture
 
 func _on_take_care_mouse_entered() -> void:
 	$UI/DayActions/TakeCare/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+	$UI/DayActions/TakeCare.texture_normal = pressed_texture
 	$SFX.stream = hover_sfx
 	$SFX.play()
 
 func _on_take_care_mouse_exited() -> void:
 	$UI/DayActions/TakeCare/Label.remove_theme_color_override("font_color")
+	$UI/DayActions/TakeCare.texture_normal = normal_texture
 
 
 func _on_work_pressed() -> void:
@@ -202,6 +225,9 @@ func _on_care_pressed() -> void:
 		$UI/DayActions/Meds.visible = true
 		$UI/DayActions/Buy.visible = true
 		$UI/DayActions/TakeCare.visible = true
+		$UI/CanvasLayer/DayActions/Meds.visible = true
+		$UI/CanvasLayer/DayActions/Buy.visible = true
+		$UI/CanvasLayer/DayActions/TakeCare.visible = true
 
 		if Autoloads.mother >= 25:
 			var t = toast.instantiate()
@@ -225,6 +251,9 @@ func _on_care_pressed() -> void:
 		$UI/DayActions/Meds.visible = false
 		$UI/DayActions/Buy.visible = false
 		$UI/DayActions/TakeCare.visible = false
+		$UI/CanvasLayer/DayActions/Meds.visible = false
+		$UI/CanvasLayer/DayActions/Buy.visible = false
+		$UI/CanvasLayer/DayActions/TakeCare.visible = false
 		var t = toast.instantiate()
 		t.display_text("Mother is in stable condition.")
 		t.global_position = $UI/CanvasLayer/Point.global_position/4
@@ -302,9 +331,17 @@ func _on_timer_timeout() -> void:
 	$SFX.play()
 	night = true
 	$AnimationPlayer.play("Black_to_View")
+	check_player_status()
 	find_visitor()
 	$UI/CanvasLayer/StatusBar/Day.text = "NIGHT " + str(Autoloads.day)
 	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
+	
+	if Autoloads.day == 10:
+		$Ambient.play()
+		var t = toast.instantiate()
+		t.display_text("It's raining outside.")
+		t.global_position = $UI/CanvasLayer/Point.global_position/4
+		$UI/CanvasLayer/Point.add_child(t)
 
 
 func _on_sleep_pressed() -> void:
@@ -333,10 +370,17 @@ func _on_timer_morn_timeout() -> void:
 
 
 func _on_knock_countdown_timeout() -> void:
-	if Autoloads.visitors_remaining_today() > 0:
-		$Knock.stream = knock_sfx
-		$Knock.play()
+	if Autoloads.day == 10:
+		$Boss.play()
 		knocking = true
+	else:
+		if Autoloads.visitors_remaining_today() > 0:
+			if Autoloads.current_visitor_id == "chismosa_day9":
+				$Knock.stream = aggressive_sfx
+			else:
+				$Knock.stream = knock_sfx
+			$Knock.play()
+			knocking = true
 
 
 func _on_knock_finished() -> void:
@@ -346,12 +390,24 @@ func find_visitor():
 	var rng = RandomNumberGenerator.new()
 	randomize()
 	var rand = rng.randf_range(3,5)
+	randomize()
+	randomize()
 	$KnockCountdown.wait_time = rand
+	if Autoloads.day == 10:
+		$KnockCountdown.wait_time = 10
 	$KnockCountdown.start()
 
 func check_mother_status():
 	if night == false and Autoloads.mother <= 0:
 		get_tree().change_scene_to_file("res://Scenes/mother_ending.tscn")
 
+func check_player_status():
+	if night == true and Autoloads.condition <= 0:
+		get_tree().change_scene_to_file("res://Scenes/player_ending.tscn")
+
 func _on_ambient_finished() -> void:
 	$Ambient.play()
+
+
+func _on_boss_finished() -> void:
+	$Boss.play()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb88w5fedl0ev"
-path="res://.godot/imported/Shady_Man - shades.png-baf023a1fdcd58edbfc63fe7902e1fb6.ctex"
+uid="uid://cana0aanefte4"
+path="res://.godot/imported/Boss_Pedro.png-06b0de3498693d55b7e8b4deece414fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Shady_Man - shades.png"
-dest_files=["res://.godot/imported/Shady_Man - shades.png-baf023a1fdcd58edbfc63fe7902e1fb6.ctex"]
+source_file="res://Assets/Characters/Boss_Pedro.png"
+dest_files=["res://.godot/imported/Boss_Pedro.png-06b0de3498693d55b7e8b4deece414fd.ctex"]
 
 [params]
 

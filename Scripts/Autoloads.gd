@@ -4,14 +4,14 @@ var current_bgm_seek = 0
 var main_bgm_seek = 0
 var night = true
 var total_debt = 69420.67
-var day = 5
+var day = 1
 var after_encounter = false
 var from_intro = true
 var stats_revealed = false
 
 var money = 2000
-var mother = 10
-var condition = 40
+var mother = 15
+var condition = 15
 var meds = 0
 var trust = 50
 var suspicion = 0
@@ -22,10 +22,12 @@ var day_visitor_index = 0
 
 var flags = {}
 var today_pool = []
+var encountered_today = []
 
 var visitor_requires = {
-	"old_lady_day4": ["helped_old_lady"],
-	"sinister_male_day6": ["!ermita_hidden"],
+	"ugly_beggar_day6": ["beggar_sheltered4"],
+	"ugly_beggar_day8": ["beggar_sheltered6"],
+	"sinister_male_day9": ["ermita_hidden"],
 }
 
 var visitor_schedule := {
@@ -39,17 +41,21 @@ var visitor_schedule := {
 	8: ["collector_old_day8", "cat_man_day8", "collector_young_day8", "ugly_beggar_day8"],
 	9: ["collector_old_day9", "chismosa_day9", "sinister_male_day9", "shady_man_day9"],
 	10: ["boss_pedro"],
-	11: ["test"]
-		
+	11: ["cat_man_day8"]
 }
+
+func _ready() -> void:
+	build_today_pool()
 
 # still not working, trying to fix
 func build_today_pool() -> void:
 	today_pool.clear()
 	for id in visitor_schedule.get(day, []):
+		if encountered_today.has(id):
+			continue
 		if _conditions_met(id):
 			today_pool.append(id)
-	day_visitor_index = 0
+	#day_visitor_index = 0
 
 func _conditions_met(id: String) -> bool:
 	for req in visitor_requires.get(id, []):
@@ -62,30 +68,51 @@ func _conditions_met(id: String) -> bool:
 
 # debugging with new function
 func pick_visitor_for_today() -> void:
+	build_today_pool()
+	"""
 	var pool: Array = visitor_schedule.get(day, ["collector_young_day1"])
 	print("Pool, ", pool)
 	#var pool: Array = today_pool[day_visitor_index]
 	if day_visitor_index >= pool.size():
 		day_visitor_index = pool.size() - 1
 	current_visitor_id = pool[day_visitor_index]
-
+	"""
+	if today_pool.is_empty():
+		push_warning("pick_visitor_for_today: no eligible visitors left today (day " + str(day) + ")")
+		current_visitor_id = ""
+		return
+	current_visitor_id = today_pool[0]
+	
+func mark_visitor_encountered(id: String) -> void:
+	if id != "" and not encountered_today.has(id):
+		encountered_today.append(id)
 
 
 func visitors_remaining_today() -> int:
-	var pool: Array = visitor_schedule.get(day, [])
-	return max(pool.size() - day_visitor_index, 0)
+	# trying out lol
+	#var pool: Array = visitor_schedule.get(day, [])
+	#return max(pool.size() - day_visitor_index, 0)
+	build_today_pool()
+	return today_pool.size()
 
 
 func advance_to_next_day() -> void:
 	day += 1
+	encountered_today.clear()
 	build_today_pool()
-	day_visitor_index = 0
+	#day_visitor_index = 0
 
 
 func apply_effect(effect: String) -> void:
 	if effect == "":
 		return
 
+	# chain multiple effects in one string: "hate(30);interest(250)"
+	if effect.find(";") != -1:
+		for part in effect.split(";"):
+			apply_effect(part.strip_edges())
+		return
+		
 	var open_end = effect.find("(")
 	var close_end = effect.find(")")
 	if open_end == -1 or close_end == -1 or close_end < open_end:
@@ -119,10 +146,6 @@ func apply_effect(effect: String) -> void:
 			animosity = clamp(animosity + int(amount*0.3), 0, 100)
 		"interest":
 			total_debt = max(total_debt + amount, 0.0)
-		"slam":
-			total_debt = max(total_debt + amount, 0.0)
-			suspicion = clamp(animosity + int(amount*0.1), 0, 100)
-			animosity = clamp(animosity + int(amount*0.2), 0, 100)
 		"flag":
 			flags[arg_str] = true
 		_:

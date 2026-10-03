@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://degxf7iu2q54w"
-path="res://.godot/imported/fraud.png-bfdf2e5a98a4909a2ce9625575fdf498.ctex"
+uid="uid://drbyen2bbkrf6"
+path="res://.godot/imported/Lending_Young_Male_Bruised.png-ecdfd974d627ce5a8acf940c97f3d1c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/fraud.png"
-dest_files=["res://.godot/imported/fraud.png-bfdf2e5a98a4909a2ce9625575fdf498.ctex"]
+source_file="res://Assets/Characters/Lending_Young_Male_Bruised.png"
+dest_files=["res://.godot/imported/Lending_Young_Male_Bruised.png-ecdfd974d627ce5a8acf940c97f3d1c2.ctex"]
 
 [params]
 

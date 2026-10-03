@@ -1,28 +1,16 @@
-[gd_scene format=3 uid="uid://dbqko3bcaf3xu"]
+[gd_scene format=3 uid="uid://dy7b8fwkkx85x"]
 
-[ext_resource type="Texture2D" uid="uid://iefkpsnfek3t" path="res://Assets/Backgrounds/BG1.jpg" id="1_21xkr"]
-[ext_resource type="Script" uid="uid://bwdqx7jmvgw6h" path="res://Scripts/main.gd" id="1_ynf5e"]
-[ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="2_8gbba"]
-[ext_resource type="AudioStream" uid="uid://cqmhl6grjykwk" path="res://Assets/Music/(4) Creepy Ambience.ogg" id="2_hptm8"]
-[ext_resource type="Texture2D" uid="uid://c136dsf440uhh" path="res://Assets/UI/paper.png" id="2_jjvhh"]
-[ext_resource type="Texture2D" uid="uid://d0mnb4inx213x" path="res://Assets/UI/dialoguebox_new.png" id="3_21xkr"]
-[ext_resource type="AudioStream" uid="uid://e0upokc6x5nm" path="res://Assets/Sounds/Writing_On_Paper.ogg" id="3_d1ilt"]
-[ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="3_jjvhh"]
-[ext_resource type="AudioStream" uid="uid://m43tfu8jnc7m" path="res://Assets/Sounds/Thunderstorm.mp3" id="3_jkdf5"]
-[ext_resource type="AudioStream" uid="uid://donja64k3qj3s" path="res://Assets/Sounds/cat_noise.ogg" id="4_k12tt"]
-[ext_resource type="Texture2D" uid="uid://rghs383lj5oo" path="res://Assets/UI/button_new.png" id="5_344ge"]
-[ext_resource type="Texture2D" uid="uid://dc7vwclfc0g7l" path="res://Assets/Misc/LightProbe.png" id="6_6iyac"]
-[ext_resource type="Texture2D" uid="uid://prnh6wciqj5f" path="res://Assets/Characters/Sinister_Male.png" id="6_wsu2k"]
-[ext_resource type="Texture2D" uid="uid://bx3vd8q5qlydc" path="res://Assets/UI/button_hover.png" id="6_ynf5e"]
-[ext_resource type="Texture2D" uid="uid://cana0aanefte4" path="res://Assets/Characters/Boss_Pedro.png" id="9_h1bgf"]
-[ext_resource type="Texture2D" uid="uid://dkpb1qrsu2aqf" path="res://Assets/Characters/Crony.png" id="10_b3802"]
-[ext_resource type="Texture2D" uid="uid://kxwu86a3oy36" path="res://Assets/UI/StatusBar.png" id="12_fdnlq"]
+[ext_resource type="Script" uid="uid://bmte5nl8bebfo" path="res://Scripts/player_ending.gd" id="1_qg2nu"]
+[ext_resource type="Texture2D" uid="uid://dcppm155yyh4v" path="res://Assets/Backgrounds/RoomEnding.jpg" id="2_724rk"]
+[ext_resource type="AudioStream" uid="uid://cfb4laotwhtof" path="res://Assets/Sounds/ConditionZero.ogg" id="4_qg2nu"]
+[ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="6_sorg1"]
+[ext_resource type="AudioStream" uid="uid://pyobxky5i3b4" path="res://Assets/Sounds/DeathRattle.mp3" id="8_o7g76"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
-shader = ExtResource("2_8gbba")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_id4dn"]
+shader = ExtResource("6_sorg1")
 shader_parameter/amount = 36.50100648379751
 
-[sub_resource type="Shader" id="Shader_bo1nx"]
+[sub_resource type="Shader" id="Shader_cqryl"]
 code = "shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
@@ -589,8 +577,8 @@ void fragment() {
 	COLOR = vec4(col, 1.0);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gbba"]
-shader = SubResource("Shader_bo1nx")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pj1lc"]
+shader = SubResource("Shader_cqryl")
 shader_parameter/crt_intensity = 0.999999977648
 shader_parameter/fisheye_strength = 1.1499999742951998
 shader_parameter/curve_scale = 0.999999988824
@@ -637,124 +625,46 @@ shader_parameter/glow_r_strength = 0.08
 shader_parameter/glow_g_strength = 0.05
 shader_parameter/glow_b_strength = 0.08
 
-[sub_resource type="Animation" id="Animation_hptm8"]
-resource_name = "Black_to_View"
-length = 1.5
+[sub_resource type="Animation" id="Animation_nqeej"]
+resource_name = "death"
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
+tracks/0/path = NodePath("UI/CanvasLayer/Color:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.13333334, 0.56666666, 1.0666667, 1.6666666, 2.0666666, 2.6333334, 3.0666666, 3.7, 4.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_6iyac"]
-resource_name = "Fade_to_Black"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.099999994, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_d1ilt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/CanvasLayer/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hptm8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8tr7m"]
 _data = {
-&"Black_to_View": SubResource("Animation_hptm8"),
-&"Fade_to_Black": SubResource("Animation_6iyac"),
-&"RESET": SubResource("Animation_d1ilt")
+&"death": SubResource("Animation_nqeej")
 }
 
-[node name="Main" type="Node2D" unique_id=1626590382]
-script = ExtResource("1_ynf5e")
+[node name="Ending" type="Node2D" unique_id=1730413078]
+script = ExtResource("1_qg2nu")
 
-[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=610521921]
-stream = ExtResource("2_hptm8")
-volume_db = -6.0
-autoplay = true
-bus = &"BGM"
+[node name="TextureRect" type="TextureRect" parent="." unique_id=934153678]
+modulate = Color(0.38431373, 0.2784314, 0.8117647, 1)
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -61.0
+offset_right = 1814.0
+offset_bottom = 1019.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.12, 1.12)
+texture = ExtResource("2_724rk")
 
-[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1464030834]
-stream = ExtResource("3_jkdf5")
-volume_db = -6.0
-bus = &"Ambient"
-
-[node name="VoiceLine" type="AudioStreamPlayer" parent="." unique_id=1547010725]
-volume_db = 6.0
-bus = &"Voice"
-
-[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1421461893]
-bus = &"SFX"
-
-[node name="Cat" type="AudioStreamPlayer" parent="." unique_id=889594832]
-stream = ExtResource("4_k12tt")
-volume_db = -6.0
-
-[node name="Paper" type="AudioStreamPlayer" parent="." unique_id=894728574]
-stream = ExtResource("3_d1ilt")
-bus = &"SFX"
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1464303738]
-modulate = Color(0.37536725, 0.24561548, 0.18940711, 1)
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("1_21xkr")
-
-[node name="Rain" type="CPUParticles2D" parent="." unique_id=724248215]
-position = Vector2(940, 135.00002)
-scale = Vector2(0.45, 0.45)
-emitting = false
-amount = 200
-lifetime = 2.0
-emission_shape = 3
-emission_rect_extents = Vector2(2000, 1)
-direction = Vector2(1, 0.745)
-angular_velocity_max = 370.91
-angle_min = -381.8
-
-[node name="Preview" type="Sprite2D" parent="." unique_id=1854607146]
-visible = false
-modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
-light_mask = 3
-position = Vector2(796.00006, 508)
-scale = Vector2(0.45, 0.45)
-texture = ExtResource("6_wsu2k")
-
-[node name="Light" type="PointLight2D" parent="Preview" unique_id=1340482466]
-position = Vector2(-11.9999695, 287)
-scale = Vector2(2.21, 2.21)
-energy = 1.37
-range_item_cull_mask = 2
-shadow_item_cull_mask = 0
-texture = ExtResource("6_6iyac")
-
-[node name="UI" type="Control" parent="." unique_id=1440015256]
+[node name="UI" type="Control" parent="." unique_id=2104718979]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
@@ -765,330 +675,11 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VisitorSprite" type="Sprite2D" parent="UI" unique_id=1256210219]
-modulate = Color(0.507202, 0.19733563, 0.32220325, 1)
-light_mask = 3
-position = Vector2(971, 422)
-scale = Vector2(0.24, 0.24)
-texture = ExtResource("9_h1bgf")
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=2121032796]
 
-[node name="Light" type="PointLight2D" parent="UI/VisitorSprite" unique_id=2087611393]
-position = Vector2(229.16666, 187.50005)
-scale = Vector2(2.21, 2.21)
-range_item_cull_mask = 2
-shadow_item_cull_mask = 0
-texture = ExtResource("6_6iyac")
-
-[node name="Cronies" type="Node2D" parent="UI/VisitorSprite" unique_id=1232748411]
+[node name="Fisheye" type="ColorRect" parent="UI/CanvasLayer" unique_id=1468996343]
 visible = false
-show_behind_parent = true
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="Crony3" type="Sprite2D" parent="UI/VisitorSprite/Cronies" unique_id=849692228]
-modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-position = Vector2(-2241.667, 383.33325)
-texture = ExtResource("10_b3802")
-
-[node name="Crony4" type="Sprite2D" parent="UI/VisitorSprite/Cronies/Crony3" unique_id=73427310]
-show_behind_parent = true
-position = Vector2(4320.834, -195.83325)
-texture = ExtResource("10_b3802")
-
-[node name="Crony" type="Sprite2D" parent="UI/VisitorSprite/Cronies" unique_id=1662930044]
-show_behind_parent = true
-position = Vector2(-1200.0002, 187.5)
-texture = ExtResource("10_b3802")
-
-[node name="Crony2" type="Sprite2D" parent="UI/VisitorSprite/Cronies" unique_id=173855878]
-show_behind_parent = true
-position = Vector2(1120.8333, 187.5)
-texture = ExtResource("10_b3802")
-
-[node name="DialogueBox" type="Sprite2D" parent="UI" unique_id=1384319198]
-position = Vector2(960, 894)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_21xkr")
-
-[node name="Dialogue" type="VBoxContainer" parent="UI" unique_id=19302163]
-custom_minimum_size = Vector2(1800, 0)
-custom_maximum_size = Vector2(1800, 250)
-layout_mode = 0
-offset_left = 70.0
-offset_top = 762.0
-offset_right = 1870.0
-offset_bottom = 1012.0
-theme_override_constants/separation = 30
-
-[node name="Dialogue" type="Label" parent="UI/Dialogue" unique_id=1776992578]
-custom_minimum_size = Vector2(1800, 0)
-custom_maximum_size = Vector2(1800, -1)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 42
-text = "Mayong gab-e, to. Pasensya gd sa distorbo. Amo ni ang balay ni Carmen?"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="Translation" type="Label" parent="UI/Dialogue" unique_id=584684478]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 36
-text = "(Good evening, young man. Sorry for the late notice, but is this the residence of Carmen?)"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1000256942]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -648.0
-offset_top = 48.0
-offset_right = 648.0
-offset_bottom = 166.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 2
-
-[node name="Slam" type="TextureButton" parent="UI/VBoxContainer" unique_id=1658700015]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("5_344ge")
-texture_pressed = ExtResource("6_ynf5e")
-texture_hover = ExtResource("6_ynf5e")
-
-[node name="Label" type="Label" parent="UI/VBoxContainer/Slam" unique_id=1130033987]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -157.5
-offset_top = -22.499992
-offset_right = 161.5
-offset_bottom = 20.500008
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 30
-text = "Slam Door."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Choice" type="HBoxContainer" parent="UI/VBoxContainer" unique_id=3457405]
-layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Yes" type="TextureButton" parent="UI/VBoxContainer/Choice" unique_id=502986540]
-layout_mode = 2
-texture_normal = ExtResource("5_344ge")
-texture_pressed = ExtResource("6_ynf5e")
-texture_hover = ExtResource("6_ynf5e")
-
-[node name="Label" type="Label" parent="UI/VBoxContainer/Choice/Yes" unique_id=1869303518]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -101.5
-offset_top = -35.135082
-offset_right = 101.5
-offset_bottom = 7.8649178
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 30
-text = "Mayong gab-e."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Translation" type="Label" parent="UI/VBoxContainer/Choice/Yes" unique_id=2044269246]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -101.5
-offset_top = -8.594793
-offset_right = 101.5
-offset_bottom = 34.405205
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 24
-text = "(Good evening)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="No" type="TextureButton" parent="UI/VBoxContainer/Choice" unique_id=1348148114]
-layout_mode = 2
-texture_normal = ExtResource("5_344ge")
-texture_pressed = ExtResource("6_ynf5e")
-texture_hover = ExtResource("6_ynf5e")
-
-[node name="Label" type="Label" parent="UI/VBoxContainer/Choice/No" unique_id=1506212261]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -35.135002
-offset_right = 159.5
-offset_bottom = 7.864998
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 30
-text = "..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Translation" type="Label" parent="UI/VBoxContainer/Choice/No" unique_id=1416245722]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -8.594999
-offset_right = 159.5
-offset_bottom = 34.405
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 24
-text = "(Stay silent)."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Stats" type="Sprite2D" parent="UI" unique_id=910894360]
-visible = false
-position = Vector2(1693, 181)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_jjvhh")
-
-[node name="Label" type="Label" parent="UI/Stats" unique_id=1170608964]
-offset_left = -1337.5
-offset_top = -1550.0
-offset_right = -233.5
-offset_bottom = -975.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 434
-text = "Utang kay:"
-
-[node name="Debtor" type="Label" parent="UI/Stats" unique_id=875222162]
-offset_left = -2075.0
-offset_top = -975.0
-offset_right = 1971.0
-offset_bottom = -50.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 650
-text = "Pedro Lending"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Amount" type="Label" parent="UI/Stats" unique_id=548091280]
-offset_left = -2075.0
-offset_top = 50.0
-offset_right = 1971.0
-offset_bottom = 975.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 550
-text = "P69,420.67"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=232152712]
-
-[node name="Cover" type="Sprite2D" parent="UI/CanvasLayer" unique_id=953057498]
-position = Vector2(961, -86)
-scale = Vector2(1.6000012, 1)
-texture = ExtResource("3_21xkr")
-
-[node name="StatusBar" type="Sprite2D" parent="UI/CanvasLayer" unique_id=1933131264]
-position = Vector2(959, 93)
-texture = ExtResource("12_fdnlq")
-
-[node name="MoneyLabel" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=482781255]
-offset_left = -872.0
-offset_top = -30.0
-offset_right = -777.0
-offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 40
-text = "Cash:"
-
-[node name="Money" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=813360296]
-offset_left = -613.0
-offset_top = -30.0
-offset_right = -320.0
-offset_bottom = 24.0
-pivot_offset = Vector2(293, 0)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 40
-text = "P999,999.99"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Day" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=1210198370]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -1106.5
-offset_top = -49.0
-offset_right = -813.5
-offset_bottom = 47.0
-grow_horizontal = 2
-pivot_offset = Vector2(293, 0)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 72
-text = "DAY 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DebtLabel" type="Label" parent="UI/CanvasLayer/StatusBar" unique_id=1850317789]
-offset_left = 227.0
-offset_top = -30.0
-offset_right = 426.0
-offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 40
-text = "Total Debt:"
-
-[node name="TotalDebt" type="Label" parent="UI/CanvasLayer/StatusBar/DebtLabel" unique_id=134762674]
-layout_mode = 0
-offset_left = 372.0
-offset_right = 665.0
-offset_bottom = 54.0
-pivot_offset = Vector2(293, 0)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 40
-text = "P999,999.99"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Fisheye" type="ColorRect" parent="UI/CanvasLayer" unique_id=437030349]
-visible = false
-material = SubResource("ShaderMaterial_xrivr")
+material = SubResource("ShaderMaterial_id4dn")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1099,8 +690,11 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CRT" type="ColorRect" parent="UI/CanvasLayer" unique_id=392238359]
-material = SubResource("ShaderMaterial_8gbba")
+[node name="Point" type="Node2D" parent="UI/CanvasLayer" unique_id=480406368]
+position = Vector2(829, 582)
+
+[node name="CRT" type="ColorRect" parent="UI/CanvasLayer" unique_id=451621346]
+material = SubResource("ShaderMaterial_pj1lc")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1108,175 +702,32 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Yes" type="TextureButton" parent="UI/CanvasLayer" unique_id=1207707376]
-modulate = Color(1, 1, 1, 0)
-offset_left = 232.91
-offset_top = 667.23
-offset_right = 865.9103
-offset_bottom = 724.23
-rotation = 0.02617994
-scale = Vector2(1.125, 1.125)
-texture_normal = ExtResource("5_344ge")
-texture_pressed = ExtResource("6_ynf5e")
-texture_hover = ExtResource("6_ynf5e")
-
-[node name="Label" type="Label" parent="UI/CanvasLayer/Yes" unique_id=1485169418]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -101.5
-offset_top = -35.135082
-offset_right = 101.5
-offset_bottom = 7.8649178
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 30
-text = "Mayong gab-e."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Translation" type="Label" parent="UI/CanvasLayer/Yes" unique_id=403217949]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -101.5
-offset_top = -8.594793
-offset_right = 101.5
-offset_bottom = 34.405205
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 24
-text = "(Good evening)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="No" type="TextureButton" parent="UI/CanvasLayer" unique_id=1647272772]
-modulate = Color(1, 1, 1, 0)
-offset_left = 981.585
-offset_top = 682.505
-offset_right = 1614.586
-offset_bottom = 739.505
-rotation = -0.034906585
-scale = Vector2(1.125, 1.125)
-texture_normal = ExtResource("5_344ge")
-texture_pressed = ExtResource("6_ynf5e")
-texture_hover = ExtResource("6_ynf5e")
-
-[node name="Label" type="Label" parent="UI/CanvasLayer/No" unique_id=1359479994]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -35.135002
-offset_right = 159.5
-offset_bottom = 7.864998
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 30
-text = "..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Translation" type="Label" parent="UI/CanvasLayer/No" unique_id=1938574162]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.5
-offset_top = -8.594999
-offset_right = 159.5
-offset_bottom = 34.405
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 24
-text = "(Stay silent)."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Slam2" type="TextureButton" parent="UI/CanvasLayer" unique_id=677250709]
-modulate = Color(1, 1, 1, 0)
-offset_left = 563.03
-offset_top = 605.4
-offset_right = 1196.0303
-offset_bottom = 662.4
-scale = Vector2(1.25, 1.25)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("5_344ge")
-texture_pressed = ExtResource("6_ynf5e")
-texture_hover = ExtResource("6_ynf5e")
-
-[node name="Label" type="Label" parent="UI/CanvasLayer/Slam2" unique_id=1250780902]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -157.5
-offset_top = -22.499992
-offset_right = 161.5
-offset_bottom = 20.500008
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_jjvhh")
-theme_override_font_sizes/font_size = 30
-text = "Slam Door."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="UI/CanvasLayer" unique_id=216819667]
+[node name="Color" type="ColorRect" parent="UI/CanvasLayer" unique_id=786562568]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1331616331]
-libraries/ = SubResource("AnimationLibrary_hptm8")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1901334386]
+libraries/ = SubResource("AnimationLibrary_8tr7m")
 
-[node name="Timer" type="Timer" parent="." unique_id=934772056]
-wait_time = 1.5
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=819911573]
+stream = ExtResource("4_qg2nu")
+autoplay = true
+bus = &"SFX"
 
-[connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
-[connection signal="finished" from="Ambient" to="." method="_on_ambient_finished"]
-[connection signal="finished" from="Cat" to="." method="_on_cat_finished"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/Slam" to="." method="_on_slam_mouse_entered"]
-[connection signal="mouse_exited" from="UI/VBoxContainer/Slam" to="." method="_on_slam_mouse_exited"]
-[connection signal="pressed" from="UI/VBoxContainer/Slam" to="." method="_on_slam_pressed"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/Choice/Yes" to="." method="_on_yes_mouse_entered"]
-[connection signal="mouse_exited" from="UI/VBoxContainer/Choice/Yes" to="." method="_on_yes_mouse_exited"]
-[connection signal="pressed" from="UI/VBoxContainer/Choice/Yes" to="." method="_on_yes_pressed"]
-[connection signal="mouse_entered" from="UI/VBoxContainer/Choice/No" to="." method="_on_no_mouse_entered"]
-[connection signal="mouse_exited" from="UI/VBoxContainer/Choice/No" to="." method="_on_no_mouse_exited"]
-[connection signal="pressed" from="UI/VBoxContainer/Choice/No" to="." method="_on_no_pressed"]
-[connection signal="mouse_entered" from="UI/CanvasLayer/Yes" to="." method="_on_yes_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasLayer/Yes" to="." method="_on_yes_mouse_exited"]
-[connection signal="pressed" from="UI/CanvasLayer/Yes" to="." method="_on_yes_pressed"]
-[connection signal="mouse_entered" from="UI/CanvasLayer/No" to="." method="_on_no_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasLayer/No" to="." method="_on_no_mouse_exited"]
-[connection signal="pressed" from="UI/CanvasLayer/No" to="." method="_on_no_pressed"]
-[connection signal="mouse_entered" from="UI/CanvasLayer/Slam2" to="." method="_on_slam_mouse_entered"]
-[connection signal="mouse_exited" from="UI/CanvasLayer/Slam2" to="." method="_on_slam_mouse_exited"]
-[connection signal="pressed" from="UI/CanvasLayer/Slam2" to="." method="_on_slam_pressed"]
+[node name="VoiceLine" type="AudioStreamPlayer" parent="." unique_id=1891555078]
+stream = ExtResource("8_o7g76")
+volume_db = 6.0
+autoplay = true
+bus = &"Voice"
+
+[node name="Timer" type="Timer" parent="." unique_id=416384043]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
