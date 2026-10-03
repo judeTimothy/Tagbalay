@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpolgbjfdpri3"
+path="res://.godot/imported/old_lady_day7_N1.ogg-14b6b053eed58030e2b4d8a1e811f791.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 7/old_lady_day7_N1.ogg"
+dest_files=["res://.godot/imported/old_lady_day7_N1.ogg-14b6b053eed58030e2b4d8a1e811f791.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://7ttk6rudksri"
+path="res://.godot/imported/sinister_male_day6_N1.ogg-9f80cdc2bbae2d7bcc2b19b3cedd7d9f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 6/sinister_male_day6_N1.ogg"
+dest_files=["res://.godot/imported/sinister_male_day6_N1.ogg-9f80cdc2bbae2d7bcc2b19b3cedd7d9f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

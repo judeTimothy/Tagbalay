@@ -41,8 +41,9 @@ func _ready() -> void:
 	_dbg("_ready() calling set_dialogue(0)")
 	set_dialogue(0)
 	
-	if Autoloads.current_visitor_id == "ugly_beggar_day3":
+	if Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8":
 		$Ambient.play()
+		$Rain.emitting = true
 
 
 func _refresh_stat_labels() -> void:
@@ -102,6 +103,20 @@ func _apply_visitor_setup() -> void:
 		_dbg("Loading bgm: " + str(visitor["bgm"]))
 		$BGM.stream = load(visitor["bgm"])
 		$BGM.play()
+	
+	_start_idle_sway()
+
+func _start_idle_sway() -> void:
+	var sprite := $UI/VisitorSprite
+	var base_pos: Vector2 = sprite.position
+ 
+	var tween := create_tween()
+	tween.set_loops()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(sprite, "position", base_pos + Vector2(3, -2), 1.6)
+	tween.tween_property(sprite, "position", base_pos + Vector2(-3, 2), 1.6)
+	tween.tween_property(sprite, "position", base_pos, 1.6)
 
 
 func set_dialogue(index: int) -> void:
@@ -119,8 +134,12 @@ func set_dialogue(index: int) -> void:
 
 	$UI/Dialogue/Dialogue.text = line.get("text", "")
 	$UI/Dialogue/Translation.text = line.get("translation", "")
-
-
+	
+	if $UI/Dialogue/Dialogue.text == "" and $UI/Dialogue/Translation.text == "":
+		$UI/Dialogue.visible = false
+	else:
+		$UI/Dialogue.visible = true
+	
 	$VoiceLine.stop()
 	var voice_path = line.get("voice", "")
 	if voice_path != "":
@@ -134,6 +153,21 @@ func set_dialogue(index: int) -> void:
 	$UI/VBoxContainer/Choice/Yes/Translation.text = yes.get("translation", "")
 	$UI/VBoxContainer/Choice/No/Label.text = no.get("text", "")
 	$UI/VBoxContainer/Choice/No/Translation.text = no.get("translation", "")
+	
+	if $UI/Dialogue/Dialogue.text == "" and $UI/Dialogue/Translation.text == "":
+		$UI/DialogueBox.visible = false
+	else:
+		$UI/DialogueBox.visible = true
+
+	
+	if $UI/VBoxContainer/Choice/Yes/Label.text == "" and $UI/VBoxContainer/Choice/Yes/Translation.text == "":
+		$UI/VBoxContainer/Choice/Yes.visible = false
+	else:
+		$UI/VBoxContainer/Choice/Yes.visible = true
+	if $UI/VBoxContainer/Choice/No/Label.text == "" and $UI/VBoxContainer/Choice/No/Translation.text == "":
+		$UI/VBoxContainer/Choice/No.visible = false
+	else:
+		$UI/VBoxContainer/Choice/No.visible = true
 
 
 	var slam_index = visitor.get("slam_index", -1)

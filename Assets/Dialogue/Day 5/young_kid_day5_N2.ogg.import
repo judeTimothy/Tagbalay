@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cgejlm76fvytj"
+path="res://.godot/imported/young_kid_day5_N2.ogg-97b0796c74536d6143629a6d7abd9203.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Dialogue/Day 5/young_kid_day5_N2.ogg"
+dest_files=["res://.godot/imported/young_kid_day5_N2.ogg-97b0796c74536d6143629a6d7abd9203.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
