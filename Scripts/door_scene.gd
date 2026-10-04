@@ -44,6 +44,7 @@ func _ready() -> void:
 			$UI/CanvasLayer/StatusBar/DebtLabel.visible = true
 		night = true
 		Autoloads.after_encounter = false
+		
 	
 	
 	print(Autoloads.visitors_remaining_today())
@@ -72,7 +73,7 @@ func _ready() -> void:
 		buffer = "DAY "
 	$UI/CanvasLayer/StatusBar/Day.text = buffer + str(Autoloads.day)
 	
-	if (Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "sinister_male_day5" or Autoloads.current_visitor_id == "collector_young_day3" or Autoloads.current_visitor_id == "sinister_male_day6" or Autoloads.current_visitor_id == "collector_young_day8") and night:
+	if (Autoloads.current_visitor_id == "cat_man_day6" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "sinister_male_day5" or Autoloads.current_visitor_id == "collector_young_day3" or Autoloads.current_visitor_id == "sinister_male_day6" or Autoloads.current_visitor_id == "collector_young_day8") and night:
 		$Ambient.play()
 		var t = toast.instantiate()
 		t.display_text("It's raining outside.")
@@ -81,6 +82,11 @@ func _ready() -> void:
 	else:
 		$Ambient.stop()
 		
+	if Autoloads.day == 5 and Autoloads.day == 8:
+			var t = toast.instantiate()
+			t.display_text("Mother is getting worse.")
+			t.global_position = $UI/CanvasLayer/Point.global_position/4
+			$UI/CanvasLayer/Point.add_child(t)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -288,7 +294,7 @@ func _on_buy_pressed() -> void:
 		$UI/DayActions/Buy/Label.remove_theme_color_override("font_color")
 	$SFX.stream = select_sfx
 	$SFX.play()
-	$UI/CanvasLayer/StatusBar/Money.text = "Cash: P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
 	$UI/DayActions/Meds/Label.text = "Give Meds(" + str(Autoloads.meds) + ")"
 
 func _on_meds_pressed() -> void:
@@ -403,6 +409,10 @@ func check_mother_status():
 
 func check_player_status():
 	if night == true and Autoloads.condition <= 0:
+		get_tree().change_scene_to_file("res://Scenes/player_ending.tscn")
+
+func check_animosity():
+	if night == true and Autoloads.animosity >= 100:
 		get_tree().change_scene_to_file("res://Scenes/player_ending.tscn")
 
 func _on_ambient_finished() -> void:

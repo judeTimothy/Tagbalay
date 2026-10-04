@@ -25,9 +25,10 @@ var today_pool = []
 var encountered_today = []
 
 var visitor_requires = {
-	"ugly_beggar_day6": ["beggar_sheltered4"],
+	"ugly_beggar_day6": ["beggar_sheltered3"],
 	"ugly_beggar_day8": ["beggar_sheltered6"],
-	"sinister_male_day9": ["ermita_hidden"],
+	"chismosa_day9": ["ermitta_hidden7"],
+	"sinister_male_day9": ["ermita_hidden9"],
 }
 
 var visitor_schedule := {
@@ -127,6 +128,7 @@ func apply_effect(effect: String) -> void:
 		"payment":
 			total_debt = max(total_debt - amount, 0.0)
 			money = max(money - int(amount), 0)
+			animosity = clamp(animosity - 10, 0, 100)
 		"money":
 			money = max(money + int(amount), 0)
 		"mother":
@@ -150,3 +152,30 @@ func apply_effect(effect: String) -> void:
 			flags[arg_str] = true
 		_:
 			push_warning("apply_effect: unknown effect name '" + effect_name + "'")
+
+func reset_game_state() -> void:
+	current_bgm_seek = 0
+	main_bgm_seek = 0
+	night = true
+	total_debt = 69420.67
+	day = 1
+	after_encounter = false
+	from_intro = true
+	stats_revealed = false
+
+	money = 2000
+	mother = 15
+	condition = 15
+	meds = 0
+	trust = 50
+	suspicion = 0
+	animosity = 0
+
+	current_visitor_id = ""
+	day_visitor_index = 0
+
+	flags.clear()
+	today_pool.clear()
+	encountered_today.clear()
+
+	build_today_pool()

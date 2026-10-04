@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dymd5plehm0t" path="res://Scripts/main_menu.gd" id="1_28flt"]
 [ext_resource type="AudioStream" uid="uid://caj8nw4e68nc6" path="res://Assets/Music/(1) Main Menu.ogg" id="2_48xlc"]
-[ext_resource type="Texture2D" uid="uid://bwdhhtls3vu30" path="res://Assets/Backgrounds/MainMenu.jpg" id="3_1ehe0"]
-[ext_resource type="AudioStream" uid="uid://b5qatp8t51cks" path="res://Assets/Sounds/TV_Static.ogg" id="3_n45e2"]
+[ext_resource type="AudioStream" uid="uid://dfs40flhuq3yf" path="res://Assets/Sounds/PhilippinesAmbient.ogg" id="3_opfnp"]
 [ext_resource type="Shader" uid="uid://q6kob0kmtj7b" path="res://Shaders/main.gdshader" id="4_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://bobg1yve0b66a" path="res://Assets/Backgrounds/main_menu.png" id="4_n45e2"]
 [ext_resource type="FontFile" uid="uid://b27ye6jqw54v2" path="res://Assets/Fonts/MayflowerAntique.ttf" id="6_opfnp"]
+[ext_resource type="Texture2D" uid="uid://cl4s6mcpx32jh" path="res://Assets/Fonts/title_card.png" id="7_cp0ys"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n45e2"]
 shader = ExtResource("4_ce3w2")
@@ -341,29 +342,28 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Static:volume_db")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-30.0, -30.0]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BGM:volume_db")
+tracks/2/path = NodePath("Ambient:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0.001, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.0]
+"values": [-80.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_opfnp"]
@@ -402,14 +402,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Static:volume_db")
+tracks/0/path = NodePath("CanvasLayer/Press:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-30.0]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -423,13 +423,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ambient:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="Animation" id="Animation_16hvj"]
+resource_name = "Text"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Press:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yhxw7"]
 _data = {
 &"Black_to_View": SubResource("Animation_cp0ys"),
 &"Fade_to_Black": SubResource("Animation_opfnp"),
 &"Intro": SubResource("Animation_yhxw7"),
-&"RESET": SubResource("Animation_trj04")
+&"RESET": SubResource("Animation_trj04"),
+&"Text": SubResource("Animation_16hvj")
 }
 
 [node name="MainMenu" type="Control" unique_id=1647314391]
@@ -443,26 +472,31 @@ script = ExtResource("1_28flt")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1901188971]
 stream = ExtResource("2_48xlc")
-autoplay = true
 bus = &"BGM"
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=530936707]
 bus = &"SFX"
 
-[node name="Static" type="AudioStreamPlayer" parent="." unique_id=719607224]
-stream = ExtResource("3_n45e2")
-volume_db = -30.0
+[node name="Ambient" type="AudioStreamPlayer" parent="." unique_id=1345293383]
+stream = ExtResource("3_opfnp")
+volume_db = -80.0
 autoplay = true
-bus = &"SFX"
+bus = &"Ambient"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=901702447]
+modulate = Color(0.769471, 0.840688, 0.98797506, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_1ehe0")
+texture = ExtResource("4_n45e2")
+
+[node name="TitleCard" type="Sprite2D" parent="." unique_id=1901993630]
+position = Vector2(969, 368)
+scale = Vector2(2.49, 2.49)
+texture = ExtResource("7_cp0ys")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1725068451]
 
@@ -482,6 +516,34 @@ grow_vertical = 2
 [node name="Point" type="Node2D" parent="CanvasLayer" unique_id=1965961308]
 position = Vector2(829, 582)
 
+[node name="Press" type="Label" parent="CanvasLayer" unique_id=1290272872]
+visible = false
+offset_left = 609.0
+offset_top = 939.0
+offset_right = 1411.0
+offset_bottom = 1008.0
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 52
+text = "[Click anywhere to start the game]"
+
+[node name="Version" type="Label" parent="CanvasLayer" unique_id=1126461340]
+offset_left = 1704.0
+offset_top = 1039.0
+offset_right = 2506.0
+offset_bottom = 1108.0
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 24
+text = "Game Jam v0.1.0"
+
+[node name="Copyright" type="Label" parent="CanvasLayer" unique_id=1818371443]
+offset_left = 12.0
+offset_top = 1039.0
+offset_right = 814.0
+offset_bottom = 1108.0
+theme_override_fonts/font = ExtResource("6_opfnp")
+theme_override_font_sizes/font_size = 24
+text = "YUME Interactive (c) 2026"
+
 [node name="CRT" type="ColorRect" parent="CanvasLayer" unique_id=483951979]
 material = SubResource("ShaderMaterial_opfnp")
 anchors_preset = 15
@@ -498,57 +560,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=909406792]
 libraries/ = SubResource("AnimationLibrary_yhxw7")
 
-[node name="Play" type="Button" parent="." unique_id=2034943851]
-layout_mode = 0
-offset_left = 698.0
-offset_top = 317.0
-offset_right = 1161.0
-offset_bottom = 526.0
-theme_override_colors/font_color = Color(0.021900358, 0.31970716, 0.46061963, 1)
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 150
-flat = true
-
-[node name="Label" type="Label" parent="Play" unique_id=2143399876]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.023529412, 0.32156864, 0.45882353, 1)
-theme_override_fonts/font = ExtResource("6_opfnp")
-theme_override_font_sizes/font_size = 150
-text = "PLAY"
-
 [node name="Timer" type="Timer" parent="." unique_id=1015111502]
 
-[node name="IntroTimer" type="Timer" parent="." unique_id=723635692]
-wait_time = 30.0
-one_shot = true
-autostart = true
-
-[node name="Start" type="Timer" parent="." unique_id=1383747253]
-wait_time = 3.0
+[node name="Start" type="Timer" parent="." unique_id=1448645500]
+wait_time = 3.8
 one_shot = true
 autostart = true
 
 [connection signal="finished" from="BGM" to="." method="_on_bgm_finished"]
-[connection signal="finished" from="Static" to="." method="_on_static_finished"]
-[connection signal="mouse_entered" from="Play" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="Play" to="." method="_on_button_mouse_exited"]
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="finished" from="Ambient" to="." method="_on_ambient_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="IntroTimer" to="." method="_on_intro_timer_timeout"]
 [connection signal="timeout" from="Start" to="." method="_on_start_timeout"]

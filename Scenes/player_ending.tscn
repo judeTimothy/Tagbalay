@@ -10,7 +10,7 @@
 shader = ExtResource("6_sorg1")
 shader_parameter/amount = 36.50100648379751
 
-[sub_resource type="Shader" id="Shader_cqryl"]
+[sub_resource type="Shader" id="Shader_dprhi"]
 code = "shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
@@ -578,7 +578,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pj1lc"]
-shader = SubResource("Shader_cqryl")
+shader = SubResource("Shader_dprhi")
 shader_parameter/crt_intensity = 0.999999977648
 shader_parameter/fisheye_strength = 1.1499999742951998
 shader_parameter/curve_scale = 0.999999988824

@@ -46,7 +46,7 @@ func _ready() -> void:
 	_dbg("_ready() calling set_dialogue(0)")
 	set_dialogue(0)
 	
-	if Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8" or Autoloads.current_visitor_id == "boss_pedro":
+	if Autoloads.current_visitor_id == "cat_man_day6" or Autoloads.current_visitor_id == "empty_day5" or Autoloads.current_visitor_id == "ugly_beggar_day3" or Autoloads.current_visitor_id == "ugly_beggar_day6" or Autoloads.current_visitor_id == "ugly_beggar_day8" or Autoloads.current_visitor_id == "boss_pedro":
 		$Ambient.play()
 		$Rain.emitting = true
 	
@@ -312,7 +312,12 @@ func _on_timer_timeout() -> void:
 	Autoloads.after_encounter = true
 	Autoloads.from_intro = false
 	if Autoloads.current_visitor_id == "boss_pedro":
-		get_tree().change_scene_to_file("res://Scenes/credits.tscn")
+		if Autoloads.flags.get("pedro_agree", false):
+			get_tree().change_scene_to_file("res://Scenes/ending_agree.tscn")
+		elif Autoloads.flags.get("pedro_refuse", false):
+			get_tree().change_scene_to_file("res://Scenes/ending_refuse.tscn")
+		else:
+			get_tree().change_scene_to_file("res://Scenes/credits.tscn")
 		return
 	get_tree().change_scene_to_file("res://Scenes/DoorScene.tscn")
 
