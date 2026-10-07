@@ -20,15 +20,15 @@ var taken_care = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	check_mother_status()
-	
+	print("Animosity: ", Autoloads.animosity)
 	print("Day ", Autoloads.day, " start.")
 	if Autoloads.flags.get("shady_man_sheltered", false):
 		get_tree().change_scene_to_file("res://Scenes/knife_end.tscn")
 	#print(Autoloads.flags)
 	#$UI/CanvasLayer/Color.color = Color8(1,1,1,0)
 	#Autoloads.build_today_pool()
-	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
-	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P" + str(float(Autoloads.total_debt))
+	$UI/CanvasLayer/StatusBar/Money.text = "P%.2f" % Autoloads.money
+	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P%.2f" % Autoloads.total_debt
 	day = Autoloads.day
 	if day == 1:
 		if night == false:
@@ -91,12 +91,15 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	if night == false:
 		$UI/DayActions.visible = true
+		$UI/CanvasLayer/DayActions.visible = true
 		$TextureRect.modulate = Color.from_rgba8(188,135,113,255)
 		$Door.disabled = true
 	else:
 		$UI/DayActions.visible = false
+		$UI/CanvasLayer/DayActions.visible = false
 		$TextureRect.modulate = Color.from_rgba8(91,71,207,255)
 		$Door.disabled = false
 	
@@ -211,6 +214,7 @@ func _on_work_pressed() -> void:
 	$SFX.play()
 	$AnimationPlayer.play("Fade_to_Black")
 	$Timer.start()
+	check_animosity()
 	Autoloads.apply_effect("money(550)")
 	Autoloads.apply_effect("condition(-10)")
 	
@@ -294,7 +298,7 @@ func _on_buy_pressed() -> void:
 		$UI/DayActions/Buy/Label.remove_theme_color_override("font_color")
 	$SFX.stream = select_sfx
 	$SFX.play()
-	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/Money.text = "P%.2f" % Autoloads.money
 	$UI/DayActions/Meds/Label.text = "Give Meds(" + str(Autoloads.meds) + ")"
 
 func _on_meds_pressed() -> void:
@@ -340,7 +344,7 @@ func _on_timer_timeout() -> void:
 	check_player_status()
 	find_visitor()
 	$UI/CanvasLayer/StatusBar/Day.text = "NIGHT " + str(Autoloads.day)
-	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
+	$UI/CanvasLayer/StatusBar/Money.text = "P%.2f" % Autoloads.money
 	
 	if Autoloads.day == 10:
 		$Ambient.play()
@@ -412,6 +416,7 @@ func check_player_status():
 		get_tree().change_scene_to_file("res://Scenes/player_ending.tscn")
 
 func check_animosity():
+	print("Animosity: ", Autoloads.animosity)
 	if night == true and Autoloads.animosity >= 100:
 		get_tree().change_scene_to_file("res://Scenes/player_ending.tscn")
 
@@ -421,3 +426,7 @@ func _on_ambient_finished() -> void:
 
 func _on_boss_finished() -> void:
 	$Boss.play()
+
+
+func _on_bgm_finished() -> void:
+	$BGM.play()

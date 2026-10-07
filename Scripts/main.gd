@@ -8,6 +8,7 @@ extends Node2D
 # manual changing of texture over CRt
 @onready var normal_texture = preload("res://Assets/UI/button_new.png")
 @onready var pressed_texture = preload("res://Assets/UI/button_hover.png")
+@onready var disabled_texture = preload("res://Assets/UI/button_disabled.png")
 
 const VISITOR_DATA_PATH = "res://Data/visitors.json"
 
@@ -60,8 +61,8 @@ func _ready() -> void:
 
 
 func _refresh_stat_labels() -> void:
-	$UI/CanvasLayer/StatusBar/Money.text = "P" + str(float(Autoloads.money))
-	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P" + str(float(Autoloads.total_debt))
+	$UI/CanvasLayer/StatusBar/Money.text = "P%.2f" % Autoloads.money
+	$UI/CanvasLayer/StatusBar/DebtLabel/TotalDebt.text = "P%.2f" % Autoloads.total_debt
 	# $UI/Stats/Mother.text = "Mother: " + str(Autoloads.mother)
 	# $UI/Stats/Condition.text = "Condition: " + str(Autoloads.condition)
 	# $UI/Stats/Meds.text = "Meds: " + str(Autoloads.meds)
@@ -135,6 +136,24 @@ func _start_idle_sway() -> void:
 	tween.tween_property(sprite, "position", base_pos + Vector2(-3, 2), 1.6)
 	tween.tween_property(sprite, "position", base_pos, 1.6)
 
+# get_total_cost for button to prevent unlimited payment
+func _get_total_cost(effect: String) -> float:
+	var cost := 0.0
+	for part in effect.split(";"):
+		part = part.strip_edges()
+		var open_i := part.find("(")
+		var close_i := part.find(")")
+		if open_i == -1 or close_i == -1 or close_i < open_i:
+			continue
+		var var_name := part.substr(0, open_i)
+		var amount := part.substr(open_i + 1, close_i - open_i - 1).to_float()
+		if var_name == "payment" and amount > 0:
+			cost += amount
+		elif var_name == "money" and amount < 0:
+			cost += -amount
+	print("Got cost: ", cost)
+	return cost
+
 
 func set_dialogue(index: int) -> void:
 	_dbg("set_dialogue(" + str(index) + ") called, current_track=" + current_track)
@@ -187,6 +206,20 @@ func set_dialogue(index: int) -> void:
 		$UI/VBoxContainer/Choice/No.visible = true
 
 
+	var yes_cost := _get_total_cost(yes.get("effect", ""))
+	var no_cost := _get_total_cost(no.get("effect", ""))
+	$UI/VBoxContainer/Choice/Yes.disabled = (yes_cost > 0 and Autoloads.money < yes_cost)
+	$UI/VBoxContainer/Choice/No.disabled = (no_cost > 0 and Autoloads.money < no_cost)
+	$UI/CanvasLayer/Yes.visible = not $UI/VBoxContainer/Choice/Yes.disabled 
+	$UI/CanvasLayer/No.visible = not $UI/VBoxContainer/Choice/No.disabled 
+	
+	if $UI/VBoxContainer/Choice/Yes.disabled:
+		$UI/VBoxContainer/Choice/Yes.release_focus()
+		$UI/VBoxContainer/Choice/Yes.texture_normal = disabled_texture
+	if $UI/VBoxContainer/Choice/No.disabled:
+		$UI/VBoxContainer/Choice/No.release_focus()
+		$UI/VBoxContainer/Choice/No.texture_normal = disabled_texture
+
 	var slam_index = visitor.get("slam_index", -1)
 	if index == slam_index:
 		slam_unlocked = true
@@ -206,25 +239,29 @@ func set_dialogue(index: int) -> void:
 
 
 func _on_yes_mouse_entered() -> void:
-	$UI/VBoxContainer/Choice/Yes/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
-	$UI/VBoxContainer/Choice/Yes.texture_normal = pressed_texture
-	$SFX.stream = hover_sfx
-	$SFX.play()
+	if not $UI/VBoxContainer/Choice/Yes.disabled:
+		$UI/VBoxContainer/Choice/Yes/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+		$UI/VBoxContainer/Choice/Yes.texture_normal = pressed_texture
+		$SFX.stream = hover_sfx
+		$SFX.play()
 
 func _on_yes_mouse_exited() -> void:
-	$UI/VBoxContainer/Choice/Yes/Label.remove_theme_color_override("font_color")
-	$UI/VBoxContainer/Choice/Yes.texture_normal = normal_texture
+	if not $UI/VBoxContainer/Choice/Yes.disabled:
+		$UI/VBoxContainer/Choice/Yes/Label.remove_theme_color_override("font_color")
+		$UI/VBoxContainer/Choice/Yes.texture_normal = normal_texture
 
 
 func _on_no_mouse_entered() -> void:
-	$UI/VBoxContainer/Choice/No/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
-	$UI/VBoxContainer/Choice/No.texture_normal = pressed_texture
-	$SFX.stream = hover_sfx
-	$SFX.play()
+	if not $UI/VBoxContainer/Choice/No.disabled:
+		$UI/VBoxContainer/Choice/No/Label.add_theme_color_override("font_color", Color.from_rgba8(1,1,1,255))
+		$UI/VBoxContainer/Choice/No.texture_normal = pressed_texture
+		$SFX.stream = hover_sfx
+		$SFX.play()
 
 func _on_no_mouse_exited() -> void:
-	$UI/VBoxContainer/Choice/No/Label.remove_theme_color_override("font_color")
-	$UI/VBoxContainer/Choice/No.texture_normal = normal_texture
+	if not $UI/VBoxContainer/Choice/No.disabled:
+		$UI/VBoxContainer/Choice/No/Label.remove_theme_color_override("font_color")
+		$UI/VBoxContainer/Choice/No.texture_normal = normal_texture
 
 
 func _on_slam_mouse_entered() -> void:

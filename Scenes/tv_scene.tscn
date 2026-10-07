@@ -542,7 +542,7 @@ libraries/ = SubResource("AnimationLibrary_yhxw7")
 [node name="Timer" type="Timer" parent="." unique_id=1015111502]
 
 [node name="KnockCountdown" type="Timer" parent="." unique_id=244612493]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 

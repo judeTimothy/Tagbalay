@@ -835,7 +835,7 @@ bus = &"BGM"
 libraries/ = SubResource("AnimationLibrary_1bamb")
 
 [node name="Timer" type="Timer" parent="." unique_id=1170908809]
-wait_time = 45.0
+wait_time = 15.0
 one_shot = true
 autostart = true
 

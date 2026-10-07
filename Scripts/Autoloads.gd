@@ -9,7 +9,7 @@ var after_encounter = false
 var from_intro = true
 var stats_revealed = false
 
-var money = 2000
+var money := 2000.00
 var mother = 15
 var condition = 15
 var meds = 0
@@ -28,7 +28,7 @@ var visitor_requires = {
 	"ugly_beggar_day6": ["beggar_sheltered3"],
 	"ugly_beggar_day8": ["beggar_sheltered6"],
 	"chismosa_day9": ["ermitta_hidden7"],
-	"sinister_male_day9": ["ermita_hidden9"],
+	"sinister_male_day9": ["ermitta_hidden9"],
 }
 
 var visitor_schedule := {
@@ -126,11 +126,11 @@ func apply_effect(effect: String) -> void:
 
 	match effect_name:
 		"payment":
-			total_debt = max(total_debt - amount, 0.0)
-			money = max(money - int(amount), 0)
+			total_debt = max(total_debt - amount, 0.00)
+			money = max(money - int(amount), 0.00)
 			animosity = clamp(animosity - 10, 0, 100)
 		"money":
-			money = max(money + int(amount), 0)
+			money = max(money + int(amount), 0.00)
 		"mother":
 			mother = clamp(mother + int(amount), 0, 40)
 		"condition":
@@ -144,10 +144,10 @@ func apply_effect(effect: String) -> void:
 		"animosity":
 			animosity = clamp(animosity + int(amount), 0, 100)
 		"hate":
-			suspicion = clamp(animosity + int(amount*0.7), 0, 100)
-			animosity = clamp(animosity + int(amount*0.3), 0, 100)
+			suspicion = clamp(animosity + int(amount*0.64), 0, 100)
+			animosity = clamp(animosity + int(amount*0.36), 0, 100)
 		"interest":
-			total_debt = max(total_debt + amount, 0.0)
+			total_debt = max(total_debt + amount, 0.00)
 		"flag":
 			flags[arg_str] = true
 		_:
@@ -163,7 +163,7 @@ func reset_game_state() -> void:
 	from_intro = true
 	stats_revealed = false
 
-	money = 2000
+	money = 2000.00
 	mother = 15
 	condition = 15
 	meds = 0

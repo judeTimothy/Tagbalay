@@ -4,7 +4,7 @@
 	"bgm": "res://Assets/Music/(4) Creepy Ambience.ogg",
 	"reveal_index": 3,
 	"slam_index": -1,
-	"slam_effect": "hate(30)",
+	"slam_effect": "hate(60)",
 	"lines": [
 	  {
 		"text": "Mayong gab-e, to. Pasensya gd sa distorbo. Amo ni ang balay ni Carmen?",
@@ -204,7 +204,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "hate(30)",
+	"slam_effect": "hate(60)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Ginpabalik na ko ni Boss Pedro. Naka storya nata kagab-e.",
@@ -466,7 +466,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect_unpaid": "hate(30);interest(250)",
+	"slam_effect_unpaid": "hate(60);interest(250)",
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -730,7 +730,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "hate(30)",
+	"slam_effect": "hate(60)",
 	"lines_positive": [
 	  {
 		"text": "Uy mayong gab-e. Daw damo tawo di gakadto kada gab-e haw?",
@@ -860,8 +860,8 @@
 	"sprite": "res://Assets/Characters/Lending_Young_Male.png",
 	"bgm": "",
 	"reveal_index": 0,
-	"slam_index": 2,
-	"slam_effect_unpaid": "hate(30);interest(250)",
+	"slam_index": 1,
+	"slam_effect_unpaid": "hate(60);interest(250)",
 	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
@@ -1094,7 +1094,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect_unpaid": "hate(40);interest(250)",
+	"slam_effect_unpaid": "hate(80);interest(250)",
 	"slam_effect": "hate(40)",
 	"lines_positive": [
 	  {
@@ -1226,7 +1226,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "hate(50)",
+	"slam_effect": "hate(100)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e.",
@@ -1488,7 +1488,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect_unpaid": "hate(40);interest(250)",
+	"slam_effect_unpaid": "hate(80);interest(250)",
 	"slam_effect": "hate(40)",
 	"lines_positive": [
 	  {
@@ -1753,7 +1753,7 @@
 	"reveal_index": 0,
 	"slam_hide_on_last": true,
 	"slam_index": 2,
-	"slam_effect": "hate(30)",
+	"slam_effect": "hate(60)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to.",
@@ -1987,7 +1987,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect_unpaid": "hate(50);interest(250)",
+	"slam_effect_unpaid": "hate(100);interest(250)",
 	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
@@ -2355,7 +2355,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "hate(20)",
+	"slam_effect": "hate(30)",
 	"lines_positive": [
 	  {
 		"text": "…",
@@ -2590,7 +2590,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect_unpaid": "hate(50);interest(250)",
+	"slam_effect_unpaid": "hate(100);interest(250)",
 	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
@@ -2826,7 +2826,7 @@
 	"reveal_index": 0,
 	"slam_index": 2,
 	"slam_hide_on_last": true,
-	"slam_effect": "hate(50)",
+	"slam_effect": "hate(100)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to. Dumduman mo pa ko?",
@@ -2959,7 +2959,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect": "hate(30)",
+	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
 		"text": "Mayong gab-e to.",
@@ -3091,7 +3091,7 @@
 	"bgm": "",
 	"reveal_index": 0,
 	"slam_index": 2,
-	"slam_effect_unpaid": "hate(40);interest(250)",
+	"slam_effect_unpaid": "hate(80);interest(250)",
 	"slam_effect": "hate(50)",
 	"lines_positive": [
 	  {
