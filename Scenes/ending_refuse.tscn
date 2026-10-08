@@ -624,7 +624,7 @@ shader_parameter/glow_r_strength = 0.08
 shader_parameter/glow_g_strength = 0.05
 shader_parameter/glow_b_strength = 0.08
 
-[node name="AgreeEnd" type="Control" unique_id=804557110]
+[node name="RefuseEnd" type="Control" unique_id=804557110]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

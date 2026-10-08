@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://caclv67xy7esd"]
+
+[ext_resource type="Script" uid="uid://dykn2mhhh0m44" path="res://Scripts/achievement.gd" id="1_mn5ub"]
+[ext_resource type="AudioStream" uid="uid://cew12msualcgi" path="res://Assets/Achievements/Achievement.ogg" id="1_q4h7l"]
+[ext_resource type="Texture2D" uid="uid://c3xhw6ehu5br1" path="res://Assets/Achievements/Achievement_01.png" id="1_umqle"]
+
+[sub_resource type="Animation" id="Animation_mn5ub"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Achievement:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1618, 1000)]
+}
+
+[sub_resource type="Animation" id="Animation_gfdsa"]
+resource_name = "show_achievement"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Achievement:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 2.9, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1618, 1161), Vector2(1618, 1000), Vector2(1618, 1000), Vector2(1618, 1161)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uhfr4"]
+_data = {
+&"RESET": SubResource("Animation_mn5ub"),
+&"show_achievement": SubResource("Animation_gfdsa")
+}
+
+[node name="Achievement" type="Control" unique_id=1567124068]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mn5ub")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1397266383]
+libraries/ = SubResource("AnimationLibrary_uhfr4")
+
+[node name="Achievement" type="Sprite2D" parent="." unique_id=1082994669]
+position = Vector2(1618, 1000)
+texture = ExtResource("1_umqle")
+
+[node name="AchievementSound" type="AudioStreamPlayer" parent="." unique_id=997413426]
+stream = ExtResource("1_q4h7l")
+autoplay = true

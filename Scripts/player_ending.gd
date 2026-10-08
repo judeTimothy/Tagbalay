@@ -1,9 +1,11 @@
 extends Node2D
+@onready var achievement = preload("res://Scenes/achievement.tscn")
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.play("death")
+	var b = achievement.instantiate()
+	b.achievement = 2
+	$UI/CanvasLayer/Color.add_child(b)
 	_start_idle_sway()
 
 
